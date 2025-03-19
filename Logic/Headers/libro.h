@@ -29,7 +29,7 @@ private:
     unsigned int numeroPagine;
     Genere genere;
 public:
-    Libro(string n = "", unsigned int a = 0, Lingua l = Lingua::Undefined, Copertina c = Copertina(), string au = "", string ed = "", string pu = "", unsigned int np = 0, Genere g = Genere());
+    Libro(string n = "", unsigned int a = 0, Lingua l = Lingua::Undefined, Copertina c = Copertina::Undefined, string au = "", string ed = "", string pu = "", unsigned int np = 0, Genere g = Genere::Undefined);
 
     string getAutore() const;
     string getEditore() const;
