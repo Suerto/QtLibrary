@@ -10,7 +10,8 @@ protected:
         Shonen,
         Seinen,
         Isekai,
-        Mecha
+        Mecha,
+        Undefined
     };
 private:
     unsigned int numeroEpisodi;
