@@ -19,14 +19,14 @@ string Anime::getGenere() const {
     }
 }
 
-bool hasSubtitle() const { return subtitled; }
+bool Anime::hasSubtitle() const { return subtitled; }
 
-void setEpisodi(const unsigned int& ne) { numeroEpisodi = ne; }
+void Anime::setEpisodi(const unsigned int& ne) { numeroEpisodi = ne; }
 
-void setStagioni(const unsigned int& ns) { numeroStagioni = ns; }
+void Anime::setStagioni(const unsigned int& ns) { numeroStagioni = ns; }
 
-void setCasa(const string& cp) { casaProduttrice = cp; }
+void Anime::setCasa(const string& cp) { casaProduttrice = cp; }
 
-void setGenere(const Genere& g) { genere = g; }
+void Anime::setGenere(const Genere& g) { genere = g; }
 
-void setSubtitle(const bool& sub) { subtitled = sub; }
+void Anime::setSubtitle(const bool& sub) { subtitled = sub; }
