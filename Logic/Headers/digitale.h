@@ -17,7 +17,7 @@ private:
     Risoluzione risoluzione;
     unsigned int durata;
 public:
-    Digitale(string n = "", unsigned int a = 0, Lingua l = Lingua::Undefined, vector<Premio> p = vector<Premio>(),
+    Digitale(string n = "", unsigned int a = 0, Lingua l = Lingua::Undefined,
              Risoluzione r = Risoluzione::Undefined, unsigned int d = 0);
 
     string getRisoluzione() const;
