@@ -1,11 +1,10 @@
 #include "../../Headers/GUI/advancedSearch.h"
 #include "qboxlayout.h"
 #include "qobject.h"
-#include "qsizepolicy.h"
 #include "qstackedwidget.h"
 
-AdvancedResearch::AdvancedResearch(QWidget* parent) : QWidget(parent), advancedLayout(new QVBoxLayout(this)), buttonsLayout(new QHBoxLayout(this)), types(new QButtonGroup(this)), filter(new QStackedWidget(this)) { 
-    
+AdvancedResearch::AdvancedResearch(QWidget* parent) : QWidget(parent), advancedLayout(new QVBoxLayout(this)), buttonsLayout(new QHBoxLayout()), types(new QButtonGroup()), filter(new QStackedWidget()) { 
+
     QPushButton* libro = new QPushButton("Libro", this);
     libro->setCheckable(true);
     types->addButton(libro, 0);
@@ -32,7 +31,7 @@ AdvancedResearch::AdvancedResearch(QWidget* parent) : QWidget(parent), advancedL
     filter->insertWidget(3, new AnimeFilters);
     
     advancedLayout->setContentsMargins(5, 5, 5, 5);
-    connect(types, &QButtonGroup::idClicked, this, &AdvancedResearch::showFilters);
+    connect(types, &QButtonGroup::idToggled, this, &AdvancedResearch::showFilters);
 }     
 
 void AdvancedResearch::showFilters(int id) {
@@ -40,7 +39,7 @@ void AdvancedResearch::showFilters(int id) {
     //contenuto selezionato
     (qobject_cast<Filters*>(filter->currentWidget()))->reset();
     filter->setCurrentWidget(filter->widget(id));
-    filter->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
+    filter->setFixedSize(400, 400);
     advancedLayout->addWidget(filter);
 }
 
