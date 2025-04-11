@@ -1,9 +1,8 @@
 #include "../../Headers/GUI/mainwindow.h"
 
-MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
+MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), searchWidget(new Search()){
     resize(1200, 800);
-    setMinimumSize(600, 400);
-    
-    Search* search = new Search(this);
-    setCentralWidget(search);
+
+    searchWidget->setFixedSize(width() / 2, height());
+    setCentralWidget(searchWidget);
 }
