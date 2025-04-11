@@ -9,13 +9,16 @@
 
 class BookFilters : public Filters {
 private:
+   QComboBox* cover;
+   QSpinBox* pages;
+
    QLineEdit* author;
-   QComboBox* genre;
    QLineEdit* editor;
    QLineEdit* publisher;
+   QComboBox* genre;
 public:
    BookFilters(QWidget* parent = nullptr);
-   void reset();
+   virtual void reset() override;
 };
 
 #endif //BOOKFILTERS_H 
