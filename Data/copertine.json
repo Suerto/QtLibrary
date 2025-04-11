@@ -1,0 +1,20 @@
+{
+    "Copertine": [
+        {
+            "enum": 3,
+            "nome": "Ruvida"
+        },
+        {
+            "enum": 2,
+            "nome": "Rigida"
+        },
+        {
+            "enum": 4,
+            "nome": "Plastificata"
+        },
+        {
+            "enum": 1,
+            "nome": "Brossura"
+        }
+    ]
+}

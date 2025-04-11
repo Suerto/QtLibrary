@@ -1,0 +1,32 @@
+{
+    "Lingue": [
+        {
+            "enum": 6,
+            "nome": "Mandarino"
+        },
+        {
+            "enum": 5,
+            "nome": "Giapponese"
+        },
+        {
+            "enum": 4,
+            "nome": "Francese"
+        },
+        {
+            "enum": 3,
+            "nome": "Tedesco"
+        },
+        {
+            "enum": 2,
+            "nome": "Inglese"
+        },
+        {
+            "enum": 1,
+            "nome": "Italiano"
+        },
+        {
+            "enum": 0,
+            "nome": "Indefinita"
+        }
+    ]
+}
