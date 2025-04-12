@@ -1,4 +1,22 @@
 {
+    "Cadenze": [
+        {
+            "enum": 4,
+            "nome": "Annuale"
+        },
+        {
+            "enum": 3,
+            "nome": "Mensile"
+        },
+        {
+            "enum": 2,
+            "nome": "Settimanale"
+        },
+        {
+            "enum": 1,
+            "nome": "Quotidiana"
+        }
+    ],
     "Copertine": [
         {
             "enum": 3,
@@ -15,6 +33,38 @@
         {
             "enum": 1,
             "nome": "Brossura"
+        }
+    ],
+    "Generi Anime": [
+        {
+            "enum": 0,
+            "nome": "Indefinito"
+        },
+        {
+            "enum": 4,
+            "nome": "Mecha"
+        },
+        {
+            "enum": 3,
+            "nome": "Seinen"
+        },
+        {
+            "enum": 2,
+            "nome": "Shonen"
+        },
+        {
+            "enum": 1,
+            "nome": "Isekai"
+        }
+    ],
+    "Generi Film": [
+        {
+            "enum": 0,
+            "nome": "Horror"
+        },
+        {
+            "enum": 1,
+            "nome": "Thriller"
         }
     ],
     "Generi Libri": [
@@ -41,6 +91,28 @@
         {
             "enum": 1,
             "nome": "Biografia"
+        }
+    ],
+    "Generi Manga": [
+        {
+            "enum": 5,
+            "nome": "Action"
+        },
+        {
+            "enum": 3,
+            "nome": "Mecha"
+        },
+        {
+            "enum": 4,
+            "nome": "Shojo"
+        },
+        {
+            "enum": 2,
+            "nome": "Shonen"
+        },
+        {
+            "enum": 1,
+            "nome": "Seinen"
         }
     ],
     "Lingue": [
@@ -71,6 +143,24 @@
         {
             "enum": 0,
             "nome": "Indefinita"
+        }
+    ],
+    "Risoluzioni": [
+        {
+            "enum": 1,
+            "nome": "Ultra HD"
+        },
+        {
+            "enum": 0,
+            "nome": "Full HD"
+        },
+        {
+            "enum": 3,
+            "nome": "4K"
+        },
+        {
+            "enum": 2,
+            "nome": "2K"
         }
     ]
 }
