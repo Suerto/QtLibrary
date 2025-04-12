@@ -7,10 +7,10 @@ App::App(int& argc, char** argv) : QApplication(argc, argv) {
     MainWindow* main = new MainWindow();
    
     //Per il salvataggio dei filtri generali dei contenuti all'interno della QCOmboBox
-    JsonHandler::saveEnumToJson(Contenuto::getMappaLingue(), "Data/lingue.json" , "Lingue");
+    JsonHandler::saveEnumToJson(Contenuto::getMappaLingue(), "Data/Dati.json" , "Lingue");
 
-    JsonHandler::saveEnumToJson(Fisico::getMappaCopertine(), "Data/copertine.json", "Copertine");
+    JsonHandler::saveEnumToJson(Fisico::getMappaCopertine(), "Data/Dati.json", "Copertine");
 
-    JsonHandler::saveEnumToJson(Libro::getMappaGeneri(), "Data/generiLibri.json", "Generi Libri");
+    JsonHandler::saveEnumToJson(Libro::getMappaGeneri(), "Data/Dati.json", "Generi Libri");
     main->show();
 }
