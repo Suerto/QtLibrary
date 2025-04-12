@@ -1,7 +1,4 @@
 #include "../../Headers/GUI/advancedSearch.h"
-#include "qboxlayout.h"
-#include "qobject.h"
-#include "qstackedwidget.h"
 
 AdvancedResearch::AdvancedResearch(QWidget* parent) : QWidget(parent), advancedLayout(new QVBoxLayout(this)), buttonsLayout(new QHBoxLayout()), types(new QButtonGroup()), filter(new QStackedWidget()) { 
 
@@ -35,11 +32,8 @@ AdvancedResearch::AdvancedResearch(QWidget* parent) : QWidget(parent), advancedL
 }     
 
 void AdvancedResearch::showFilters(int id) {
-    //effettua il refresh della schermata dei filtri se viene cambiato il 
-    //contenuto selezionato
     (qobject_cast<Filters*>(filter->currentWidget()))->reset();
     filter->setCurrentWidget(filter->widget(id));
-    filter->setFixedSize(400, 400);
     advancedLayout->addWidget(filter);
 }
 
