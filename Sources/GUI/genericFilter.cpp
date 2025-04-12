@@ -3,10 +3,9 @@
 #include "qformlayout.h"
 
 Filters::Filters(QWidget* parent) : QWidget(parent), language(new QComboBox(this)), year(new QSpinBox(this)), filtersLayout(new QFormLayout(this)) {
-    //carica le lingue
     filtersLayout->setSpacing(10);
 
-    JsonHandler::loadEnumFromJson(language, "Data/lingue.json", "Lingue");
+    JsonHandler::loadEnumFromJson("Data/Dati.json", "Lingue", language);
     language->setBaseSize(50, 20);
     filtersLayout->addRow("Selezionare una lingua : ", language);
     
@@ -16,6 +15,4 @@ Filters::Filters(QWidget* parent) : QWidget(parent), language(new QComboBox(this
     setLayout(filtersLayout);
 }
 
-void Filters::reset() {
-    language->setCurrentIndex(6);
-} 
+void Filters::reset() { language->setCurrentIndex(-1); } 
