@@ -1,7 +1,7 @@
 #include "../../Headers/GUI/bookFilters.h"
 
 BookFilters::BookFilters(QWidget* parent) : Filters(parent), cover(new QComboBox(this)), pages(new QSpinBox(this)), author(new QLineEdit(this)), editor(new QLineEdit(this)), publisher(new QLineEdit(this)), genre(new QComboBox(this)) {
-    JsonHandler::loadEnumFromJson(cover, "Data/copertine.json", "Copertine");
+    JsonHandler::loadEnumFromJson("Data/Dati.json", "Copertine", cover);
     
     filtersLayout->addRow("Selezionare tipo di copertina : ", cover);
 
@@ -13,7 +13,7 @@ BookFilters::BookFilters(QWidget* parent) : Filters(parent), cover(new QComboBox
     
     filtersLayout->addRow("Inserire nome del Publisher : ", publisher);
       
-    JsonHandler::loadEnumFromJson(genre, "Data/generiLibri.json", "Generi Libri");
+    JsonHandler::loadEnumFromJson("Data/Dati.json", "Generi Libri", genre);
     
     filtersLayout->addRow("Selezionare un genere : ", genre);
 }
@@ -21,11 +21,16 @@ BookFilters::BookFilters(QWidget* parent) : Filters(parent), cover(new QComboBox
 //gestita l'aggiunta delle possibili copertine che un libro può avere, occuparsi della rimozione del filtro selezionato per il refresh della pagina
 void BookFilters::reset() {
     Filters::reset(); //pensare ad una alternativa più performante
-    cover->setCurrentIndex(7);
+    
+    cover->setCurrentIndex(-1);
+
     author->clear();
+    
     editor->clear();
+    
     publisher->clear();
-    genre->setCurrentIndex(0);
+    
+    genre->setCurrentIndex(-1);
 }
 
 
