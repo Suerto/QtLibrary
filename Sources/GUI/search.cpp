@@ -2,7 +2,6 @@
 #include "qboxlayout.h"
 
 Search::Search(QWidget* parent) : QWidget(parent), searchBar(new QLineEdit()), searchButton(new QPushButton()), advancedResearchButton(new QCheckBox("Ricerca Avanzata")), advancedSearch(new AdvancedResearch(this)), searchLayout(new QVBoxLayout()), simpleSearchLayout(new QHBoxLayout()) {   
-    //setStyleSheet("border : 2px solid blue; border-radius: 4px; ");
     searchBar->setPlaceholderText("Inserire titolo del contenuto...");
     searchBar->setFixedSize(400, 40);
 
@@ -15,8 +14,7 @@ Search::Search(QWidget* parent) : QWidget(parent), searchBar(new QLineEdit()), s
     searchLayout->addWidget(advancedResearchButton);
     
     advancedSearch->setVisible(false);
-    advancedSearch->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    //advancedSearch->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
+
     searchLayout->addWidget(advancedSearch);
 
     searchLayout->setContentsMargins(15, 15, 15, 15);
