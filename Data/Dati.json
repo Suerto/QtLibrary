@@ -59,6 +59,26 @@
     ],
     "Generi Film": [
         {
+            "enum": 6,
+            "nome": "Romantico"
+        },
+        {
+            "enum": 4,
+            "nome": "Guerra"
+        },
+        {
+            "enum": 3,
+            "nome": "Commedia"
+        },
+        {
+            "enum": 5,
+            "nome": "Autobiografico"
+        },
+        {
+            "enum": 2,
+            "nome": "Azione"
+        },
+        {
             "enum": 0,
             "nome": "Horror"
         },
