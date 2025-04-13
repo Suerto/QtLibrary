@@ -12,7 +12,7 @@ FilmFilters::FilmFilters(QWidget* parent) : Filters(parent), resolution(new QCom
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Generi Film", genre);
     filtersLayout->addRow("Selezionare Genere : ", genre);
 
-    JsonHandler::loadEnumFromJson("Data/Dati.json", "Risoluzione", resolution);
+    JsonHandler::loadEnumFromJson("Data/Dati.json", "Risoluzioni", resolution);
     filtersLayout->addRow("Selezionare Risoluzione : ", resolution);
 }
 
