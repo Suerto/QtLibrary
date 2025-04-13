@@ -19,6 +19,7 @@ private:
     QSpinBox* seasons;
     QCheckBox* subtitled;
     QComboBox* genre;
+    QComboBox* cadence;
 public:
     AnimeFilters(QWidget* parent = nullptr);
     void reset();
