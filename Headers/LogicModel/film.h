@@ -6,7 +6,7 @@
 
 class Film : public Digitale {
 public:
-    enum Genere { Horror, Thriller, Indefinito };
+    enum Genere { Horror, Thriller, Action, Comedy, Guerra, Autobiografico, Romantico, Indefinito };
 private:
     static const unordered_map<const Genere, const string> MappaGeneri;
     string regista;
