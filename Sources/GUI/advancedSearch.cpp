@@ -3,18 +3,22 @@
 AdvancedResearch::AdvancedResearch(QWidget* parent) : QWidget(parent), advancedLayout(new QVBoxLayout(this)), buttonsLayout(new QHBoxLayout()), types(new QButtonGroup()), filter(new QStackedWidget()) { 
 
     QPushButton* libro = new QPushButton("Libro", this);
+    libro->setFixedSize(100, 25);
     libro->setCheckable(true);
     types->addButton(libro, 0);
     
     QPushButton* manga = new QPushButton("Manga", this);
+    manga->setFixedSize(100, 25);
     manga->setCheckable(true);
     types->addButton(manga, 1);
 
     QPushButton* film = new QPushButton("Film", this);
+    film->setFixedSize(100, 25);
     film->setCheckable(true);
     types->addButton(film, 2);
 
     QPushButton* anime = new QPushButton("Anime", this);
+    anime->setFixedSize(100, 25);
     anime->setCheckable(true);
     types->addButton(anime, 3);
  
