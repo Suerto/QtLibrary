@@ -1,11 +1,33 @@
 #include "../../Headers/GUI/filmFilters.h"
 
-FilmFilters::FilmFilters(QWidget* parent) : Filters(parent), director(new QLineEdit(this)) {
-    filtersLayout->addRow("Inserire nome regista : ", director);
+FilmFilters::FilmFilters(QWidget* parent) : Filters(parent), resolution(new QComboBox(this)), durata(new QSpinBox(this)), director(new QLineEdit(this)), composer(new QLineEdit(this)), producer(new QLineEdit(this)), genre(new QComboBox(this)) {
+    filtersLayout->addRow("Regista : ", director);
+
+    filtersLayout->addRow("Compositore Musicale : ", composer);
+
+    filtersLayout->addRow("Produttore : ", producer);
+
+    filtersLayout->addRow("Durata : ", durata);
     
+    JsonHandler::loadEnumFromJson("Data/Dati.json", "Generi Film", genre);
+    filtersLayout->addRow("Selezionare Genere : ", genre);
+
+    JsonHandler::loadEnumFromJson("Data/Dati.json", "Risoluzione", resolution);
+    filtersLayout->addRow("Selezionare Risoluzione : ", resolution);
 }
 
 void FilmFilters::reset() {
     Filters::reset();
-    director->setText("");
+
+    director->clear();
+
+    composer->clear();
+
+    producer->clear();
+
+    durata->clear();
+
+    genre->setCurrentIndex(-1);
+
+    resolution->setCurrentIndex(-1);
 }

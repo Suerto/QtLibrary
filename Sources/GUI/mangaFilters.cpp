@@ -1,30 +1,39 @@
 #include "../../Headers/GUI/mangaFilters.h"
 
 MangaFilters::MangaFilters(QWidget* parent) : Filters(parent), cover(new QComboBox(this)), cadence(new QComboBox(this)), mangaka(new QLineEdit(this)), editor(new QLineEdit(this)), pages(new QSpinBox(this)), chapters(new QSpinBox(this)), genre(new QComboBox(this)) {
-   
-    JsonHandler::loadEnumFromJson("Data/Dati.json", "Copertine", cover);
+    filtersLayout->addRow("Mangaka : ", mangaka);
 
-    filtersLayout->addRow("Indicare tipologia di copertina : ", cover);
+    filtersLayout->addRow("Editore : ", editor);
+
+    JsonHandler::loadEnumFromJson("Data/Dati.json", "Generi Manga", genre);
+    filtersLayout->addRow("Selezionare Genere : ", genre);
+
+    filtersLayout->addRow("Numero di Pagine : ", pages);
+
+    filtersLayout->addRow("Numero di Capitoli : ", chapters);
     
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Cadenze", cadence);
+    filtersLayout->addRow("Selezionare Cadenza di Pubblicazione : ", cadence);
 
-    filtersLayout->addRow("Indicare cadenza di pubblicazione : ", cadence);
-    
-    filtersLayout->addRow("Scrivere nome del Mangaka : ", mangaka);
-
-    filtersLayout->addRow("Indicare nome dell'Editore :", editor);
-
-    filtersLayout->addRow("Indicare numero di pagine : ", pages);
-
-    filtersLayout->addRow("Indicare numero di capitoli ", chapters);
-    
-    JsonHandler::loadEnumFromJson("Data/Dati.json", "Generi Manga", genre);
-
-    filtersLayout->addRow("Indicare genere : ", genre);
+    JsonHandler::loadEnumFromJson("Data/Dati.json", "Copertine", cover);
+    filtersLayout->addRow("Selezionare Copertina : ", cover);
 
 }
 
 void MangaFilters::reset() {
     Filters::reset();
-    mangaka->setText("");
+    
+    mangaka->clear();
+
+    editor->clear();
+
+    genre->setCurrentIndex(-1);
+
+    pages->clear();
+
+    chapters->clear();
+
+    cadence->setCurrentIndex(-1);
+
+    cover->setCurrentIndex(-1);
 }
