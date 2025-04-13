@@ -17,7 +17,6 @@ protected:
     Filters(QWidget* parent = nullptr);
     QFormLayout* filtersLayout;
 public:
-    //virtual Filters* createFilters() const = 0;
     virtual void reset();
 };
 
