@@ -4,11 +4,14 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), toolBar(new QTool
     resize(1200, 800);
     
     toolBar = addToolBar("Strumenti");
-    QPushButton* searching = new QPushButton("Ricerca", toolBar);
-    toolBar->addWidget(searching);
+    toolBar->setMovable(false);
     
-    QPushButton* creation = new QPushButton("Creazione", toolBar);
-    toolBar->addWidget(creation);
+    QAction* searching = new QAction("Ricerca", toolBar);
+
+    toolBar->addAction(searching);
+    
+    QAction* creation = new QAction("Creazione", toolBar);
+    toolBar->addAction(creation);
 
     windows->addWidget(new Search);
     windows->addWidget(new Creation);
@@ -16,18 +19,22 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), toolBar(new QTool
     setCentralWidget(windows);
     windows->setVisible(false);
 
-    connect(searching, &QPushButton::clicked, this, &MainWindow::showSearching);
-    connect(creation, &QPushButton::clicked, this, &MainWindow::showAdvanced);
+    connect(searching, &QAction::triggered, this, &MainWindow::showSearching);
+    connect(creation, &QAction::triggered, this, &MainWindow::showCreation);
+
+    //Design
+    //setStyleSheet("background-color : #003fd4");
 }
 
 //Risolvere fattore di reset al variare del widget mostrato
 void MainWindow::showSearching() {
-   if(!windows->isVisible()) windows->setVisible(true);
-    
+   if(!windows->isVisible()) windows->setVisible(true);    
    windows->setCurrentWidget(windows->widget(0));
+
+    windows->setFixedSize(500, 800);
 }
 
-void MainWindow::showAdvanced() {
+void MainWindow::showCreation() {
     if(!windows->isVisible()) windows->setVisible(true);
     windows->setCurrentWidget(windows->widget(1));
 }
