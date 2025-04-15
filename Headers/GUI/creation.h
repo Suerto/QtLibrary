@@ -5,7 +5,6 @@
 #include <QLineEdit>
 #include <QVBoxLayout>
 
-
 class Creation : public QWidget {
     Q_OBJECT 
 private:

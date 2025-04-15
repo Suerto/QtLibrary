@@ -20,7 +20,7 @@ public:
     MainWindow(QWidget* parent = nullptr);
 private slots :
     void showSearching();
-    void showAdvanced();
+    void showCreation();
 };
 
 #endif //MAINWINDOW_H
