@@ -36,8 +36,8 @@ AdvancedResearch::AdvancedResearch(QWidget* parent) : QWidget(parent), advancedL
 }     
 
 void AdvancedResearch::showFilters(int id) {
-    (qobject_cast<Filters*>(filter->currentWidget()))->reset();
     filter->setCurrentWidget(filter->widget(id));
+    (qobject_cast<Filters*>(filter->currentWidget()))->reset();
     advancedLayout->addWidget(filter);
 }
 
