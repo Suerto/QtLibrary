@@ -1,4 +1,5 @@
 #include "../../Headers/GUI/advancedSearch.h"
+#include "qnamespace.h"
 
 AdvancedResearch::AdvancedResearch(QWidget* parent) : QWidget(parent), advancedLayout(new QVBoxLayout(this)), buttonsLayout(new QHBoxLayout()), types(new QButtonGroup()), filter(new QStackedWidget()) { 
 
@@ -15,7 +16,7 @@ AdvancedResearch::AdvancedResearch(QWidget* parent) : QWidget(parent), advancedL
     QPushButton* film = new QPushButton("Film", this);
     film->setFixedSize(100, 25);
     film->setCheckable(true);
-    types->addButton(film, 2);
+    types->addButton(film, 2) ;
 
     QPushButton* anime = new QPushButton("Anime", this);
     anime->setFixedSize(100, 25);
@@ -31,7 +32,8 @@ AdvancedResearch::AdvancedResearch(QWidget* parent) : QWidget(parent), advancedL
     filter->insertWidget(2, new FilmFilters);
     filter->insertWidget(3, new AnimeFilters);
     
-    advancedLayout->setContentsMargins(5, 5, 5, 5);
+    advancedLayout->setAlignment(Qt::AlignTop | Qt::AlignLeft);
+    //advancedLayout->setContentsMargins(5, 5, 5, 5);
     connect(types, &QButtonGroup::idToggled, this, &AdvancedResearch::showFilters);
 }     
 
