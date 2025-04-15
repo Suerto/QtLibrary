@@ -3,22 +3,24 @@
 
 #include <QMainWindow>
 #include <QWidget>
-#include <QListWidget>
-#include <QLineEdit>
 #include <QPushButton>
 #include <QStackedWidget>
-#include <QVBoxLayout>
 #include <QToolBar>
-#include <QSplitter>
+#include <QPushButton>
 
 #include "search.h"
+#include "creation.h"
 
 class MainWindow : public QMainWindow { 
     Q_OBJECT    
 private:
-    Search* searchWidget;
+    QToolBar* toolBar;
+    QStackedWidget* windows;
 public: 
     MainWindow(QWidget* parent = nullptr);
+private slots :
+    void showSearching();
+    void showAdvanced();
 };
 
 #endif //MAINWINDOW_H
