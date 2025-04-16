@@ -1,12 +1,19 @@
 #include "../../Headers/GUI/search.h"
 #include "qboxlayout.h"
+#include <QLabel>
+
 
 Search::Search(QWidget* parent) : QWidget(parent), searchBar(new QLineEdit()), searchButton(new QPushButton()), advancedResearchButton(new QCheckBox("Ricerca Avanzata")), advancedSearch(new AdvancedResearch(this)), searchLayout(new QVBoxLayout()), simpleSearchLayout(new QHBoxLayout()) {   
     searchBar->setPlaceholderText("Inserire titolo del contenuto...");
     searchBar->setFixedSize(400, 40);
 
     searchButton->setFixedSize(40, 40);
+    QLabel* titleError(new QLabel(this));
+    titleError->setText("Inserire un titolo");
+    titleError->setVisible(false);
+
     simpleSearchLayout->addWidget(searchBar);
+    
     simpleSearchLayout->addWidget(searchButton);
     simpleSearchLayout->setAlignment(Qt::AlignTop | Qt::AlignLeft);
     searchLayout->addLayout(simpleSearchLayout);
@@ -21,8 +28,12 @@ Search::Search(QWidget* parent) : QWidget(parent), searchBar(new QLineEdit()), s
     //searchLayout->setContentsMargins(15, 15, 15, 15);
     searchLayout->setAlignment(Qt::AlignTop | Qt::AlignLeft); 
     connect(advancedResearchButton, &QCheckBox::toggled, this, &Search::advancedResearch);
+    
+    connect(searchButton, &QPushButton::clicked, this, &Search::startSearch);
 
     setLayout(searchLayout);
 }
 
-void Search::advancedResearch(bool checked) { checked ? advancedSearch->setVisible(true) : advancedSearch->setVisible(false); }
+void Search::advancedResearch(bool checked) { checked ? advancedSearch->show() : advancedSearch->hide(); }
+
+void Search::startSearch() {}
