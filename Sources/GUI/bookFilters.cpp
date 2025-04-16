@@ -14,8 +14,6 @@ BookFilters::BookFilters(QWidget* parent) : Filters(parent), cover(new QComboBox
     filtersLayout->addRow("Selezionare Copertina : ", cover);
 
     filtersLayout->addRow("Publisher : ", publisher);
-    
-    for(QWidget* filter : filtersLayout->widget()) filter->
 }
 
 void BookFilters::reset() {
@@ -31,5 +29,3 @@ void BookFilters::reset() {
     
     genre->setCurrentIndex(-1);
 }
-
-
