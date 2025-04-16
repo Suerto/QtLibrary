@@ -1,8 +1,6 @@
 #include "../../Headers/GUI/genericFilters.h"
 
 Filters::Filters(QWidget* parent) : QWidget(parent), language(new QComboBox(this)), year(new QSpinBox(this)), filtersLayout(new QFormLayout(this)) {
-    filtersLayout->setSpacing(10);
-
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Lingue", language);
     filtersLayout->addRow("Selezionare Lingua : ", language);
     
