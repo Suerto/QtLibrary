@@ -3,13 +3,16 @@
 
 #include <QWidget>
 #include <QLineEdit>
-#include <QVBoxLayout>
+#include <QFormLayout>
+#include <QButtonGroup>
+#include <QPushButton>
 
 class Creation : public QWidget {
     Q_OBJECT 
 private:
-    QVBoxLayout* creationLayout;
+    QFormLayout* creationLayout;
     QLineEdit* title;
+    QButtonGroup* type;
 public:
     Creation(QWidget* parent = nullptr);
 };
