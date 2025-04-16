@@ -31,10 +31,11 @@ void MainWindow::showSearching() {
    if(!windows->isVisible()) windows->setVisible(true);    
    windows->setCurrentWidget(windows->widget(0));
 
-    windows->setFixedSize(500, 800);
+   windows->setFixedSize(470, 800);
 }
 
 void MainWindow::showCreation() {
     if(!windows->isVisible()) windows->setVisible(true);
+    
     windows->setCurrentWidget(windows->widget(1));
 }
