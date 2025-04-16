@@ -8,23 +8,27 @@
 #include <QCheckBox>
 
 #include "advancedSearch.h"
-#include "qboxlayout.h"
 
 class Search : public QWidget {
-    Q_OBJECT
+    Q_OBJECT    
 private:
     QLineEdit* searchBar;
     QPushButton* searchButton;
     QCheckBox* advancedResearchButton;
     AdvancedResearch* advancedSearch;
-protected:
     QVBoxLayout* searchLayout;
-private:
     QHBoxLayout* simpleSearchLayout;
 public:
     Search(QWidget* parent = nullptr);
 private slots:
     void advancedResearch(bool checked);
+    void startSearch();
+    
+    //Possibile idea, resettare i widget se si cambia la schermata visualizzata:
+    //Se il widget è quello di ricerca, resettare tutti i filtri
+    //Se il widget è quello di creazione, mostrare un prompt che indica che le 
+    //modifiche verranno perse
+    //void refreshOnChanged();
 };
 
 #endif //SEARCH_H
