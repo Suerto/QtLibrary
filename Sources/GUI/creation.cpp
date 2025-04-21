@@ -1,17 +1,11 @@
 #include "../../Headers/GUI/creation.h"
-#include "qboxlayout.h"
-#include "qnamespace.h"
 
-Creation::Creation(QWidget* parent) : QWidget(parent), creationLayout(new QFormLayout(this)), title(new QLineEdit(this)) {
+Creation::Creation(QWidget* parent) : QWidget(parent), creationLayout(new QVBoxLayout(this)), title(new QLineEdit(this)), buttonLayout(new QHBoxLayout), type(new QButtonGroup(this)), typeForm(new QStackedWidget(this)) {
 
     title->setPlaceholderText("Inserire Titolo del Contenuto");
     title->setFixedSize(300, 30);
-    creationLayout->addWidget(title);
+    creationLayout->addWidget(title, Qt::AlignLeft | Qt::AlignTop);
     
-    QWidget* typeWidget = new QWidget(this);
-    type = new QButtonGroup(typeWidget);
-    QHBoxLayout* buttonLayout = new QHBoxLayout(typeWidget);
-
     QPushButton* book = new QPushButton("Libro", this);
     book->setFixedSize(100, 25);
     book->setCheckable(true);
@@ -34,11 +28,39 @@ Creation::Creation(QWidget* parent) : QWidget(parent), creationLayout(new QFormL
 
     foreach(QAbstractButton* button, type->buttons()) buttonLayout->addWidget(button);
     
-    buttonLayout->setAlignment(Qt::AlignRight);
-    typeWidget->setLayout(buttonLayout);
+    buttonLayout->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+    creationLayout->addLayout(buttonLayout);
 
-    creationLayout->addRow("Selezionare la tipologia di contenuto : ", typeWidget); 
+    typeForm->insertWidget(0, new BookFilters);
+    typeForm->insertWidget(1, new MangaFilters);
+    typeForm->insertWidget(2, new FilmFilters);
+    typeForm->insertWidget(3, new AnimeFilters);
 
-    creationLayout->setAlignment(Qt::AlignRight);
-    setLayout(creationLayout);
+    typeForm->setVisible(false);
+    creationLayout->addWidget(typeForm);
+    creationLayout->setAlignment(Qt::AlignCenter);
+    //setLayout(creationLayout);
+
+    connect(type, &QButtonGroup::idClicked, this, &Creation::showTypeForm);
+
+}
+void Creation::showTypeForm(int id) {
+    //si sta tentando di cambiare tipo durante la creazione
+    if(typeForm->currentIndex() != id) {
+        ErrorDialog* change = new ErrorDialog(this);
+        connect(change, &ErrorDialog::azione, this, [this, id](const QString& choice) {
+                if(choice == "Conferma") {
+                    qobject_cast<Filters*>(typeForm->currentWidget())->reset();
+                    typeForm->setCurrentIndex(id);
+                }
+        });
+
+        change->exec();
+    }
+
+    else { 
+        typeForm->setCurrentWidget(typeForm->widget(id));
+        typeForm->setVisible(true);
+    }
+
 }
