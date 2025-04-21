@@ -18,6 +18,7 @@ MangaFilters::MangaFilters(QWidget* parent) : Filters(parent), cover(new QComboB
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Copertine", cover);
     filtersLayout->addRow("Selezionare Copertina : ", cover);
 
+    reset();
 }
 
 void MangaFilters::reset() {
