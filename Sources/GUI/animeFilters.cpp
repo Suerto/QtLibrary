@@ -19,6 +19,8 @@ AnimeFilters::AnimeFilters(QWidget* parent) :Filters(parent), resolution(new QCo
 
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Generi Anime", genre);
     filtersLayout->addRow("Selezionare Genere : ", genre);
+    
+    reset();
 } 
 
 void AnimeFilters::reset() {
