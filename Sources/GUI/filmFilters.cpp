@@ -14,6 +14,8 @@ FilmFilters::FilmFilters(QWidget* parent) : Filters(parent), resolution(new QCom
 
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Risoluzioni", resolution);
     filtersLayout->addRow("Selezionare Risoluzione : ", resolution);
+
+    reset();
 }
 
 void FilmFilters::reset() {
