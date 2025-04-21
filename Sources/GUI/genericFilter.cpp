@@ -8,6 +8,12 @@ Filters::Filters(QWidget* parent) : QWidget(parent), language(new QComboBox(this
     filtersLayout->addRow("Anno di Pubblicazione : ", year);
 
     setLayout(filtersLayout);
+
+    reset();
 }
 
-void Filters::reset() { language->setCurrentIndex(-1); } 
+void Filters::reset() { 
+    language->setCurrentIndex(-1); 
+    
+    year->clear();
+} 
