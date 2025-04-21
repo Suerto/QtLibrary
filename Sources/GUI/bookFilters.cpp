@@ -14,6 +14,8 @@ BookFilters::BookFilters(QWidget* parent) : Filters(parent), cover(new QComboBox
     filtersLayout->addRow("Selezionare Copertina : ", cover);
 
     filtersLayout->addRow("Publisher : ", publisher);
+
+    reset();
 }
 
 void BookFilters::reset() {
