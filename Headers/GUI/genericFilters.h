@@ -5,8 +5,10 @@
 #include <QComboBox>
 #include <QSpinBox>
 #include <QFormLayout>
+#include <QVariantMap>
 
 #include "../../Sources/JSON/JsonHandler.hpp"
+
 
 class Filters : public QWidget {
     Q_OBJECT
@@ -18,6 +20,7 @@ protected:
     QFormLayout* filtersLayout;
 public:
     virtual void reset();
+    virtual QVariantMap raccogliDati() const = 0;
 };
 
 #endif //GENERIC_H
