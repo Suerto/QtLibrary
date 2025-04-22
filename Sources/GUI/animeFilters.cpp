@@ -23,20 +23,30 @@ AnimeFilters::AnimeFilters(QWidget* parent) :Filters(parent), resolution(new QCo
     reset();
 } 
 
+QVariantMap AnimeFilters::raccogliDati() const {
+    QVariantMap parametri;
+
+    parametri["lingua"] = language->currentText();
+    parametri["anno"] = year->value();
+    parametri["sottotitolato"] = subtitled->isChecked();
+    parametri["episodi"] = episodes->value();
+    parametri["durata"] = durata->value();
+    parametri["cadenza"] = cadence->currentText();
+    parametri["stagioni"] = seasons->value();
+    parametri["risoluzione"] = resolution->currentText();
+    parametri["genere"] = genre->currentText();
+
+    return parametri;
+}
+
 void AnimeFilters::reset() {
     Filters::reset();
 
     producer->clear();
-
     subtitled->setChecked(false);
-
     episodes->clear();
-
     seasons->clear();
-
     durata->clear();
-
     genre->setCurrentIndex(-1);
-
     resolution->setCurrentIndex(-1);
 }

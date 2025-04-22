@@ -21,20 +21,30 @@ MangaFilters::MangaFilters(QWidget* parent) : Filters(parent), cover(new QComboB
     reset();
 }
 
+QVariantMap MangaFilters::raccogliDati() const {
+    QVariantMap parametri;
+ 
+    parametri["lingua"] = language->currentText();
+    parametri["anno"] = year->value();
+    parametri["mangaka"] = mangaka->text();
+    parametri["editor"] = editor->text();
+    parametri["genere"] = genre->currentText();
+    parametri["pagine"] = pages->value();
+    parametri["capitoli"] = chapters->value();
+    parametri["cadenza"] = cadence->currentText();
+    parametri["copertina"] = cover->currentText();
+
+    return parametri;
+}
+
 void MangaFilters::reset() {
     Filters::reset();
     
     mangaka->clear();
-
     editor->clear();
-
     genre->setCurrentIndex(-1);
-
     pages->clear();
-
     chapters->clear();
-
     cadence->setCurrentIndex(-1);
-
     cover->setCurrentIndex(-1);
 }

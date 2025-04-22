@@ -18,18 +18,28 @@ FilmFilters::FilmFilters(QWidget* parent) : Filters(parent), resolution(new QCom
     reset();
 }
 
+QVariantMap FilmFilters::raccogliDati() const {
+    QVariantMap parametri;
+
+    parametri["lingua"] = language->currentText();
+    parametri["anno"] = year->value();
+    parametri["regista"] = director->text();
+    parametri["compositore"] = composer->text();
+    parametri["produttore"] = producer->text();
+    parametri["durata"] = durata->value();
+    parametri["genere"] = genre->currentText();
+    parametri["risoluzione"] = resolution->currentText();
+    
+    return parametri;
+}
+
 void FilmFilters::reset() {
     Filters::reset();
 
     director->clear();
-
     composer->clear();
-
     producer->clear();
-
     durata->clear();
-
     genre->setCurrentIndex(-1);
-
     resolution->setCurrentIndex(-1);
 }

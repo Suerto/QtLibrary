@@ -18,16 +18,26 @@ BookFilters::BookFilters(QWidget* parent) : Filters(parent), cover(new QComboBox
     reset();
 }
 
+QVariantMap BookFilters::raccogliDati() const {
+    QVariantMap parametri;
+
+    parametri["lingua"] = language->currentText();
+    parametri["anno"] = year->value();
+    parametri["autore"] = author->text();
+    parametri["genere"] = genre->currentText();
+    parametri["pagine"] = pages->value();
+    parametri["copertina"] = cover->currentText();
+    parametri["publisher"] = publisher->text();
+
+    return parametri;
+}
+
 void BookFilters::reset() {
     Filters::reset();
     
     cover->setCurrentIndex(-1);
-
     author->clear();
-    
     editor->clear();
-    
     publisher->clear();
-    
     genre->setCurrentIndex(-1);
 }
