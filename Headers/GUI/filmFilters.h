@@ -18,7 +18,8 @@ private:
     QComboBox* genre;
 public:
     FilmFilters(QWidget* parent = nullptr);
-    void reset();
+    virtual void reset() override;
+    virtual QVariantMap raccogliDati() const override;
 };
 
 #endif //FILMFILTERS_H

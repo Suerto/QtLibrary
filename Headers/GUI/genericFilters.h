@@ -12,13 +12,12 @@
 
 class Filters : public QWidget {
     Q_OBJECT
-private:
+protected:
     QComboBox* language;
     QSpinBox* year;
-protected:
-    Filters(QWidget* parent = nullptr);
     QFormLayout* filtersLayout;
 public:
+    Filters(QWidget* parent = nullptr);
     virtual void reset();
     virtual QVariantMap raccogliDati() const = 0;
 };

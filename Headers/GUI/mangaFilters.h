@@ -19,7 +19,8 @@ private:
     QComboBox* genre;
 public: 
     MangaFilters(QWidget* parent = nullptr);
-    void reset();
+    virtual void reset() override;
+    virtual QVariantMap raccogliDati() const override;
 };
 
 #endif //MANGAFILTERS_H

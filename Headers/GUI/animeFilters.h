@@ -22,7 +22,8 @@ private:
     QComboBox* cadence;
 public:
     AnimeFilters(QWidget* parent = nullptr);
-    void reset();
+    virtual void reset() override;
+    virtual QVariantMap raccogliDati() const override;
 };
 
 #endif //ANIMEFILTERS_H

@@ -19,6 +19,7 @@ private:
 public:
    BookFilters(QWidget* parent = nullptr);
    virtual void reset() override;
+   virtual QVariantMap raccogliDati() const override;
 };
 
 #endif //BOOKFILTERS_H 
