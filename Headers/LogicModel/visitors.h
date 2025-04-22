@@ -8,10 +8,10 @@ class Film;
 
 class Visitors {
 public:
-    virtual void visit(const Libro& lib) const = 0;
-    virtual void visit(const Film& flm) const = 0;
-    virtual void visit(const Manga& mng) const = 0;
-    virtual void visit(const Anime& anm) const = 0;
+    virtual void visit(Libro& lib) const = 0;
+    virtual void visit(Film& flm) const = 0;
+    virtual void visit(Manga& mng) const = 0;
+    virtual void visit(Anime& anm) const = 0;
 };
 
 #endif
