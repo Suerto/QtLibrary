@@ -41,7 +41,7 @@ void Libro::setGenere(const string& ge) {
     else genere = Libro::Genere::Indefinito;
 }
 
-void Libro::accept(const Visitors& visitor) const {
+void Libro::accept(const Visitors& visitor) {
     visitor.visit(*this);
 }
 

@@ -43,7 +43,7 @@ void Manga::setGenere(const string& gnr) {
     genere = Manga::Genere::Indefinito;
 }
 
-void Manga::accept(const Visitors& visitor) const {
+void Manga::accept(const Visitors& visitor) {
     visitor.visit(*this);
 }
 
