@@ -30,7 +30,7 @@ public:
     void setAnno(const unsigned int& an);
     void setLingua(const string& lng);
     
-    virtual void accept(const Visitors& visitor) const = 0;
+    virtual void accept(const Visitors& visitor) = 0;
 
     static const unordered_map<const Contenuto::Lingua, const string> getMappaLingue(); 
 };

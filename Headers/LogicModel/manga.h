@@ -27,7 +27,7 @@ public:
     void setCapitoli(const unsigned int& cp);
     void setGenere(const string& gnr);
     
-    virtual void accept(const Visitors& visitor) const override;
+    virtual void accept(const Visitors& visitor) override;
 
     static const unordered_map<const Genere, const string> getMappaGeneri();
 };
