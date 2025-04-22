@@ -1,6 +1,7 @@
 #include "../../Headers/GUI/creation.h"
 #include "qbuttongroup.h"
 #include "qnamespace.h"
+#include "qobject.h"
 
 Creation::Creation(QWidget* parent) : QWidget(parent), creationLayout(new QVBoxLayout(this)), reset(new QPushButton("Riprista filtri", this)), title(new QLineEdit(this)), buttonLayout(new QHBoxLayout), type(new QButtonGroup(this)), typeForm(new QStackedWidget(this)), choice(new QPushButton("Crea Contenuto", this)) {
     
@@ -62,7 +63,6 @@ void Creation::showTypeForm(int id) {
         connect(change, &ErrorDialog::azione, this, [this, id](const QString& choice) {
                 if(choice == "Conferma") {
                     qobject_cast<Filters*>(typeForm->currentWidget())->reset();
-                    //typeForm->setCurrentIndex(id);
                 }
         });
 
@@ -79,4 +79,8 @@ void Creation::resetCreation() {
    qobject_cast<Filters*>(typeForm->currentWidget())->reset();
 }
 
-void Creation::startCreation() {}
+void Creation::startCreation() {
+   QVariantMap parameters = qobject_cast<Filters*>(typeForm->currentWidget())->raccogliDati();
+
+   parameters["titolo"] = title->text();
+}
