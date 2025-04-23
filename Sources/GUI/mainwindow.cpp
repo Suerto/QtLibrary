@@ -18,24 +18,35 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), toolBar(new QTool
      
     setCentralWidget(windows);
     windows->setVisible(false);
-
+    
     connect(searching, &QAction::triggered, this, &MainWindow::showSearching);
     connect(creation, &QAction::triggered, this, &MainWindow::showCreation);
 
     //Design
-    //setStyleSheet("background-color : #003fd4");
+    toolBar->setStyleSheet("background-color : #808080; text->color : #FFFFFF;");
+    
 }
 
-//Risolvere fattore di reset al variare del widget mostrato
 void MainWindow::showSearching() {
-   if(!windows->isVisible()) windows->setVisible(true);    
-   windows->setCurrentWidget(windows->widget(0));
+    if(!windows->isVisible()) windows->setVisible(true);
+    
+    if(windows->currentIndex() == 1) {
+        ErrorDialog* change = new ErrorDialog(this);
+        connect(change, &ErrorDialog::azione, this, [this](const QString& choice) {
+            if(choice == "Conferma") {
+               qobject_cast<Creation*>(windows->currentWidget())->resetCreation();
+               windows->setCurrentIndex(0); 
+            }
+        });
 
-   windows->setFixedSize(470, 800);
+        change->exec();
+    }
+
+    windows->setFixedSize(500, this->height());
 }
 
 void MainWindow::showCreation() {
     if(!windows->isVisible()) windows->setVisible(true);
     
-    windows->setCurrentWidget(windows->widget(1));
+    if(windows->currentIndex() != 1) windows->setCurrentIndex(1); 
 }
