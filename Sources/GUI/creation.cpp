@@ -85,6 +85,9 @@ void Creation::startCreation() {
    QVariantMap parameters = qobject_cast<Filters*>(typeForm->currentWidget())->raccogliDati();
    parameters["titolo"] = title->text();
    
-
-   CreationVisitor* visitor = new CreationVisitor(new Contenuto);
+   //debug per mostrare i valori
+   for(const auto& key : parameters.keys()) {
+        qDebug() << key << " : " << parameters.value(key).toString() << "\n";
+   }
+   //CreationVisitor* visitor = new CreationVisitor(new Contenuto);
 }
