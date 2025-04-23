@@ -39,7 +39,6 @@ Creation::Creation(QWidget* parent) : QWidget(parent), creationLayout(new QVBoxL
     typeForm->insertWidget(4, new AnimeFilters);
 
     typeForm->setVisible(false);
-    //typeForm->setCurrentIndex(-1);
     creationLayout->addWidget(typeForm);
     creationLayout->setAlignment(Qt::AlignCenter);
 
@@ -84,7 +83,8 @@ void Creation::resetCreation() {
 
 void Creation::startCreation() {
    QVariantMap parameters = qobject_cast<Filters*>(typeForm->currentWidget())->raccogliDati();
-
    parameters["titolo"] = title->text();
+   
 
+   CreationVisitor* visitor = new CreationVisitor(new Contenuto);
 }
