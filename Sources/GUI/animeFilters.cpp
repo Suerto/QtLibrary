@@ -47,6 +47,7 @@ void AnimeFilters::reset() {
     episodes->clear();
     seasons->clear();
     durata->clear();
+    cadence->setCurrentIndex(-1);
     genre->setCurrentIndex(-1);
     resolution->setCurrentIndex(-1);
 }
