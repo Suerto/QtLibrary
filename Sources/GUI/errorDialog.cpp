@@ -3,6 +3,7 @@
 
 ErrorDialog::ErrorDialog(QWidget* parent) : QDialog(parent), text(new QLabel("Attenzione! Così facendo verranno persi tutti i criteri inseriti finora. Vuoi davvero continuare?", this)), errorLayout(new QVBoxLayout(this)), action(new QButtonGroup(this)) { 
     setWindowTitle("Conferma Scelta");
+    setModal(true);
     errorLayout->addWidget(text, Qt::AlignCenter);
 
     QPushButton* confirm = new QPushButton("Conferma", this);
