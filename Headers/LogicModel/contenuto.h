@@ -1,18 +1,19 @@
 #ifndef CONTENUTO_H
 #define CONTENUTO_H
 
-#include "visitors.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
+
+#include "visitors.h"
+
 using std::string;
 using std::unordered_map;
 using std::vector;
 
-
 class Contenuto {
 public:
-    enum Lingua { Indefinita, Italiano, Inglese, Tedesco, Francese, Giapponese, Mandarino };
+    enum Lingua { Indefinita, Italiano, Inglese, Tedesco, Francese, Giapponese };
 protected:
     static const unordered_map<const Contenuto::Lingua, const string> MappaLingue;
 private:

@@ -7,7 +7,6 @@ const unordered_map<const Contenuto::Lingua, const string> Contenuto::MappaLingu
     { Contenuto::Lingua::Tedesco, "Tedesco" },
     { Contenuto::Lingua::Francese, "Francese" },
     { Contenuto::Lingua::Giapponese, "Giapponese" },
-    { Contenuto::Lingua::Mandarino, "Mandarino" }
 };
 
 Contenuto::Contenuto(string n, unsigned int a, Contenuto::Lingua l) : nome(n), anno(a), lingua(l) {}
