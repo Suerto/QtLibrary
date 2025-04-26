@@ -19,7 +19,7 @@ private:
 public:
     FilmFilters(QWidget* parent = nullptr);
     virtual void reset() override;
-    virtual QVariantMap raccogliDati() const override;
+    virtual unordered_map<string, string> raccogliDati() const override;
 };
 
 #endif //FILMFILTERS_H

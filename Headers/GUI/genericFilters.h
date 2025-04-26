@@ -5,10 +5,11 @@
 #include <QComboBox>
 #include <QSpinBox>
 #include <QFormLayout>
-#include <QVariantMap>
+#include <unordered_map>
 
 #include "../../Sources/JSON/JsonHandler.hpp"
 
+using std::unordered_map;
 
 class Filters : public QWidget {
     Q_OBJECT
@@ -19,7 +20,7 @@ protected:
 public:
     Filters(QWidget* parent = nullptr);
     virtual void reset();
-    virtual QVariantMap raccogliDati() const = 0;
+    virtual unordered_map<string, string> raccogliDati() const = 0;
 };
 
 #endif //GENERIC_H

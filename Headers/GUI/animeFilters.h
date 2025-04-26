@@ -23,7 +23,7 @@ private:
 public:
     AnimeFilters(QWidget* parent = nullptr);
     virtual void reset() override;
-    virtual QVariantMap raccogliDati() const override;
+    virtual unordered_map<string, string> raccogliDati() const override;
 };
 
 #endif //ANIMEFILTERS_H
