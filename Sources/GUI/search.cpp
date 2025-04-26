@@ -34,4 +34,11 @@ void Search::advancedResearch(bool checked) { checked ? advancedSearch->show() :
 
 void Search::startSearch() {
     searchBar->text().isEmpty() ? titleError->show() : (titleError->isHidden() ? advancedSearch->show() : (titleError->hide()));
+    if(advancedResearchButton->isChecked()) {
+       connect(advancedSearch, &AdvancedResearch::datiRaccolti, this, &Search::advanced); }
+}
+
+void Search::advanced(const int& index, const unordered_map<string, string>& attributi) const {
+    //Necessario definire un nuovo tipo di visitor che controlla gli attributi
+    //necessario definire un nuovo metodo in contentmanager che cerca un contenuto
 }

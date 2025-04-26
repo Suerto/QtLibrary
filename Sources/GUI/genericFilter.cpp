@@ -4,6 +4,7 @@ Filters::Filters(QWidget* parent) : QWidget(parent), language(new QComboBox(this
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Lingue", language);
     filtersLayout->addRow("Selezionare Lingua : ", language);
     
+    year->setMinimum(0);
     year->setMaximum(2025);
     filtersLayout->addRow("Anno di Pubblicazione : ", year);
 
@@ -16,4 +17,8 @@ void Filters::reset() {
     language->setCurrentIndex(-1); 
     
     year->clear();
+}
+
+void Filters::ottieniMappaAttributi() {
+    emit datiRaccolti(raccogliDati());
 } 

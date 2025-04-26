@@ -13,6 +13,7 @@
 #include "animeFilters.h"
 
 class AdvancedResearch : public QWidget {
+    friend class Search;
 private:
     QVBoxLayout* advancedLayout;
     QHBoxLayout* buttonsLayout;
@@ -22,6 +23,9 @@ public:
     AdvancedResearch(QWidget* parent = nullptr);
 public slots :
     void showFilters(int id);
+    void ottieniMappaAttributi(const int& index, const std::unordered_map<string, string>& attributi);
+signals:
+    void datiRaccolti(const int& index, const std::unordered_map<string, string>& attributi) const; 
 };
 
 #endif //ADVANCED_H

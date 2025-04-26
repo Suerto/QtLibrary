@@ -2,7 +2,6 @@
 
 MainWindow::MainWindow(QWidget* parent, ContentManager* mngr) : QMainWindow(parent), manager(mngr), toolBar(new QToolBar(this)), windows(new QStackedWidget(this)) {
     resize(1200, 800);
-    
     toolBar = addToolBar("Strumenti");
     toolBar->setMovable(false);
     
@@ -13,8 +12,8 @@ MainWindow::MainWindow(QWidget* parent, ContentManager* mngr) : QMainWindow(pare
     QAction* creation = new QAction("Creazione", toolBar);
     toolBar->addAction(creation);
 
-    windows->addWidget(new Search);
-    windows->addWidget(new Creation);
+    windows->addWidget(new Search(this, mngr));
+    windows->addWidget(new Creation(this, mngr));
      
     setCentralWidget(windows);
     windows->setVisible(false);

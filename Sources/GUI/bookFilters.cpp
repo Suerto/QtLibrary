@@ -8,7 +8,9 @@ BookFilters::BookFilters(QWidget* parent) : Filters(parent), cover(new QComboBox
 
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Generi Libri", genre);
     filtersLayout->addRow("Selezionare Genere : ", genre);
-
+    
+    pages->setMinimum(0);
+    pages->setMaximum(10000);
     filtersLayout->addRow("Numero di Pagine : ", pages);
     
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Copertine", cover);
@@ -36,7 +38,7 @@ unordered_map<string, string> BookFilters::raccogliDati() const {
 }
 
 void BookFilters::reset() {
-    Filters::reset();
+   Filters::reset();
     
     cover->setCurrentIndex(-1);
     author->clear();

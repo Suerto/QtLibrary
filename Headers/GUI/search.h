@@ -28,6 +28,7 @@ public:
 private slots:
     void advancedResearch(bool checked);
     void startSearch();
+    void advanced(const int& index, const std::unordered_map<string, string>& attributi) const;
 };
 
 #endif //SEARCH_H
