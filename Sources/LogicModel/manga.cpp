@@ -43,8 +43,8 @@ void Manga::setGenere(const string& gnr) {
     genere = Manga::Genere::Indefinito;
 }
 
-void Manga::accept(const Visitors& visitor) {
-    visitor.visit(*this);
+void Manga::accept(const Visitors* visitor) {
+    visitor->visit(*this);
 }
 
 const unordered_map<const Manga::Genere, const string> Manga::getMappaGeneri() { return MappaGeneri; }

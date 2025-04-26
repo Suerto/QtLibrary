@@ -25,7 +25,7 @@ public:
     void setPublisher(const string& pu);
     void setGenere(const string& ge);
     
-    virtual void accept(const Visitors& visitor) override;
+    virtual void accept(const Visitors* visitor) override;
 
     static const unordered_map<const Genere, const string> getMappaGeneri();
 };

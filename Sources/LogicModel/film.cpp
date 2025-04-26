@@ -42,8 +42,8 @@ void Film::setGenere(const string& gnr) {
     genere = Film::Genere::Indefinito;
 }
 
-void Film::accept(const Visitors& visitor) {
-    visitor.visit(*this);
+void Film::accept(const Visitors* visitor) {
+    visitor->visit(*this);
 }
 
 const unordered_map<const Film::Genere, const string> Film::getMappaGeneri() { return MappaGeneri; }

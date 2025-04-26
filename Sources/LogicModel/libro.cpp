@@ -41,8 +41,8 @@ void Libro::setGenere(const string& ge) {
     else genere = Libro::Genere::Indefinito;
 }
 
-void Libro::accept(const Visitors& visitor) {
-    visitor.visit(*this);
+void Libro::accept(const Visitors* visitor) {
+    visitor->visit(*this);
 }
 
 const unordered_map<const Libro::Genere, const string> Libro::getMappaGeneri() { return MappaGeneri; }

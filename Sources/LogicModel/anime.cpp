@@ -45,8 +45,8 @@ void Anime::setGenere(const string& gnr) {
     genere = Anime::Genere::Indefinito;
 }
 
-void Anime::accept(const Visitors& visitor) {
-    visitor.visit(*this);
+void Anime::accept(const Visitors* visitor) {
+    visitor->visit(*this);
 }
 
 const unordered_map<const Anime::Genere, const string> Anime::getMappaGeneri() { return MappaGeneri; }
