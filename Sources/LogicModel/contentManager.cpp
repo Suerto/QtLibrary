@@ -1,14 +1,8 @@
 #include "../../Headers/LogicModel/contentManager.h"
-#include "qglobal.h"
-
-#include <QDebug>
 
 ContentManager::ContentManager() : contenuti() {}
 
-void ContentManager::creaContenuto(const int& index, const Visitors* visitor) {
-    bool visit = 0;
-    if(visitor != nullptr) visit = 1;
-    qDebug() << "Indice passato? : " << index << ", Visitor Passato? " << visit << "\n";
+void ContentManager::creaContenuto(const int& index, const Visitors* visitor) {  
     Contenuto* contenuto = nullptr;
     switch(index) {
         case 0 : contenuto = new Libro(); break;
@@ -16,18 +10,18 @@ void ContentManager::creaContenuto(const int& index, const Visitors* visitor) {
         case 2 : contenuto = new Film(); break;
         case 3 : contenuto = new Anime(); break;
     }
-    qDebug() << "Contenuto creato";
     contenuto->accept(visitor);
-    qDebug() << "Modifica avvenuta";
-    salvaContenuto(contenuto);
+    salvaContenuto(index, contenuto);
 } 
 
-void ContentManager::salvaContenuto(Contenuto* contenuto) {
-    contenuti.push_back(contenuto);
-    qDebug() << "Contenuto salvato con successo!!!";
+void ContentManager::salvaContenuto(const int& index, Contenuto* contenuto) {
+    contenuti[index].push_back(contenuto);
 }
 
 ContentManager& ContentManager::getManager() { return *this; }
+
 ContentManager::~ContentManager() {
-    for(auto& content : contenuti) delete content;
+    for(auto& type : contenuti) {
+        for(auto& content : type) delete content; 
+    }     
 }

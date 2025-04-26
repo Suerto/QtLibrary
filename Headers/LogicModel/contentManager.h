@@ -15,13 +15,13 @@ using std::array;
 
 class ContentManager {
 private:
-    vector<Contenuto*> contenuti;
+    array<vector<Contenuto*>, 4> contenuti;
 public:
     ContentManager();
     ~ContentManager();
 
     void creaContenuto(const int& index, const Visitors* visitor);
-    void salvaContenuto(Contenuto* contenuto);
+    void salvaContenuto(const int& index, Contenuto* contenuto);
 
     ContentManager& getManager();
 };
