@@ -1,6 +1,6 @@
 #include "../../Headers/GUI/search.h"
 
-Search::Search(QWidget* parent) : QWidget(parent), searchBar(new QLineEdit()), searchButton(new QPushButton()), advancedResearchButton(new QCheckBox("Ricerca Avanzata")), advancedSearch(new AdvancedResearch(this)), searchLayout(new QVBoxLayout()), simpleSearchLayout(new QHBoxLayout()) {   
+Search::Search(QWidget* parent, ContentManager* mngr) : QWidget(parent), manager(mngr), searchBar(new QLineEdit()), searchButton(new QPushButton()), advancedResearchButton(new QCheckBox("Ricerca Avanzata")), advancedSearch(new AdvancedResearch(this)), searchLayout(new QVBoxLayout()), simpleSearchLayout(new QHBoxLayout()) {   
     searchBar->setPlaceholderText("Inserire titolo del contenuto...");
     searchBar->setFixedSize(400, 40);
 

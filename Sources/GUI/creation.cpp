@@ -1,6 +1,6 @@
 #include "../../Headers/GUI/creation.h"
 
-Creation::Creation(QWidget* parent) : QWidget(parent), creationLayout(new QVBoxLayout(this)), reset(new QPushButton("Riprista filtri", this)), title(new QLineEdit(this)), buttonLayout(new QHBoxLayout), type(new QButtonGroup(this)), typeForm(new QStackedWidget(this)), choice(new QPushButton("Crea Contenuto", this)) {  
+Creation::Creation(QWidget* parent, ContentManager* mngr) : QWidget(parent), manager(mngr), creationLayout(new QVBoxLayout(this)), reset(new QPushButton("Riprista filtri", this)), title(new QLineEdit(this)), buttonLayout(new QHBoxLayout), type(new QButtonGroup(this)), typeForm(new QStackedWidget(this)), choice(new QPushButton("Crea Contenuto", this)) {  
     creationLayout->addWidget(reset, Qt::AlignLeft);
 
     title->setPlaceholderText("Inserire Titolo del Contenuto");
@@ -52,8 +52,7 @@ Creation::Creation(QWidget* parent) : QWidget(parent), creationLayout(new QVBoxL
 
 void Creation::showTypeForm(int id) {
     //gestione del tentativo di cambio del widget durante la creazione dell'oggetto
-    if(typeForm->currentIndex() != 0) {
-        if(typeForm->currentIndex() != id) {
+    if(typeForm->currentIndex() != id && !typeForm->isVisible()) {
             ErrorDialog* change = new ErrorDialog(this);
             connect(change, &ErrorDialog::azione, this, [this, id](const QString& choice) {
                 if(choice == "Conferma") {
@@ -67,8 +66,6 @@ void Creation::showTypeForm(int id) {
 
             change->exec();
         }
-        else return;
-    }
 
     else {
         typeForm->setCurrentIndex(id);
@@ -82,12 +79,10 @@ void Creation::resetCreation() {
 }
 
 void Creation::startCreation() {
-   QVariantMap parameters = qobject_cast<Filters*>(typeForm->currentWidget())->raccogliDati();
-   parameters["titolo"] = title->text();
-   
-   //debug per mostrare i valori
-   for(const auto& key : parameters.keys()) {
-        qDebug() << key << " : " << parameters.value(key).toString() << "\n";
-   }
-   //CreationVisitor* visitor = new CreationVisitor(new Contenuto);
+   unordered_map<string, string> parameters = qobject_cast<Filters*>(typeForm->currentWidget())->raccogliDati();
+   parameters.insert({"Titolo", title->text().toStdString()}); 
+    
+   CreationVisitor visitor(parameters);
+
+   manager->creaContenuto(typeForm->currentIndex(), &visitor);
 }
