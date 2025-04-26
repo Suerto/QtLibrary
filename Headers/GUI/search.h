@@ -10,9 +10,12 @@
 
 #include "advancedSearch.h"
 
+#include "../LogicModel/contentManager.h"
 class Search : public QWidget {
     Q_OBJECT    
 private:
+    ContentManager* manager;
+
     QLineEdit* searchBar;
     QPushButton* searchButton;
     QCheckBox* advancedResearchButton;
@@ -21,7 +24,7 @@ private:
     QHBoxLayout* simpleSearchLayout;
     QLabel* titleError;
 public:
-    Search(QWidget* parent = nullptr);
+    Search(QWidget* parent = nullptr, ContentManager* mngr = nullptr);
 private slots:
     void advancedResearch(bool checked);
     void startSearch();

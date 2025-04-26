@@ -21,10 +21,13 @@
 #include "../LogicModel/manga.h"
 #include "../LogicModel/film.h"
 #include "../LogicModel/anime.h"
+#include "../LogicModel/contentManager.h"
 
 class Creation : public QWidget {
     Q_OBJECT 
 private:
+    ContentManager* manager;
+
     QVBoxLayout* creationLayout;
     QPushButton* reset;
     QLineEdit* title;
@@ -33,7 +36,7 @@ private:
     QStackedWidget* typeForm;
     QPushButton* choice;
 public:
-    Creation(QWidget* parent = nullptr);
+    Creation(QWidget* parent = nullptr, ContentManager* mngr = nullptr);
     void resetCreation();
     void startCreation();
 private slots:

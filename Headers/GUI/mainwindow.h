@@ -15,10 +15,12 @@
 class MainWindow : public QMainWindow { 
     Q_OBJECT    
 private:
+    ContentManager* manager;
+
     QToolBar* toolBar;
     QStackedWidget* windows;
 public: 
-    MainWindow(QWidget* parent = nullptr);
+    MainWindow(QWidget* parent = nullptr, ContentManager* mngr = nullptr);
 private slots :
     void showSearching();
     void showCreation();
