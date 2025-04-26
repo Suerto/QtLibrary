@@ -1,4 +1,5 @@
 #include "../../Headers/GUI/bookFilters.h"
+#include <string>
 
 BookFilters::BookFilters(QWidget* parent) : Filters(parent), cover(new QComboBox(this)), pages(new QSpinBox(this)), author(new QLineEdit(this)), editor(new QLineEdit(this)), publisher(new QLineEdit(this)), genre(new QComboBox(this)) {
     filtersLayout->addRow("Autore : ", author);
@@ -18,17 +19,19 @@ BookFilters::BookFilters(QWidget* parent) : Filters(parent), cover(new QComboBox
     reset();
 }
 
-QVariantMap BookFilters::raccogliDati() const {
-    QVariantMap parametri;
+unordered_map<string, string> BookFilters::raccogliDati() const {
+    unordered_map<string, string> parametri = {
+        {"Anno", std::to_string(year->value())},
+        {"Lingua", language->currentText().toStdString()},
 
-    parametri["lingua"] = language->currentText();
-    parametri["anno"] = year->value();
-    parametri["autore"] = author->text();
-    parametri["genere"] = genre->currentText();
-    parametri["pagine"] = pages->value();
-    parametri["copertina"] = cover->currentText();
-    parametri["publisher"] = publisher->text();
+        {"Copertina", cover->currentText().toStdString()},
+        {"Pagine", std::to_string(pages->value())},
 
+        {"Autore", author->text().toStdString()},
+        {"Editore", editor->text().toStdString()},
+        {"Publisher", publisher->text().toStdString()},
+        {"Genere", genre->currentText().toStdString()}
+    };
     return parametri;
 }
 

@@ -1,4 +1,5 @@
 #include "../../Headers/GUI/mangaFilters.h"
+#include <string>
 
 MangaFilters::MangaFilters(QWidget* parent) : Filters(parent), cover(new QComboBox(this)), cadence(new QComboBox(this)), mangaka(new QLineEdit(this)), editor(new QLineEdit(this)), pages(new QSpinBox(this)), chapters(new QSpinBox(this)), genre(new QComboBox(this)) {
     filtersLayout->addRow("Mangaka : ", mangaka);
@@ -21,19 +22,21 @@ MangaFilters::MangaFilters(QWidget* parent) : Filters(parent), cover(new QComboB
     reset();
 }
 
-QVariantMap MangaFilters::raccogliDati() const {
-    QVariantMap parametri;
- 
-    parametri["lingua"] = language->currentText();
-    parametri["anno"] = year->value();
-    parametri["mangaka"] = mangaka->text();
-    parametri["editor"] = editor->text();
-    parametri["genere"] = genre->currentText();
-    parametri["pagine"] = pages->value();
-    parametri["capitoli"] = chapters->value();
-    parametri["cadenza"] = cadence->currentText();
-    parametri["copertina"] = cover->currentText();
+unordered_map<string, string> MangaFilters::raccogliDati() const {   
+    unordered_map<string, string> parametri = {
+        {"Anno", std::to_string(year->value())},
+        {"Lingua", language->currentText().toStdString()},
+        
+        {"Copertina", cover->currentText().toStdString()},
+        {"Pagine", std::to_string(pages->value())},
 
+        {"Cadenza", cadence->currentText().toStdString()},
+
+        {"Mangaka", mangaka->text().toStdString()},
+        {"Editore", editor->text().toStdString()},
+        {"Capitoli", chapters->text().toStdString()},
+        {"Genere", genre->currentText().toStdString()}
+    };
     return parametri;
 }
 

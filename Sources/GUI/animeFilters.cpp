@@ -23,19 +23,22 @@ AnimeFilters::AnimeFilters(QWidget* parent) :Filters(parent), resolution(new QCo
     reset();
 } 
 
-QVariantMap AnimeFilters::raccogliDati() const {
-    QVariantMap parametri;
+unordered_map<string, string> AnimeFilters::raccogliDati() const {
+    unordered_map<string, string> parametri = {
+        {"Anno", std::to_string(year->value())},
+        {"Lingua", language->currentText().toStdString()},
 
-    parametri["lingua"] = language->currentText();
-    parametri["anno"] = year->value();
-    parametri["sottotitolato"] = subtitled->isChecked();
-    parametri["episodi"] = episodes->value();
-    parametri["durata"] = durata->value();
-    parametri["cadenza"] = cadence->currentText();
-    parametri["stagioni"] = seasons->value();
-    parametri["risoluzione"] = resolution->currentText();
-    parametri["genere"] = genre->currentText();
+        {"Risoluzione", resolution->currentText().toStdString()},
+        {"Durata", std::to_string(durata->value())},
+        
+        {"Cadenza", cadence->currentText().toStdString()},
 
+        {"Episodi", std::to_string(episodes->value())},
+        {"Stagioni", std::to_string(seasons->value())},
+        {"Sottotitolato", std::to_string(subtitled->isChecked())},
+        {"Producer", producer->text().toStdString()},
+        {"Genere", genre->currentText().toStdString()}
+    };
     return parametri;
 }
 

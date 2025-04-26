@@ -18,18 +18,19 @@ FilmFilters::FilmFilters(QWidget* parent) : Filters(parent), resolution(new QCom
     reset();
 }
 
-QVariantMap FilmFilters::raccogliDati() const {
-    QVariantMap parametri;
+unordered_map<string, string> FilmFilters::raccogliDati() const {
+    unordered_map<string, string> parametri = {
+        {"Anno", std::to_string(year->value())},
+        {"Lingua", language->currentText().toStdString()},
 
-    parametri["lingua"] = language->currentText();
-    parametri["anno"] = year->value();
-    parametri["regista"] = director->text();
-    parametri["compositore"] = composer->text();
-    parametri["produttore"] = producer->text();
-    parametri["durata"] = durata->value();
-    parametri["genere"] = genre->currentText();
-    parametri["risoluzione"] = resolution->currentText();
-    
+        {"Risoluzione", resolution->currentText().toStdString()},
+        {"Durata", std::to_string(durata->value())},
+
+        {"Regista", director->text().toStdString()},
+        {"Composer", composer->text().toStdString()},
+        {"Producer", producer->text().toStdString()},
+        {"Genere", genre->currentText().toStdString()}
+    };
     return parametri;
 }
 
