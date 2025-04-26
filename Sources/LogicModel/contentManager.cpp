@@ -20,8 +20,4 @@ void ContentManager::salvaContenuto(const int& index, Contenuto* contenuto) {
 
 ContentManager& ContentManager::getManager() { return *this; }
 
-ContentManager::~ContentManager() {
-    for(auto& type : contenuti) {
-        for(auto& content : type) delete content; 
-    }     
-}
+ContentManager::~ContentManager() = default; 
