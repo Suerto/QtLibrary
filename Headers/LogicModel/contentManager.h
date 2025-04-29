@@ -22,6 +22,7 @@ public:
 
     void creaContenuto(const int& index, const Visitors* visitor);
     void salvaContenuto(const int& index, Contenuto* contenuto);
+    void cercaContenuto(const int& index, const Visitors* visitor);
 
     ContentManager& getManager();
 };

@@ -18,6 +18,8 @@ void ContentManager::salvaContenuto(const int& index, Contenuto* contenuto) {
     contenuti[index].push_back(contenuto);
 }
 
+void ContentManager::cercaContenuto(const int& index, const Visitors* visitor) {}
+
 ContentManager& ContentManager::getManager() { return *this; }
 
 ContentManager::~ContentManager() = default; 
