@@ -1,5 +1,4 @@
 #include "../../Headers/GUI/errorDialog.h"
-#include "qnamespace.h"
 
 ErrorDialog::ErrorDialog(QWidget* parent) : QDialog(parent), text(new QLabel("Attenzione! Così facendo verranno persi tutti i criteri inseriti finora. Vuoi davvero continuare?", this)), errorLayout(new QVBoxLayout(this)), action(new QButtonGroup(this)) { 
     setWindowTitle("Conferma Scelta");
@@ -18,8 +17,6 @@ ErrorDialog::ErrorDialog(QWidget* parent) : QDialog(parent), text(new QLabel("At
     errorLayout->addLayout(actionLayout);
     
     connect(action, &QButtonGroup::idClicked, this, &ErrorDialog::changeWidget);
-
-    //setLayout(errorLayout);
 }
 
 void ErrorDialog::changeWidget(int id) {
