@@ -2,14 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QWidget>
-#include <QPushButton>
-#include <QStackedWidget>
 #include <QToolBar>
-#include <QPushButton>
 
-#include "search.h"
 #include "creation.h"
+#include "search.h"
 #include "errorDialog.h"
 
 class MainWindow : public QMainWindow { 

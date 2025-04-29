@@ -11,9 +11,11 @@ MainWindow::MainWindow(QWidget* parent, ContentManager* mngr) : QMainWindow(pare
     
     QAction* creation = new QAction("Creazione", toolBar);
     toolBar->addAction(creation);
-
-    windows->addWidget(new Search(this, mngr));
-    windows->addWidget(new Creation(this, mngr));
+    
+    Search* ricerca = new Search(this, mngr);
+    Creation* creazione = new Creation(this, mngr);
+    windows->insertWidget(0, ricerca);
+    windows->insertWidget(1, creazione);
      
     setCentralWidget(windows);
     windows->setVisible(false);
@@ -33,14 +35,14 @@ void MainWindow::showSearching() {
         ErrorDialog* change = new ErrorDialog(this);
         connect(change, &ErrorDialog::azione, this, [this](const QString& choice) {
             if(choice == "Conferma") {
-               qobject_cast<Creation*>(windows->currentWidget())->resetCreation();
+               qDebug() << "";
+               qobject_cast<Creation*>(windows->currentWidget())->ripristinaFiltri();
                windows->setCurrentIndex(0); 
             }
         });
 
         change->exec();
     }
-
     windows->setFixedSize(500, this->height());
 }
 

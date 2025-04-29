@@ -1,89 +1,17 @@
 #include "../../Headers/GUI/creation.h"
 
-Creation::Creation(QWidget* parent, ContentManager* mngr) : QWidget(parent), manager(mngr), creationLayout(new QVBoxLayout(this)), reset(new QPushButton("Riprista filtri", this)), title(new QLineEdit(this)), buttonLayout(new QHBoxLayout), type(new QButtonGroup(this)), typeForm(new QStackedWidget(this)), choice(new QPushButton("Crea Contenuto", this)) {  
-    creationLayout->addWidget(reset, Qt::AlignLeft);
+Creation::Creation(QWidget* parent, ContentManager* mngr) : MainWidget(parent), manager(mngr), crea(new QPushButton("Avvia Creazione", this)) {
+    crea->setFixedSize(50, 50);
+    titleLayout->addWidget(crea);
     
-    qDebug() << "Manager ricevuto da Creation? : " << static_cast<void*>(mngr);
-    title->setPlaceholderText("Inserire Titolo del Contenuto");
-    title->font();
-    title->setFixedSize(300, 30);
-    creationLayout->addWidget(title, Qt::AlignLeft | Qt::AlignTop);
-    
-    QPushButton* book = new QPushButton("Libro", this);
-    book->setFixedSize(100, 25);
-    book->setCheckable(true);
-    type->addButton(book, 0);
+    pulsantiera->setVisible(true);
 
-    QPushButton* manga = new QPushButton("Manga", this);
-    manga->setFixedSize(100, 25);
-    manga->setCheckable(true);
-    type->addButton(manga, 1);
-
-    QPushButton* film = new QPushButton("Film", this);
-    film->setFixedSize(100, 25);
-    film->setCheckable(true);
-    type->addButton(film, 2);
-
-    QPushButton* anime = new QPushButton("Anime", this);
-    anime->setFixedSize(100, 25);
-    anime->setCheckable(true);
-    type->addButton(anime, 3);
-
-    foreach(QAbstractButton* button, type->buttons()) buttonLayout->addWidget(button);
-
-    buttonLayout->setAlignment(Qt::AlignLeft | Qt::AlignTop);
-    creationLayout->addLayout(buttonLayout);
-
-    typeForm->insertWidget(0, new BookFilters);
-    typeForm->insertWidget(1, new MangaFilters);
-    typeForm->insertWidget(2, new FilmFilters);
-    typeForm->insertWidget(3, new AnimeFilters);
-
-    typeForm->setVisible(false);
-    creationLayout->addWidget(typeForm);
-    creationLayout->setAlignment(Qt::AlignCenter);
-
-    creationLayout->addWidget(choice); 
-
-    connect(type, &QButtonGroup::idClicked, this, &Creation::showTypeForm);
-    connect(reset, &QPushButton::clicked, this, &Creation::resetCreation);
-    connect(choice, &QPushButton::clicked, this, &Creation::startCreation);
-
-}
-
-void Creation::showTypeForm(int id) {
-    //gestione del tentativo di cambio del widget durante la creazione dell'oggetto
-    if(typeForm->currentIndex() != id && typeForm->isVisible()) {
-            ErrorDialog* change = new ErrorDialog(this);
-            connect(change, &ErrorDialog::azione, this, [this, id](const QString& choice) {
-                if(choice == "Conferma") {
-                    qobject_cast<Filters*>(typeForm->currentWidget())->reset();
-                    typeForm->setCurrentIndex(id);
-                }
-                else {
-                    type->button(typeForm->currentIndex())->click();
-                }
-            });
-
-            change->exec();
-        }
-
-    else {
-        typeForm->setCurrentIndex(id);
-        typeForm->setVisible(true);
-    }
-}
-
-void Creation::resetCreation() {
-   title->clear();
-   qobject_cast<Filters*>(typeForm->currentWidget())->reset();
+    connect(crea, &QPushButton::clicked, this, &Creation::startCreation);
 }
 
 void Creation::startCreation() {
-   unordered_map<string, string> parameters = qobject_cast<Filters*>(typeForm->currentWidget())->raccogliDati();
-   parameters.insert({"Titolo", title->text().toStdString()}); 
+   unordered_map<string, string> parameters = qobject_cast<Filters*>(filtri->currentWidget())->raccogliDati();
+   parameters.insert({"Titolo", titolo->text().toStdString()}); 
     
    CreationVisitor* visitor = new CreationVisitor(parameters);
-
-   manager->creaContenuto(typeForm->currentIndex(), visitor);
 }
