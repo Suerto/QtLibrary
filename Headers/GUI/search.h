@@ -18,7 +18,8 @@ public:
     Search(QWidget* parent = nullptr, ContentManager* mngr = nullptr);
 private slots:
     void advancedResearch(bool checked);
-    //void startSearch();
+    void startSearch();
+    void mostraFiltro(int id) override;
 };
 
 #endif //SEARCH_H

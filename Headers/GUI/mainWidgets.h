@@ -33,7 +33,7 @@ protected:
 public:
     MainWidget(QWidget* parent = nullptr, ContentManager* mngr = nullptr);
 public slots:
-    void mostraFiltro(int id);
+    virtual void mostraFiltro(int id) = 0;
     void ripristinaFiltri();
     //void raccogliDati();
 };

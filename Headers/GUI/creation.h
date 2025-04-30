@@ -12,6 +12,7 @@ public:
     Creation(QWidget* parent = nullptr, ContentManager* mngr = nullptr);
 public slots:
     void startCreation();
+    void mostraFiltro(int id) override;
 };
 
 #endif //CREATION_H
