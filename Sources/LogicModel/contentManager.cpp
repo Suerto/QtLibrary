@@ -1,25 +1,37 @@
 #include "../../Headers/LogicModel/contentManager.h"
 
-ContentManager::ContentManager() : contenuti() {}
+#include <QDebug>
+
+ContentManager::ContentManager() : memoria() {}
+
+std::unordered_map<int, std::function<Contenuto*()>> ContentManager::creatore = {
+    {0, [](){ return new Libro(); } },
+    {1, [](){ return new Manga(); } },
+    {2, [](){ return new Film(); } },
+    {3, [](){ return new Anime(); } }
+};
 
 void ContentManager::creaContenuto(const int& index, const Visitors* visitor) {  
-    Contenuto* contenuto = nullptr;
-    switch(index) {
-        case 0 : contenuto = new Libro(); break;
-        case 1 : contenuto = new Manga(); break;
-        case 2 : contenuto = new Film(); break;
-        case 3 : contenuto = new Anime(); break;
-    }
+    Contenuto* contenuto = creatore.find(index)->second();
     contenuto->accept(visitor);
     salvaContenuto(index, contenuto);
 } 
 
 void ContentManager::salvaContenuto(const int& index, Contenuto* contenuto) {
-    contenuti[index].push_back(contenuto);
+    memoria[index].push_back(contenuto);
 }
 
-void ContentManager::cercaContenuto(const int& index, const Visitors* visitor) {}
+vector<Contenuto*> ContentManager::cercaPerTitolo(const string& title) const {
+    vector<Contenuto*> risultati;
+    
+    for(vector<Contenuto*> tipo : memoria) {
+        for(Contenuto* riscontro : tipo) {
+            if(title == riscontro->getNome()) risultati.push_back(riscontro); 
+        }
+    }
+    return risultati;
+}
 
 ContentManager& ContentManager::getManager() { return *this; }
 
-ContentManager::~ContentManager() = default; 
+ContentManager::~ContentManager() = default;
