@@ -10,6 +10,7 @@
 #include "libro.h"
 #include "manga.h"
 #include "creationVisitor.h"
+#include "checkVisitor.h"
 
 using std::vector;
 using std::array;
@@ -27,11 +28,8 @@ public:
     void salvaContenuto(const int& index, Contenuto* contenuto);
     
     vector<Contenuto*> cercaPerTitolo(const string& title) const;
-
-    ContentManager& getManager();
-
-    template<class T>
-    vector<T*> cercaContenuto(const int& index, const Visitors* visitor) const;
+    
+    vector<Contenuto*> cercaContenuto(const int& index, const Visitors* visitor) const;
 };
 
 #endif //CONTENT_MANAGER_H

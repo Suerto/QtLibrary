@@ -21,17 +21,27 @@ void ContentManager::salvaContenuto(const int& index, Contenuto* contenuto) {
     memoria[index].push_back(contenuto);
 }
 
+vector<Contenuto*> ContentManager::cercaContenuto(const int& index, const Visitors* visitor) const {
+    vector<Contenuto*> risultati;
+    CheckVisitor* check = new CheckVisitor(visitor->getMap());
+    
+    for(Contenuto* element : memoria[index]) {
+       element->accept(check);
+       if(check->isSimilar()) risultati.push_back(element);
+    }
+
+    return risultati;
+}
+
 vector<Contenuto*> ContentManager::cercaPerTitolo(const string& title) const {
     vector<Contenuto*> risultati;
     
-    for(vector<Contenuto*> tipo : memoria) {
-        for(Contenuto* riscontro : tipo) {
-            if(title == riscontro->getNome()) risultati.push_back(riscontro); 
+    for(vector<Contenuto*> tipologia : memoria) {
+        for(Contenuto* content : tipologia) {
+            if(title == content->getNome()) risultati.push_back(content); 
         }
     }
     return risultati;
 }
-
-ContentManager& ContentManager::getManager() { return *this; }
 
 ContentManager::~ContentManager() = default;
