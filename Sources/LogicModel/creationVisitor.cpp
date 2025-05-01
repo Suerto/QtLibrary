@@ -1,17 +1,10 @@
 #include "../../Headers/LogicModel/creationVisitor.h"
-#include <QDebug>
+
 CreationVisitor::CreationVisitor(const unordered_map<string, string>& prmts) : parametri(prmts) {}
 
 void CreationVisitor::visit(Libro& lib) const {
-    // Titolo
-    auto it = parametri.find("Titolo");
-    if(it != parametri.end() && !it->second.empty())
-        lib.setNome(it->second);
-    else
-        lib.setNome("Indefinito");
-
     // Anno
-    it = parametri.find("Anno");
+    auto it = parametri.find("Anno");
     if(it != parametri.end() && !it->second.empty())
         lib.setAnno(static_cast<unsigned int>(std::stoi(it->second)));
     else
@@ -43,21 +36,21 @@ void CreationVisitor::visit(Libro& lib) const {
     if(it != parametri.end() && !it->second.empty())
         lib.setAutore(it->second);
     else
-        lib.setAutore("Autore sconosciuto");
+        lib.setAutore("Indefinito");
 
     // Editore
     it = parametri.find("Editore");
     if(it != parametri.end() && !it->second.empty())
         lib.setEditore(it->second);
     else
-        lib.setEditore("Editore sconosciuto");
+        lib.setEditore("Indefinito");
 
     // Publisher
     it = parametri.find("Publisher");
     if(it != parametri.end() && !it->second.empty())
         lib.setPublisher(it->second);
     else
-        lib.setPublisher("Publisher sconosciuto");
+        lib.setPublisher("Indefinito");
 
     // Genere
     it = parametri.find("Genere");
@@ -65,21 +58,11 @@ void CreationVisitor::visit(Libro& lib) const {
         lib.setGenere(it->second);
     else
         lib.setGenere("Indefinito");
-
-    // Stampa tutti i parametri
-    qDebug() << QString::fromStdString(lib.getAutore());
 }
 
 void CreationVisitor::visit(Manga& mng) const {
-    // Titolo
-    auto it = parametri.find("Titolo");
-    if(it != parametri.end() && !it->second.empty())
-        mng.setNome(it->second);
-    else
-        mng.setNome("Indefinito");
-
     // Anno
-    it = parametri.find("Anno");
+    auto it = parametri.find("Anno");
     if(it != parametri.end() && !it->second.empty())
         mng.setAnno(static_cast<unsigned int>(std::stoi(it->second)));
     else
@@ -125,7 +108,7 @@ void CreationVisitor::visit(Manga& mng) const {
     if(it != parametri.end() && !it->second.empty())
         mng.setEditore(it->second);
     else
-        mng.setEditore("Editore sconosciuto");
+        mng.setEditore("Indefinito");
 
     // Capitoli
     it = parametri.find("Capitoli");
@@ -139,23 +122,12 @@ void CreationVisitor::visit(Manga& mng) const {
     if(it != parametri.end() && !it->second.empty())
         mng.setGenere(it->second);
     else
-        mng.setGenere("Genere sconosciuto");
-
-    // Stampa tutti i parametri
-    for(const auto&[T, V] : parametri)
-        qDebug() << QString::fromStdString(T) << " : " << QString::fromStdString(V) << "\n";
+        mng.setGenere("Indefinito");
 }
 
 void CreationVisitor::visit(Film& flm) const {
-    // Titolo
-    auto it = parametri.find("Titolo");
-    if(it != parametri.end() && !it->second.empty())
-        flm.setNome(it->second);
-    else
-        flm.setNome("Indefinito");
-
     // Anno
-    it = parametri.find("Anno");
+    auto it = parametri.find("Anno");
     if(it != parametri.end() && !it->second.empty())
         flm.setAnno(static_cast<unsigned int>(std::stoi(it->second)));
     else
@@ -208,23 +180,12 @@ void CreationVisitor::visit(Film& flm) const {
     if(it != parametri.end() && !it->second.empty())
         flm.setGenere(it->second);
     else
-        flm.setGenere("Genere sconosciuto");
-
-    // Stampa tutti i parametri
-    for(const auto&[T, V] : parametri)
-        qDebug() << QString::fromStdString(T) << " : " << QString::fromStdString(V) << "\n";
+        flm.setGenere("Indefinito");
 }
 
 void CreationVisitor::visit(Anime& anm) const {
-    // Titolo
-    auto it = parametri.find("Titolo");
-    if(it != parametri.end() && !it->second.empty())
-        anm.setNome(it->second);
-    else
-        anm.setNome("Indefinito");
-
     // Anno
-    it = parametri.find("Anno");
+    auto it = parametri.find("Anno");
     if(it != parametri.end() && !it->second.empty())
         anm.setAnno(static_cast<unsigned int>(std::stoi(it->second)));
     else
@@ -291,9 +252,7 @@ void CreationVisitor::visit(Anime& anm) const {
     if(it != parametri.end() && !it->second.empty())
         anm.setGenere(it->second);
     else
-        anm.setGenere("Genere sconosciuto");
-
-    // Stampa tutti i parametri
-    for(const auto&[T, V] : parametri)
-        qDebug() << QString::fromStdString(T) << " : " << QString::fromStdString(V) << "\n";
+        anm.setGenere("Indefinito");
 }
+
+unordered_map<string, string> CreationVisitor::getMap() const { return parametri; }
