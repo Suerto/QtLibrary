@@ -22,27 +22,32 @@ BookFilters::BookFilters(QWidget* parent) : Filters(parent), cover(new QComboBox
 }
 
 unordered_map<string, string> BookFilters::raccogliDati() const {
-    unordered_map<string, string> parametri = {
-        {"Anno", std::to_string(year->value())},
-        {"Lingua", language->currentText().toStdString()},
+    unordered_map<string, string> parametri;
+    
+    //Contenuto
+    parametri.insert({"Anno", std::to_string(year->value())});
+    (language->currentText().toStdString()).empty() ? parametri.insert({"Lingua", "Indefinita"}) : parametri.insert({"Lingua", language->currentText().toStdString()});
+    
+    //Fisico
+    (cover->currentText().toStdString()).empty() ? parametri.insert({"Copertina", "Indefinita"}) : parametri.insert({"Copertina", cover->currentText().toStdString()});
+    parametri.insert({"Pagine", std::to_string(pages->value())});
+    
+    //Libro
+    (author->text().toStdString()).empty() ? parametri.insert({"Autore", "Indefinito"}) : parametri.insert({"Autore", author->text().toStdString()});
+    (editor->text().toStdString()).empty() ? parametri.insert({"Editore", "Indefinito"}) :parametri.insert({"Editore", editor->text().toStdString()});
+    (publisher->text().toStdString()).empty() ? parametri.insert({"Publisher", "Indefinito"}) : parametri.insert({"Publisher", publisher->text().toStdString()});
+    (genre->currentText().toStdString()).empty() ? parametri.insert({"Genere", "Indefinito"}) : parametri.insert({"Genere", genre->currentText().toStdString()});
 
-        {"Copertina", cover->currentText().toStdString()},
-        {"Pagine", std::to_string(pages->value())},
-
-        {"Autore", author->text().toStdString()},
-        {"Editore", editor->text().toStdString()},
-        {"Publisher", publisher->text().toStdString()},
-        {"Genere", genre->currentText().toStdString()}
-    };
     return parametri;
 }
 
 void BookFilters::reset() {
    Filters::reset();
     
-    cover->setCurrentIndex(-1);
-    author->clear();
-    editor->clear();
-    publisher->clear();
-    genre->setCurrentIndex(-1);
+   author->clear();
+   editor->clear();
+   genre->setCurrentIndex(-1);
+   pages->clear();
+   cover->setCurrentIndex(-1);
+   publisher->clear();
 }

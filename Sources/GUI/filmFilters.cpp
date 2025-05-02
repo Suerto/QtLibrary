@@ -19,28 +19,32 @@ FilmFilters::FilmFilters(QWidget* parent) : Filters(parent), resolution(new QCom
 }
 
 unordered_map<string, string> FilmFilters::raccogliDati() const {
-    unordered_map<string, string> parametri = {
-        {"Anno", std::to_string(year->value())},
-        {"Lingua", language->currentText().toStdString()},
+    unordered_map<string, string> parametri;
 
-        {"Risoluzione", resolution->currentText().toStdString()},
-        {"Durata", std::to_string(durata->value())},
-
-        {"Regista", director->text().toStdString()},
-        {"Composer", composer->text().toStdString()},
-        {"Producer", producer->text().toStdString()},
-        {"Genere", genre->currentText().toStdString()}
-    };
+    //Contenuto
+    parametri.insert({"Anno", std::to_string(year->value())});
+    (language->currentText().toStdString()).empty() ? parametri.insert({"Lingua", "Indefinita"}) : parametri.insert({"Lingua", language->currentText().toStdString()});
+    
+    //Digitale
+    (resolution->currentText().toStdString()).empty() ? parametri.insert({"Risoluzione", "Indefinita"}) : parametri.insert({"Risoluzione", resolution->currentText().toStdString()});
+    parametri.insert({"Durata", std::to_string(durata->value())});
+    
+    //Film
+    (director->text().toStdString()).empty() ? parametri.insert({"Regista", "Indefinito"}) : parametri.insert({"Regista", director->text().toStdString()});
+    (composer->text().toStdString()).empty() ? parametri.insert({"Compositore", "Indefinito"}) :parametri.insert({"Compositore", composer->text().toStdString()});
+    (producer->text().toStdString()).empty() ? parametri.insert({"Producer", "Indefinito"}) : parametri.insert({"Producer", producer->text().toStdString()});
+    (genre->currentText().toStdString()).empty() ? parametri.insert({"Genere", "Indefinito"}) : parametri.insert({"Genere", genre->currentText().toStdString()});
     return parametri;
 }
 
 void FilmFilters::reset() {
     Filters::reset();
+    
+    resolution->setCurrentIndex(-1);
+    durata->setValue(0);
 
     director->clear();
     composer->clear();
     producer->clear();
-    durata->clear();
     genre->setCurrentIndex(-1);
-    resolution->setCurrentIndex(-1);
 }

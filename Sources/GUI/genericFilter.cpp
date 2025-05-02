@@ -16,9 +16,5 @@ Filters::Filters(QWidget* parent) : QWidget(parent), language(new QComboBox(this
 void Filters::reset() { 
     language->setCurrentIndex(-1); 
     
-    year->clear();
+    year->setValue(0);
 }
-
-void Filters::ottieniMappaAttributi() {
-    emit datiRaccolti(raccogliDati());
-} 

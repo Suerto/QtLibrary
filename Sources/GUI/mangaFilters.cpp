@@ -23,31 +23,36 @@ MangaFilters::MangaFilters(QWidget* parent) : Filters(parent), cover(new QComboB
 }
 
 unordered_map<string, string> MangaFilters::raccogliDati() const {   
-    unordered_map<string, string> parametri = {
-        {"Anno", std::to_string(year->value())},
-        {"Lingua", language->currentText().toStdString()},
-        
-        {"Copertina", cover->currentText().toStdString()},
-        {"Pagine", std::to_string(pages->value())},
+    unordered_map<string, string> parametri;
 
-        {"Cadenza", cadence->currentText().toStdString()},
+    parametri.insert({"Anno", std::to_string(year->value())});
+    (language->currentText().toStdString()).empty() ? parametri.insert({"Lingua", "Indefinita"}) : parametri.insert({"Lingua", language->currentText().toStdString()});
+    
+    //Fisico
+    (cover->currentText().toStdString()).empty() ? parametri.insert({"Copertina", "Indefinita"}) : parametri.insert({"Copertina", cover->currentText().toStdString()});
+    parametri.insert({"Pagine", std::to_string(pages->value())});
+    
+    //Periodico
+    (cadence->currentText().toStdString()).empty() ? parametri.insert({"Cadenza", "Indefinita"}) : parametri.insert({"Cadenza", language->currentText().toStdString()});
 
-        {"Mangaka", mangaka->text().toStdString()},
-        {"Editore", editor->text().toStdString()},
-        {"Capitoli", chapters->text().toStdString()},
-        {"Genere", genre->currentText().toStdString()}
-    };
+    //Manga
+    (editor->text().toStdString()).empty() ? parametri.insert({"Editore", "Indefinito"}) :parametri.insert({"Editore", editor->text().toStdString()});
+    (mangaka->text().toStdString()).empty() ? parametri.insert({"Mangaka", "Indefinito"}) : parametri.insert({"Mangaka", mangaka->text().toStdString()});
+    (genre->currentText().toStdString()).empty() ? parametri.insert({"Genere", "Indefinito"}) : parametri.insert({"Genere", genre->currentText().toStdString()});
+
     return parametri;
 }
 
 void MangaFilters::reset() {
     Filters::reset();
     
+    cover->setCurrentIndex(-1);
+    pages->setValue(0);
+
+    cadence->setCurrentIndex(-1);
+
     mangaka->clear();
     editor->clear();
     genre->setCurrentIndex(-1);
-    pages->clear();
     chapters->clear();
-    cadence->setCurrentIndex(-1);
-    cover->setCurrentIndex(-1);
 }
