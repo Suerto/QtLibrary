@@ -29,7 +29,7 @@ public:
     
     vector<Contenuto*> cercaPerTitolo(const string& title) const;
     
-    vector<Contenuto*> cercaContenuto(const int& index, const Visitors* visitor) const;
+    vector<Contenuto*> cercaContenuto(const int& index, const unordered_map<string, string>& map) const;
 };
 
 #endif //CONTENT_MANAGER_H
