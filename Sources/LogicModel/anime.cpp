@@ -5,7 +5,6 @@ const unordered_map<const Anime::Genere, const string> Anime::MappaGeneri = {
     { Anime::Genere::Shonen, "Shonen" },
     { Anime::Genere::Seinen, "Seinen" },
     { Anime::Genere::Mecha, "Mecha" },
-    { Anime::Genere::Indefinito, "Indefinito" }
 };
 
 Anime::Anime(string n, unsigned int a, Lingua l, Risoluzione res, unsigned int d, Cadenza ca, unsigned int ep, unsigned int s, bool sub, string prd, Genere g) : 
