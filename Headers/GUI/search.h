@@ -4,6 +4,8 @@
 #include <QCheckBox>
 
 #include "mainWidgets.h"
+#include "errorNoResult.h"
+#include "errorNoTitle.h"
 
 #include "../LogicModel/contentManager.h"
 

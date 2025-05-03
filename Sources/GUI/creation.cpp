@@ -12,8 +12,8 @@ Creation::Creation(QWidget* parent, ContentManager* mngr) : MainWidget(parent), 
 void Creation::mostraFiltro(int id) {
     //gestione del tentativo di cambio del widget durante la creazione dell'oggetto
     if(filtri->currentIndex() != id && filtri->isVisible()) {
-            ErrorDialog* change = new ErrorDialog(this);
-            connect(change, &ErrorDialog::azione, this, [this, id](const QString& choice) {
+            ErrorChanging* change = new ErrorChanging(this);
+            connect(change, &ErrorChanging::azione, this, [this, id](const QString& choice) {
                 if(choice == "Conferma") {
                     qobject_cast<Filters*>(filtri->currentWidget())->reset();
                     filtri->setCurrentIndex(id);
@@ -30,11 +30,20 @@ void Creation::mostraFiltro(int id) {
   }
 }
 
+bool Creation::checkMap(const unordered_map<string, string>& map) const {
+    for(const auto&[T, V] : map) {
+        if(V == "Indefinito" || V == "Indefinita" || V == "0") return false;
+    }
+    return true;
+}
+
 void Creation::startCreation() {
    unordered_map<string, string> parameters = qobject_cast<Filters*>(filtri->currentWidget())->raccogliDati();
    parameters.insert({"Titolo", titolo->text().toStdString()}); 
    
-   CreationVisitor* visitor = new CreationVisitor(parameters);
-    
-   manager->creaContenuto(filtri->currentIndex(), visitor);
+   if(!checkMap(parameters)) {
+        ErrorMissing* error = new ErrorMissing(this);
+        error->exec();
+   }
+   else manager->creaContenuto(filtri->currentIndex(), new CreationVisitor(parameters));
 }

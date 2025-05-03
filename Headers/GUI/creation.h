@@ -10,6 +10,7 @@ private:
     QPushButton* crea;
 public:
     Creation(QWidget* parent = nullptr, ContentManager* mngr = nullptr);
+    bool checkMap(const std::unordered_map<string, string>& map) const;
 public slots:
     void startCreation();
     void mostraFiltro(int id) override;

@@ -12,30 +12,30 @@
 #include "animeFilters.h"
 #include "mangaFilters.h"
 #include "filmFilters.h"
-#include "errorDialog.h"
+#include "errorMissing.h"
+#include "errorChanging.h"
 
 #include "../LogicModel/contentManager.h"
 
 class MainWidget : public QWidget {
     Q_OBJECT
 private:
-    ContentManager* manager; //riferimento al manager
+    ContentManager* manager;
 protected:
-    QVBoxLayout* mainLayout; //Layout principale
+    QVBoxLayout* mainLayout;
     QVBoxLayout* topLayout;
     QHBoxLayout* titleLayout;
-    QLineEdit* titolo; //Barra di inserimento del titolo
-    QPushButton* reset; //pulsante di reset dei filtri
+    QLineEdit* titolo;
+    QPushButton* reset; 
     QHBoxLayout* filtersButtonsLayout;
     QWidget* pulsantiera;
-    QButtonGroup* tipologia; //pulsantiera di selezione del tipo mostrabile
-    QStackedWidget* filtri; //stack dei possibili tipi mostrabili all'utente
+    QButtonGroup* tipologia;
+    QStackedWidget* filtri; 
 public:
     MainWidget(QWidget* parent = nullptr, ContentManager* mngr = nullptr);
 public slots:
     virtual void mostraFiltro(int id) = 0;
     void ripristinaFiltri();
-    //void raccogliDati();
 };
 
 #endif //MAIN_WIDGETS_H

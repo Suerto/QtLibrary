@@ -6,7 +6,7 @@
 
 #include "creation.h"
 #include "search.h"
-#include "errorDialog.h"
+#include "errorChanging.h"
 
 class MainWindow : public QMainWindow { 
     Q_OBJECT    

@@ -32,8 +32,8 @@ void MainWindow::showSearching() {
     if(!windows->isVisible()) windows->setVisible(true);
     
     if(windows->currentIndex() == 1) {
-        ErrorDialog* change = new ErrorDialog(this);
-        connect(change, &ErrorDialog::azione, this, [this](const QString& choice) {
+        ErrorChanging* change = new ErrorChanging(this);
+        connect(change, &ErrorChanging::azione, this, [this](const QString& choice) {
             if(choice == "Conferma") {
                qDebug() << "";
                qobject_cast<Creation*>(windows->currentWidget())->ripristinaFiltri();
