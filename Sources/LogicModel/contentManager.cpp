@@ -21,9 +21,9 @@ void ContentManager::salvaContenuto(const int& index, Contenuto* contenuto) {
     memoria[index].push_back(contenuto);
 }
 
-vector<Contenuto*> ContentManager::cercaContenuto(const int& index, const Visitors* visitor) const {
+vector<Contenuto*> ContentManager::cercaContenuto(const int& index, const unordered_map<string, string>& map) const {
     vector<Contenuto*> risultati;
-    CheckVisitor* check = new CheckVisitor(visitor->getMap());
+    CheckVisitor* check = new CheckVisitor(map);
     
     for(Contenuto* element : memoria[index]) {
        element->accept(check);
