@@ -3,6 +3,12 @@
 CheckVisitor::CheckVisitor(unordered_map<string, string> prm, bool sml) : parametri(prm), similar(sml) {}
 
 void CheckVisitor::visit(Libro& lib) const {
+    string titolo = parametri.find("Titolo")->second;
+    if(titolo != lib.getNome()) {
+        similar = false;
+        return;
+    }
+
     unsigned int anno = static_cast<unsigned int>(stoi(parametri.find("Anno")->second));
     if(anno != 0) {
         if(anno != lib.getAnno()) {
@@ -69,6 +75,11 @@ void CheckVisitor::visit(Libro& lib) const {
 }
 
 void CheckVisitor::visit(Manga& mng) const {
+    string titolo = parametri.find("Titolo")->second;
+    if(titolo != mng.getNome()) {
+        similar = false;
+        return;
+    }
     unsigned int anno = static_cast<unsigned int>(stoi(parametri.find("Anno")->second));
     if(anno != 0) {
         if(anno != mng.getAnno()) {
@@ -143,6 +154,11 @@ void CheckVisitor::visit(Manga& mng) const {
 }
 
 void CheckVisitor::visit(Film& flm) const {
+    string titolo = parametri.find("Titolo")->second;
+    if(titolo != flm.getNome()) {
+        similar = false;
+        return;
+    }
     unsigned int anno = static_cast<unsigned int>(stoi(parametri.find("Anno")->second));
     if(anno != 0) {
         if(anno != flm.getAnno()) {
@@ -209,6 +225,11 @@ void CheckVisitor::visit(Film& flm) const {
 }
 
 void CheckVisitor::visit(Anime& anm) const {
+    string titolo = parametri.find("Titolo")->second;
+    if(titolo != anm.getNome()) {
+        similar = false;
+        return;
+    }
     unsigned int anno = static_cast<unsigned int>(stoi(parametri.find("Anno")->second));
     if(anno != 0) {
         if(anno != anm.getAnno()) {
