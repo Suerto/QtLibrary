@@ -1,7 +1,5 @@
 #include "../../Headers/LogicModel/contentManager.h"
 
-#include <QDebug>
-
 ContentManager::ContentManager() : memoria() {}
 
 std::unordered_map<int, std::function<Contenuto*()>> ContentManager::creatore = {
@@ -15,7 +13,7 @@ void ContentManager::creaContenuto(const int& index, const Visitors* visitor) {
     Contenuto* contenuto = creatore.find(index)->second();
     contenuto->accept(visitor);
     salvaContenuto(index, contenuto);
-} 
+}
 
 void ContentManager::salvaContenuto(const int& index, Contenuto* contenuto) {
     memoria[index].push_back(contenuto);
@@ -29,7 +27,6 @@ vector<Contenuto*> ContentManager::cercaContenuto(const int& index, const unorde
        element->accept(check);
        if(check->isSimilar()) risultati.push_back(element);
     }
-
     return risultati;
 }
 

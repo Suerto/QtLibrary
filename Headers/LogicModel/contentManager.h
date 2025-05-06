@@ -27,9 +27,13 @@ public:
     void creaContenuto(const int& index, const Visitors* visitor);
     void salvaContenuto(const int& index, Contenuto* contenuto);
     
-    vector<Contenuto*> cercaPerTitolo(const string& title) const;
-    
+    vector<Contenuto*> cercaPerTitolo(const string& title) const; 
     vector<Contenuto*> cercaContenuto(const int& index, const unordered_map<string, string>& map) const;
+
+    //Definire un metodo che permette di modificare il contenuto: 
+    //Molto probabilmente l'operazione migliore da fare è passare un CreationVisitor con la 
+    //mappa raccolta da raccogliDati(), modificare il contenuto e quindi salvarlo nel contentManager
+    //e inoltre serializzare le modifiche effettuate
 };
 
 #endif //CONTENT_MANAGER_H
