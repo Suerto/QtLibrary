@@ -14,6 +14,7 @@
 #include "filmFilters.h"
 #include "errorMissing.h"
 #include "errorChanging.h"
+#include "errorNoTitle.h"
 
 #include "../LogicModel/contentManager.h"
 

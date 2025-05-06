@@ -16,6 +16,14 @@ private:
 
     QCheckBox* advancedResearchButton;
     QPushButton* ricerca;
+    //Quasi sicuramente un puntatore che viene ogni volta resettato per la 
+    //visualizzazione dei contenuti ottenuti da startResearch() che invocherà
+    //cercaContenuto() e verrà usato un vettore per inizializzare la costruzione
+    //ViewContents* risultati;
+    //
+    //molto probabilmente conviene tenere Search all'interno di un'altra classe
+    //mediante un puntatore e MainWindow creerà una istanza di quella nuova classe
+    //he avrà un puntatore a Search* e uno a ViewContents* 
 public:
     Search(QWidget* parent = nullptr, ContentManager* mngr = nullptr);
 private slots:

@@ -2,12 +2,15 @@
 #define ERROR_MISSING_H
 
 #include "errorStructure.h"
+#include <string>
+
+using std::string;
 
 class ErrorMissing : public ErrorStructure {
 private:
     QPushButton* confirm;
 public:
-    ErrorMissing(QWidget* parent = nullptr);
+    ErrorMissing(QWidget* parent = nullptr, const string& title = string());
 public slots:
     void chiudiErrore();
 };
