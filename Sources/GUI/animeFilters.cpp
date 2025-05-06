@@ -1,4 +1,5 @@
 #include "../../Headers/GUI/animeFilters.h"
+#include <string>
 
 AnimeFilters::AnimeFilters(QWidget* parent) :Filters(parent), resolution(new QComboBox(this)), durata(new QSpinBox(this)), producer(new QLineEdit(this)), episodes(new QSpinBox(this)), seasons(new QSpinBox(this)), subtitled(new QCheckBox(this)), genre(new QComboBox(this)), cadence(new QComboBox(this)) {
    filtersLayout->addRow("Producer : ", producer);
@@ -39,6 +40,7 @@ unordered_map<string, string> AnimeFilters::raccogliDati() const {
     //Anime
     parametri.insert({"Episodi", std::to_string(episodes->value())});
     parametri.insert({"Stagioni", std::to_string(seasons->value())});
+    parametri.insert({"Sottotitolato", std::to_string(subtitled->isChecked())});
     (producer->text().toStdString()).empty() ? parametri.insert({"Producer", "Indefinito"}) : parametri.insert({"Producer", producer->text().toStdString()});
     (genre->currentText().toStdString()).empty() ? parametri.insert({"Genere", "Indefinito"}) : parametri.insert({"Genere", genre->currentText().toStdString()});
     return parametri;
@@ -51,7 +53,6 @@ void AnimeFilters::reset() {
     durata->setValue(0);
 
     cadence->setCurrentIndex(-1);
-    
     producer->clear();
     subtitled->setChecked(false);
     episodes->setValue(0);

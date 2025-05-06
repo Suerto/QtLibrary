@@ -19,6 +19,8 @@ BookFilters::BookFilters(QWidget* parent) : Filters(parent), cover(new QComboBox
     filtersLayout->addRow("Publisher : ", publisher);
 
     reset();
+
+    setStyleSheet("border: 2px solid black;");
 }
 
 unordered_map<string, string> BookFilters::raccogliDati() const {

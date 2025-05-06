@@ -6,7 +6,6 @@ MainWindow::MainWindow(QWidget* parent, ContentManager* mngr) : QMainWindow(pare
     toolBar->setMovable(false);
     
     QAction* searching = new QAction("Ricerca", toolBar);
-
     toolBar->addAction(searching);
     
     QAction* creation = new QAction("Creazione", toolBar);
@@ -24,8 +23,8 @@ MainWindow::MainWindow(QWidget* parent, ContentManager* mngr) : QMainWindow(pare
     connect(creation, &QAction::triggered, this, &MainWindow::showCreation);
 
     //Design
-    toolBar->setStyleSheet("background-color : #808080; text->color : #FFFFFF;");
-    
+    toolBar->setStyleSheet("background-color : #2E8B57; text->color : #FFFFFF;");
+    setStyleSheet("background-color: #2E8B57"); 
 }
 
 void MainWindow::showSearching() {

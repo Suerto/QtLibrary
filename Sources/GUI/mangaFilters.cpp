@@ -40,6 +40,8 @@ unordered_map<string, string> MangaFilters::raccogliDati() const {
     (mangaka->text().toStdString()).empty() ? parametri.insert({"Mangaka", "Indefinito"}) : parametri.insert({"Mangaka", mangaka->text().toStdString()});
     (genre->currentText().toStdString()).empty() ? parametri.insert({"Genere", "Indefinito"}) : parametri.insert({"Genere", genre->currentText().toStdString()});
 
+    parametri.insert({"Capitoli", std::to_string(chapters->value())});
+
     return parametri;
 }
 

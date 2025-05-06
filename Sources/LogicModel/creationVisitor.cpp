@@ -1,11 +1,12 @@
 #include "../../Headers/LogicModel/creationVisitor.h"
-
-//La Creazione di un contenuto non può permettere in alcn modo che l'utnete possa non definire un attributo dell'oggetto
+#include <QDebug>
 CreationVisitor::CreationVisitor(const unordered_map<string, string>& prmts) : parametri(prmts) {}
 
 void CreationVisitor::visit(Libro& lib) const {
+    auto it = parametri.find("Titolo");
+    lib.setNome(it->second);
     // Anno
-    auto it = parametri.find("Anno");
+    it = parametri.find("Anno");
     lib.setAnno(static_cast<unsigned int>(std::stoi(it->second)));
    
     // Lingua
@@ -34,11 +35,18 @@ void CreationVisitor::visit(Libro& lib) const {
     // Genere
     it = parametri.find("Genere");
     lib.setGenere(it->second);
+    
+           for(const auto&[T, V] : parametri) {
+                qDebug() << QString::fromStdString(T) << " : " << QString::fromStdString(V) << "\n";
+           }
 }
 
 void CreationVisitor::visit(Manga& mng) const {
     // Anno
-    auto it = parametri.find("Anno");
+    auto it = parametri.find("Titolo");
+    mng.setNome(it->second);
+    
+    it = parametri.find("Anno");
     mng.setAnno(static_cast<unsigned int>(std::stoi(it->second)));
 
     // Lingua
@@ -72,11 +80,18 @@ void CreationVisitor::visit(Manga& mng) const {
     // Genere
     it = parametri.find("Genere");
         mng.setGenere(it->second);
+
+           for(const auto&[T, V] : parametri) {
+                qDebug() << QString::fromStdString(T) << " : " << QString::fromStdString(V) << "\n";
+           }
 }
 
 void CreationVisitor::visit(Film& flm) const {
     // Anno
-    auto it = parametri.find("Anno");
+    auto it = parametri.find("Titolo");
+    flm.setNome(it->second);
+    
+    it = parametri.find("Anno");
     flm.setAnno(static_cast<unsigned int>(std::stoi(it->second)));
 
     // Lingua
@@ -100,17 +115,24 @@ void CreationVisitor::visit(Film& flm) const {
     flm.setComposer(it->second);
 
     // Produttore
-    it = parametri.find("Produttore");
+    it = parametri.find("Producer");
     flm.setProducer(it->second);
 
     // Genere
     it = parametri.find("Genere");
     flm.setGenere(it->second);
+
+           for(const auto&[T, V] : parametri) {
+                qDebug() << QString::fromStdString(T) << " : " << QString::fromStdString(V) << "\n";
+           }
 }
 
 void CreationVisitor::visit(Anime& anm) const {
     // Anno
-    auto it = parametri.find("Anno");
+    auto it = parametri.find("Titolo");
+    anm.setNome(it->second);
+
+    it = parametri.find("Anno");
     anm.setAnno(static_cast<unsigned int>(std::stoi(it->second)));
 
     // Lingua
@@ -142,12 +164,16 @@ void CreationVisitor::visit(Anime& anm) const {
     anm.setSubtitle(static_cast<bool>(std::stoi(it->second)));
 
     // Produttore
-    it = parametri.find("Produttore");
+    it = parametri.find("Producer");
     anm.setProducer(it->second);
 
     // Genere
     it = parametri.find("Genere");
         anm.setGenere(it->second);
+
+           for(const auto&[T, V] : parametri) {
+                qDebug() << QString::fromStdString(T) << " : " << QString::fromStdString(V) << "\n";
+           }
 }
 
 unordered_map<string, string> CreationVisitor::getMap() const { return parametri; }

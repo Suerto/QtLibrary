@@ -1,4 +1,5 @@
 #include "../../Headers/GUI/creation.h"
+#include "qglobal.h"
 
 Creation::Creation(QWidget* parent, ContentManager* mngr) : MainWidget(parent), manager(mngr), crea(new QPushButton("Avvia Creazione", this)) {
     crea->setFixedSize(50, 50);
@@ -38,12 +39,23 @@ bool Creation::checkMap(const unordered_map<string, string>& map) const {
 }
 
 void Creation::startCreation() {
-   unordered_map<string, string> parameters = qobject_cast<Filters*>(filtri->currentWidget())->raccogliDati();
-   parameters.insert({"Titolo", titolo->text().toStdString()}); 
-   
-   if(!checkMap(parameters)) {
-        ErrorMissing* error = new ErrorMissing(this);
-        error->exec();
+   if(!titolo->text().toStdString().empty()) { 
+       unordered_map<string, string> parameters = qobject_cast<Filters*>(filtri->currentWidget())->raccogliDati();
+       parameters.insert({"Titolo", titolo->text().toStdString()});
+       if(!checkMap(parameters)) {
+           ErrorMissing* error = new ErrorMissing(this, titolo->text().toStdString());
+           error->exec();
+       }
+       else {
+           qDebug() << "Siamo in Creation\n";
+           for(const auto&[T, V] : parameters) qDebug() << QString::fromStdString(T) << " : " << QString::fromStdString(V) << "\n";
+           CreationVisitor* creator = new CreationVisitor(parameters);
+           manager->creaContenuto(filtri->currentIndex(), creator);
+           delete creator;
+       }
    }
-   else manager->creaContenuto(filtri->currentIndex(), new CreationVisitor(parameters));
+   else {
+       ErrorNoTitle* error = new ErrorNoTitle(this);
+       error->exec();        
+   }
 }
