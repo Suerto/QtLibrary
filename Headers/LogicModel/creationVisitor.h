@@ -15,12 +15,12 @@ private:
 public:
     CreationVisitor(const unordered_map<string, string>& prmts);
 
-    virtual void visit(Libro& lib) const override;
-    virtual void visit(Film& flm) const override;
-    virtual void visit(Manga& mng) const override;
-    virtual void visit(Anime& anm) const override;
+    virtual void visit(Libro& lib) override;
+    virtual void visit(Film& flm) override;
+    virtual void visit(Manga& mng) override;
+    virtual void visit(Anime& anm) override;
 
-    unordered_map<string, string> getMap() const override;
+    unordered_map<string, string> getMap() const;
 };
 
 #endif //CREATION_VISITOR_H
