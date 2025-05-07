@@ -2,7 +2,7 @@
 
 CheckVisitor::CheckVisitor(unordered_map<string, string> prm, bool sml) : parametri(prm), similar(sml) {}
 
-void CheckVisitor::visit(Libro& lib) const {
+void CheckVisitor::visit(Libro& lib) {
     string titolo = parametri.find("Titolo")->second;
     if(titolo != lib.getNome()) {
         similar = false;
@@ -74,7 +74,7 @@ void CheckVisitor::visit(Libro& lib) const {
     }
 }
 
-void CheckVisitor::visit(Manga& mng) const {
+void CheckVisitor::visit(Manga& mng) {
     string titolo = parametri.find("Titolo")->second;
     if(titolo != mng.getNome()) {
         similar = false;
@@ -153,7 +153,7 @@ void CheckVisitor::visit(Manga& mng) const {
     }
 }
 
-void CheckVisitor::visit(Film& flm) const {
+void CheckVisitor::visit(Film& flm) {
     string titolo = parametri.find("Titolo")->second;
     if(titolo != flm.getNome()) {
         similar = false;
@@ -224,7 +224,7 @@ void CheckVisitor::visit(Film& flm) const {
     }
 }
 
-void CheckVisitor::visit(Anime& anm) const {
+void CheckVisitor::visit(Anime& anm) {
     string titolo = parametri.find("Titolo")->second;
     if(titolo != anm.getNome()) {
         similar = false;

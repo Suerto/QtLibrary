@@ -49,7 +49,7 @@ void Anime::setGenere(const string& gnr) {
     genere = Anime::Genere::Indefinito;
 }
 
-void Anime::accept(const Visitors* visitor) {
+void Anime::accept(Visitors* visitor) {
     visitor->visit(*this);
 }
 

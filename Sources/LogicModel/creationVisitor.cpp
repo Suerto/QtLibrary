@@ -2,7 +2,7 @@
 #include <QDebug>
 CreationVisitor::CreationVisitor(const unordered_map<string, string>& prmts) : parametri(prmts) {}
 
-void CreationVisitor::visit(Libro& lib) const {
+void CreationVisitor::visit(Libro& lib) {
     auto it = parametri.find("Titolo");
     lib.setNome(it->second);
     // Anno
@@ -14,8 +14,7 @@ void CreationVisitor::visit(Libro& lib) const {
     lib.setLingua(it->second);
     // Copertina
     it = parametri.find("Copertina");
-    lib.setCopertina(it->second);
-
+      
     // Pagine
     it = parametri.find("Pagine");
     lib.setPagine(static_cast<unsigned int>(std::stoi(it->second)));
@@ -41,7 +40,7 @@ void CreationVisitor::visit(Libro& lib) const {
            }
 }
 
-void CreationVisitor::visit(Manga& mng) const {
+void CreationVisitor::visit(Manga& mng) {
     // Anno
     auto it = parametri.find("Titolo");
     mng.setNome(it->second);
@@ -86,7 +85,7 @@ void CreationVisitor::visit(Manga& mng) const {
            }
 }
 
-void CreationVisitor::visit(Film& flm) const {
+void CreationVisitor::visit(Film& flm) {
     // Anno
     auto it = parametri.find("Titolo");
     flm.setNome(it->second);
@@ -127,7 +126,7 @@ void CreationVisitor::visit(Film& flm) const {
            }
 }
 
-void CreationVisitor::visit(Anime& anm) const {
+void CreationVisitor::visit(Anime& anm) {
     // Anno
     auto it = parametri.find("Titolo");
     anm.setNome(it->second);

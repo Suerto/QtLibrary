@@ -42,7 +42,7 @@ void Film::setGenere(const string& gnr) {
     genere = Film::Genere::Indefinito;
 }
 
-void Film::accept(const Visitors* visitor) {
+void Film::accept(Visitors* visitor) {
     visitor->visit(*this);
 }
 
