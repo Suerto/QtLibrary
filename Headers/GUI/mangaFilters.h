@@ -21,6 +21,16 @@ public:
     MangaFilters(QWidget* parent = nullptr);
     virtual void reset() override;
     virtual unordered_map<string, string> raccogliDati() const override;
+
+    void setCover(const QString& cvr);
+    void setPages(const unsigned int& pgs);
+
+    void setCadence(const QString& cdnc);
+    
+    void setMangaka(const QString& mngk);
+    void setEditor(const QString& edtr);
+    void setChapters(const unsigned int& chpt);
+    void setGenre(const QString& gnr);
 };
 
 #endif //MANGAFILTERS_H

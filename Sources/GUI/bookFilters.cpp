@@ -1,14 +1,14 @@
 #include "../../Headers/GUI/bookFilters.h"
 #include <string>
 
-BookFilters::BookFilters(QWidget* parent) : Filters(parent), cover(new QComboBox(this)), pages(new QSpinBox(this)), author(new QLineEdit(this)), editor(new QLineEdit(this)), publisher(new QLineEdit(this)), genre(new QComboBox(this)) {
+BookFilters::BookFilters(QWidget* parent) : Filters(parent), cover(new QComboBox(this)), pages(new QSpinBox(this)), author(new QLineEdit(this)), editor(new QLineEdit(this)), publisher(new QLineEdit(this)), genre(new QComboBox(this)) { 
     filtersLayout->addRow("Autore : ", author);
     
     filtersLayout->addRow("Editore : ", editor);
-
+ 
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Generi Libri", genre);
     filtersLayout->addRow("Selezionare Genere : ", genre);
-    
+
     pages->setMinimum(0);
     pages->setMaximum(10000);
     filtersLayout->addRow("Numero di Pagine : ", pages);
@@ -20,7 +20,9 @@ BookFilters::BookFilters(QWidget* parent) : Filters(parent), cover(new QComboBox
 
     reset();
 
-    setStyleSheet("border: 2px solid black;");
+    //setStyleSheet("border: 2px solid black; ");
+
+    cover->currentText();
 }
 
 unordered_map<string, string> BookFilters::raccogliDati() const {
@@ -52,4 +54,28 @@ void BookFilters::reset() {
    pages->clear();
    cover->setCurrentIndex(-1);
    publisher->clear();
+}
+
+void BookFilters::setCover(const QString& cvr) {
+    cover->setCurrentText(cvr);
+}
+
+void BookFilters::setPages(const unsigned int& pgs) {
+    pages->setValue(pgs);
+}
+
+void BookFilters::setAuthor(const QString& athr) {
+    author->setText(athr);
+}
+
+void BookFilters::setEditor(const QString& edtr) {
+    editor->setText(edtr);
+}
+
+void BookFilters::setPublisher(const QString& pshr) {
+    publisher->setText(pshr);
+}
+
+void BookFilters::setGenre(const QString& gnr) {
+    genre->setCurrentText(gnr);
 }

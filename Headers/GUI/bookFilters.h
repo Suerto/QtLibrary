@@ -17,9 +17,17 @@ private:
    QLineEdit* publisher;
    QComboBox* genre;
 public:
-   BookFilters(QWidget* parent = nullptr);
+   BookFilters(QWidget* parent = nullptr); 
    virtual void reset() override;
    virtual unordered_map<string, string> raccogliDati() const override;
+
+   void setCover(const QString& cvr);
+   void setPages(const unsigned int& pgs);
+
+   void setAuthor(const QString& athr);
+   void setEditor(const QString& edtr);
+   void setPublisher(const QString& pshr);
+   void setGenre(const QString& gnr);
 };
 
 #endif //BOOKFILTERS_H 

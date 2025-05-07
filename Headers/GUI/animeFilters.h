@@ -8,11 +8,12 @@
 #include <QCheckBox>
 
 #include "genericFilters.h"
+#include "qpixelformat.h"
 
 class AnimeFilters : public Filters {
 private:
     QComboBox* resolution;
-    QSpinBox* durata;
+    QSpinBox* duration;
  
     QLineEdit* producer;
     QSpinBox* episodes;
@@ -24,6 +25,16 @@ public:
     AnimeFilters(QWidget* parent = nullptr);
     virtual void reset() override;
     virtual unordered_map<string, string> raccogliDati() const override;
+
+    void setResolution(const QString& rslt);
+    void setDuration(const unsigned int& drtn);
+
+    void setProducer(const QString& prdc);
+    void setEpisodes(const unsigned int& epsd);
+    void setSeasons(const unsigned int& ssns);
+    void setSubtitle(const bool& sbtd);
+    void setGenre(const QString& gnr);
+    void setCadence(const QString& cdnc);
 };
 
 #endif //ANIMEFILTERS_H

@@ -10,7 +10,7 @@
 class FilmFilters : public Filters {
 private:
     QComboBox* resolution;
-    QSpinBox* durata;
+    QSpinBox* duration;
     
     QLineEdit* director;
     QLineEdit* composer;
@@ -20,6 +20,14 @@ public:
     FilmFilters(QWidget* parent = nullptr);
     virtual void reset() override;
     virtual unordered_map<string, string> raccogliDati() const override;
+
+    void setResolution(const QString& rslt);
+    void setDuration(const unsigned int& drtn);
+
+    void setDirector(const QString& drct);
+    void setComposer(const QString& cmps);
+    void setProducer(const QString& prdc);
+    void setGenre(const QString& gnr);
 };
 
 #endif //FILMFILTERS_H

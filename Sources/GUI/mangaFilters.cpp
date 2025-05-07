@@ -7,17 +7,17 @@ MangaFilters::MangaFilters(QWidget* parent) : Filters(parent), cover(new QComboB
     filtersLayout->addRow("Editore : ", editor);
 
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Generi Manga", genre);
-    filtersLayout->addRow("Selezionare Genere : ", genre);
+    filtersLayout->addRow("Genere : ", genre);
 
     filtersLayout->addRow("Numero di Pagine : ", pages);
 
     filtersLayout->addRow("Numero di Capitoli : ", chapters);
     
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Cadenze", cadence);
-    filtersLayout->addRow("Selezionare Cadenza di Pubblicazione : ", cadence);
+    filtersLayout->addRow("Cadenza : ", cadence);
 
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Copertine", cover);
-    filtersLayout->addRow("Selezionare Copertina : ", cover);
+    filtersLayout->addRow("Copertina : ", cover);
 
     reset();
 }
@@ -57,4 +57,32 @@ void MangaFilters::reset() {
     editor->clear();
     genre->setCurrentIndex(-1);
     chapters->clear();
+}
+
+void MangaFilters::setCover(const QString& cvr) {
+    cover->setCurrentText(cvr);
+}
+
+void MangaFilters::setPages(const unsigned int& pgs) {
+    pages->setValue(pgs);
+}
+
+void MangaFilters::setCadence(const QString& cdnc) {
+    cadence->setCurrentText(cdnc);
+}
+
+void MangaFilters::setMangaka(const QString& mngk) {
+    mangaka->setText(mngk);
+}
+
+void MangaFilters::setEditor(const QString& edtr) {
+    editor->setText(edtr);
+}
+
+void MangaFilters::setChapters(const unsigned int& chpt) {
+    chapters->setValue(chpt);
+}
+
+void MangaFilters::setGenre(const QString& gnr) {
+    genre->setCurrentText(gnr);
 }

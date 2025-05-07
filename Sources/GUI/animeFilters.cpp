@@ -1,25 +1,25 @@
 #include "../../Headers/GUI/animeFilters.h"
 #include <string>
 
-AnimeFilters::AnimeFilters(QWidget* parent) :Filters(parent), resolution(new QComboBox(this)), durata(new QSpinBox(this)), producer(new QLineEdit(this)), episodes(new QSpinBox(this)), seasons(new QSpinBox(this)), subtitled(new QCheckBox(this)), genre(new QComboBox(this)), cadence(new QComboBox(this)) {
-   filtersLayout->addRow("Producer : ", producer);
+AnimeFilters::AnimeFilters(QWidget* parent) :Filters(parent), resolution(new QComboBox(this)), duration(new QSpinBox(this)), producer(new QLineEdit(this)), episodes(new QSpinBox(this)), seasons(new QSpinBox(this)), subtitled(new QCheckBox(this)), genre(new QComboBox(this)), cadence(new QComboBox(this)) {
+   filtersLayout->addRow("Producer :", producer);
 
-   filtersLayout->addRow("Sottotitolato : ", subtitled);
+   filtersLayout->addRow("Sottotitolato :", subtitled);
 
-   filtersLayout->addRow("Episodi : ", episodes);
+   filtersLayout->addRow("Episodi :", episodes);
     
-   filtersLayout->addRow("Durata episodio : ", durata);
+   filtersLayout->addRow("Durata episodio : ", duration);
     
    JsonHandler::loadEnumFromJson("Data/Dati.json", "Cadenze", cadence);
-   filtersLayout->addRow("Selezionare Cadenza di Pubblicazione : ", cadence);
+   filtersLayout->addRow("Cadenza :", cadence);
 
-   filtersLayout->addRow("Stagioni : ", seasons);
+   filtersLayout->addRow("Stagioni :", seasons);
 
    JsonHandler::loadEnumFromJson("Data/Dati.json", "Risoluzioni", resolution);
-   filtersLayout->addRow("Selezionare Risoluzione : ", resolution);
+   filtersLayout->addRow("Risoluzione :", resolution);
 
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Generi Anime", genre);
-    filtersLayout->addRow("Selezionare Genere : ", genre);
+    filtersLayout->addRow("Genere :", genre);
     
     reset();
 } 
@@ -32,7 +32,7 @@ unordered_map<string, string> AnimeFilters::raccogliDati() const {
     
     //Digitale
     (resolution->currentText().toStdString()).empty() ? parametri.insert({"Risoluzione", "Indefinita"}) : parametri.insert({"Risoluzione", resolution->currentText().toStdString()});
-    parametri.insert({"Durata", std::to_string(durata->value())});
+    parametri.insert({"Durata", std::to_string(duration->value())});
     
     //Periodico
     (cadence->currentText().toStdString()).empty() ? parametri.insert({"Cadenza", "Indefinita"}) : parametri.insert({"Cadenza", cadence->currentText().toStdString()});
@@ -50,7 +50,7 @@ void AnimeFilters::reset() {
     Filters::reset();
 
     resolution->setCurrentIndex(-1);
-    durata->setValue(0);
+    duration->setValue(0);
 
     cadence->setCurrentIndex(-1);
     producer->clear();
@@ -58,4 +58,30 @@ void AnimeFilters::reset() {
     episodes->setValue(0);
     seasons->setValue(0);
     genre->setCurrentIndex(-1);
+}
+
+void AnimeFilters::setResolution(const QString& rslt) {
+    resolution->setCurrentText(rslt);
+}
+void AnimeFilters::setDuration(const unsigned int& drtn) {
+    duration->setValue(drtn);
+}
+
+void AnimeFilters::setProducer(const QString& prdc) {
+    producer->setText(prdc);
+}
+void AnimeFilters::setEpisodes(const unsigned int& epsd) {
+    episodes->setValue(epsd);
+}
+void AnimeFilters::setSeasons(const unsigned int& ssns) {
+    seasons->setValue(ssns);
+}
+void AnimeFilters::setSubtitle(const bool& sbtd) {
+    subtitled->setChecked(sbtd);
+}
+void AnimeFilters::setGenre(const QString& gnr) {
+    genre->setCurrentText(gnr);
+}
+void AnimeFilters::setCadence(const QString& cdnc) {
+    cadence->setCurrentText(cdnc);
 }

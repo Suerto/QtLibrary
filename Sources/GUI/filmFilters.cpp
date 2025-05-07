@@ -1,19 +1,19 @@
 #include "../../Headers/GUI/filmFilters.h"
 
-FilmFilters::FilmFilters(QWidget* parent) : Filters(parent), resolution(new QComboBox(this)), durata(new QSpinBox(this)), director(new QLineEdit(this)), composer(new QLineEdit(this)), producer(new QLineEdit(this)), genre(new QComboBox(this)) {
+FilmFilters::FilmFilters(QWidget* parent) : Filters(parent), resolution(new QComboBox(this)), duration(new QSpinBox(this)), director(new QLineEdit(this)), composer(new QLineEdit(this)), producer(new QLineEdit(this)), genre(new QComboBox(this)) {
     filtersLayout->addRow("Regista : ", director);
 
-    filtersLayout->addRow("Compositore Musicale : ", composer);
+    filtersLayout->addRow("Compositore :", composer);
 
-    filtersLayout->addRow("Produttore : ", producer);
+    filtersLayout->addRow("Produttore :", producer);
 
-    filtersLayout->addRow("Durata : ", durata);
+    filtersLayout->addRow("Durata : ", duration);
     
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Generi Film", genre);
-    filtersLayout->addRow("Selezionare Genere : ", genre);
+    filtersLayout->addRow("Genere : ", genre);
 
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Risoluzioni", resolution);
-    filtersLayout->addRow("Selezionare Risoluzione : ", resolution);
+    filtersLayout->addRow("Risoluzione : ", resolution);
 
     reset();
 }
@@ -27,7 +27,7 @@ unordered_map<string, string> FilmFilters::raccogliDati() const {
     
     //Digitale
     (resolution->currentText().toStdString()).empty() ? parametri.insert({"Risoluzione", "Indefinita"}) : parametri.insert({"Risoluzione", resolution->currentText().toStdString()});
-    parametri.insert({"Durata", std::to_string(durata->value())});
+    parametri.insert({"Durata", std::to_string(duration->value())});
     
     //Film
     (director->text().toStdString()).empty() ? parametri.insert({"Regista", "Indefinito"}) : parametri.insert({"Regista", director->text().toStdString()});
@@ -41,10 +41,31 @@ void FilmFilters::reset() {
     Filters::reset();
     
     resolution->setCurrentIndex(-1);
-    durata->setValue(0);
+    duration->setValue(0);
 
     director->clear();
     composer->clear();
     producer->clear();
     genre->setCurrentIndex(-1);
+    resolution->setCurrentIndex(-1);
 }
+
+void FilmFilters::setResolution(const QString& rslt) {
+    resolution->setCurrentText(rslt);
+}
+void FilmFilters::setDuration(const unsigned int& drtn) {
+    duration->setValue(drtn);
+}
+
+void FilmFilters::setDirector(const QString& drct) {
+    director->setText(drct);
+}
+void FilmFilters::setComposer(const QString& cmps) {
+    composer->setText(cmps);
+}
+void FilmFilters::setProducer(const QString& prdc) {
+    producer->setText(prdc);
+}
+void FilmFilters::setGenre(const QString& gnr) {
+    genre->setCurrentText(gnr);
+}   
