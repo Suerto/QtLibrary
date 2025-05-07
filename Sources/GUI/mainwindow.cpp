@@ -1,7 +1,7 @@
 #include "../../Headers/GUI/mainwindow.h"
 
 MainWindow::MainWindow(QWidget* parent, ContentManager* mngr) : QMainWindow(parent), manager(mngr), toolBar(new QToolBar(this)), windows(new QStackedWidget(this)) {
-    resize(1200, 800);
+    setMinimumSize(1200, 800);
     toolBar = addToolBar("Strumenti");
     toolBar->setMovable(false);
     
@@ -11,20 +11,19 @@ MainWindow::MainWindow(QWidget* parent, ContentManager* mngr) : QMainWindow(pare
     QAction* creation = new QAction("Creazione", toolBar);
     toolBar->addAction(creation);
     
-    Search* ricerca = new Search(this, mngr);
+    Research* ricerca = new Research(this, mngr);
     Creation* creazione = new Creation(this, mngr);
     windows->insertWidget(0, ricerca);
     windows->insertWidget(1, creazione);
      
     setCentralWidget(windows);
     windows->setVisible(false);
-    
+    windows->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     connect(searching, &QAction::triggered, this, &MainWindow::showSearching);
     connect(creation, &QAction::triggered, this, &MainWindow::showCreation);
 
     //Design
     toolBar->setStyleSheet("background-color : #2E8B57; text->color : #FFFFFF;");
-    setStyleSheet("background-color: #2E8B57"); 
 }
 
 void MainWindow::showSearching() {
@@ -39,10 +38,8 @@ void MainWindow::showSearching() {
                windows->setCurrentIndex(0); 
             }
         });
-
         change->exec();
     }
-    windows->setFixedSize(500, this->height());
 }
 
 void MainWindow::showCreation() {

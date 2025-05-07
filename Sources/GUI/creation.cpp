@@ -8,13 +8,16 @@ Creation::Creation(QWidget* parent, ContentManager* mngr) : MainWidget(parent), 
     pulsantiera->setVisible(true);
 
     connect(crea, &QPushButton::clicked, this, &Creation::startCreation);
+
+    setLayout(mainLayout);
+    setStyleSheet("border: 1px solid blue");
 }
 
 void Creation::mostraFiltro(int id) {
     //gestione del tentativo di cambio del widget durante la creazione dell'oggetto
     if(filtri->currentIndex() != id && filtri->isVisible()) {
-            ErrorChanging* change = new ErrorChanging(this);
-            connect(change, &ErrorChanging::azione, this, [this, id](const QString& choice) {
+            ErrorChanging change(this);
+            connect(&change, &ErrorChanging::azione, this, [this, id](const QString& choice) {
                 if(choice == "Conferma") {
                     qobject_cast<Filters*>(filtri->currentWidget())->reset();
                     filtri->setCurrentIndex(id);
@@ -23,7 +26,7 @@ void Creation::mostraFiltro(int id) {
                     tipologia->button(filtri->currentIndex())->click();
                 }
             });
-            change->exec();
+            change.exec();
         }
     else {
         filtri->setCurrentIndex(id);
@@ -43,19 +46,16 @@ void Creation::startCreation() {
        unordered_map<string, string> parameters = qobject_cast<Filters*>(filtri->currentWidget())->raccogliDati();
        parameters.insert({"Titolo", titolo->text().toStdString()});
        if(!checkMap(parameters)) {
-           ErrorMissing* error = new ErrorMissing(this, titolo->text().toStdString());
-           error->exec();
+           ErrorMissing error(this, titolo->text().toStdString());
+           error.exec();
        }
        else {
-           qDebug() << "Siamo in Creation\n";
-           for(const auto&[T, V] : parameters) qDebug() << QString::fromStdString(T) << " : " << QString::fromStdString(V) << "\n";
-           CreationVisitor* creator = new CreationVisitor(parameters);
-           manager->creaContenuto(filtri->currentIndex(), creator);
-           delete creator;
+           CreationVisitor creator(parameters);
+           manager->creaContenuto(filtri->currentIndex(), &creator);
        }
    }
    else {
-       ErrorNoTitle* error = new ErrorNoTitle(this);
-       error->exec();        
+       ErrorNoTitle error(this);
+       error.exec();        
    }
 }

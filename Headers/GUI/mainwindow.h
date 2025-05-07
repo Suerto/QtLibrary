@@ -5,7 +5,7 @@
 #include <QToolBar>
 
 #include "creation.h"
-#include "search.h"
+#include "research.h"
 #include "errorChanging.h"
 
 class MainWindow : public QMainWindow { 

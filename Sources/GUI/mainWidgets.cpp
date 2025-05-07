@@ -9,7 +9,7 @@ MainWidget::MainWidget(QWidget* parent, ContentManager* mngr) : QWidget(parent),
     titleLayout->addWidget(reset);
 
     topLayout->addLayout(titleLayout);
-    //topLayout->setAlignment(mainLayout->alignment());
+
     mainLayout->addLayout(topLayout);
 
     QPushButton* book = new QPushButton("Libro", this);
@@ -27,17 +27,17 @@ MainWidget::MainWidget(QWidget* parent, ContentManager* mngr) : QWidget(parent),
     foreach(QAbstractButton* pulsante, tipologia->buttons()) {
         filtersButtonsLayout->addWidget(pulsante);
         pulsante->setCheckable(true);
-        pulsante->setFixedSize(95, 25);
+        pulsante->setFixedSize(90, 25);
     }
     pulsantiera->setLayout(filtersButtonsLayout);
 
     mainLayout->addWidget(pulsantiera);
     pulsantiera->setVisible(false);
 
-    BookFilters* filtroLibro = new BookFilters;
-    MangaFilters* filtroManga = new MangaFilters;
-    FilmFilters* filtroFilm = new FilmFilters;
-    AnimeFilters* filtroAnime = new AnimeFilters;
+    BookFilters* filtroLibro = new BookFilters(this);
+    MangaFilters* filtroManga = new MangaFilters(this);
+    FilmFilters* filtroFilm = new FilmFilters(this);
+    AnimeFilters* filtroAnime = new AnimeFilters(this);
     
     filtri->insertWidget(0, filtroLibro);
     filtri->insertWidget(1, filtroManga);
@@ -45,15 +45,17 @@ MainWidget::MainWidget(QWidget* parent, ContentManager* mngr) : QWidget(parent),
     filtri->insertWidget(3, filtroAnime);
     
     filtri->setVisible(false);
-    filtri->setFixedSize(400, maximumHeight());
+    filtri->setFixedSize(410, maximumHeight());
 
     mainLayout->addWidget(filtri);
     titleLayout->setAlignment(mainLayout->alignment());
-    mainLayout->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+    mainLayout->setAlignment(Qt::AlignTop | Qt::AlignLeft);
 
     connect(tipologia, &QButtonGroup::idToggled, this, &MainWidget::mostraFiltro);
 
     connect(reset, &QPushButton::clicked, this, &MainWidget::ripristinaFiltri);
+
+    setStyleSheet("border: 1px solid white;");
 }
 
 void MainWidget::ripristinaFiltri() {

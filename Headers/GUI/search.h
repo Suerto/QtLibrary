@@ -6,6 +6,7 @@
 #include "mainWidgets.h"
 #include "errorNoResult.h"
 #include "errorNoTitle.h"
+#include "viewContents.h" 
 
 #include "../LogicModel/contentManager.h"
 
@@ -23,13 +24,16 @@ private:
     //
     //molto probabilmente conviene tenere Search all'interno di un'altra classe
     //mediante un puntatore e MainWindow creerà una istanza di quella nuova classe
-    //he avrà un puntatore a Search* e uno a ViewContents* 
+    ViewContents* result;
+    QHBoxLayout* searchLayout;
 public:
     Search(QWidget* parent = nullptr, ContentManager* mngr = nullptr);
 private slots:
     void advancedResearch(bool checked);
     void startSearch();
     void mostraFiltro(int id) override;
+signals:
+    void risultatiOttenuti(vector<Contenuto*> res);
 };
 
 #endif //SEARCH_H
