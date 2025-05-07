@@ -21,6 +21,9 @@ public:
     Filters(QWidget* parent = nullptr);
     virtual void reset();
     virtual unordered_map<string, string> raccogliDati() const = 0;
+
+    void setLanguage(const QString& lng);
+    void setYear(const unsigned int& yr);
 };
 
 #endif //GENERIC_H

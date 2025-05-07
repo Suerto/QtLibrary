@@ -2,7 +2,7 @@
 
 Filters::Filters(QWidget* parent) : QWidget(parent), language(new QComboBox(this)), year(new QSpinBox(this)), filtersLayout(new QFormLayout(this)) {
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Lingue", language);
-    filtersLayout->addRow("Selezionare Lingua : ", language);
+    filtersLayout->addRow("Lingua : ", language);
     
     year->setMinimum(0);
     year->setMaximum(2025);
@@ -17,4 +17,12 @@ void Filters::reset() {
     language->setCurrentIndex(-1); 
     
     year->setValue(0);
+}
+
+void Filters::setLanguage(const QString& lng) {
+    language->setCurrentText(lng);
+}
+
+void Filters::setYear(const unsigned int& yr) {
+    year->setValue(yr);
 }
