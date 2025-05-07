@@ -14,12 +14,12 @@ using std::unordered_map;
 
 class Visitors {
 public:
-    virtual void visit(Libro& lib) const = 0;
-    virtual void visit(Film& flm) const = 0;
-    virtual void visit(Manga& mng) const = 0;
-    virtual void visit(Anime& anm) const = 0;
+    virtual void visit(Libro& lib) = 0;
+    virtual void visit(Film& flm) = 0;
+    virtual void visit(Manga& mng) = 0;
+    virtual void visit(Anime& anm) = 0;
 
-    virtual std::unordered_map<string, string> getMap() const = 0;
+    //virtual std::unordered_map<string, string> getMap() const = 0;
 };
 
 #endif

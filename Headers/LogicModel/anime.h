@@ -29,7 +29,7 @@ public:
     void setProducer(const string& prd);
     void setGenere(const string& gnr);
 
-    virtual void accept(const Visitors* visitor) override;
+    virtual void accept(Visitors* visitor) override;
 
     static const unordered_map<const Genere, const string> getMappaGeneri();
 };
