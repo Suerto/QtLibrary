@@ -17,7 +17,6 @@ protected:
     QComboBox* language;
     QSpinBox* year;
     QFormLayout* filtersLayout;
-    QString comboBoxReadOnly;
 public:
     Filters(QWidget* parent = nullptr);
     virtual void reset();
@@ -25,7 +24,6 @@ public:
 
     void setLanguage(const QString& lng);
     void setYear(const unsigned int& yr);
-    virtual void setModifiable(const bool& mdf);
 };
 
 #endif //GENERIC_H

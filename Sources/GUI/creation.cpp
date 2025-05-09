@@ -10,6 +10,7 @@ Creation::Creation(QWidget* parent, ContentManager* mngr) : MainWidget(parent), 
     connect(crea, &QPushButton::clicked, this, &Creation::startCreation);
 
     setLayout(mainLayout);
+    setStyleSheet("border: 1px solid blue");
 }
 
 void Creation::mostraFiltro(int id) {

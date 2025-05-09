@@ -49,12 +49,13 @@ MainWidget::MainWidget(QWidget* parent, ContentManager* mngr) : QWidget(parent),
 
     mainLayout->addWidget(filtri);
     titleLayout->setAlignment(mainLayout->alignment());
-    mainLayout->setAlignment(Qt::AlignTop);
+    mainLayout->setAlignment(Qt::AlignTop | Qt::AlignLeft);
 
     connect(tipologia, &QButtonGroup::idToggled, this, &MainWidget::mostraFiltro);
 
     connect(reset, &QPushButton::clicked, this, &MainWidget::ripristinaFiltri);
 
+    setStyleSheet("border: 1px solid white;");
 }
 
 void MainWidget::ripristinaFiltri() {

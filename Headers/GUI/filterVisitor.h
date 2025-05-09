@@ -12,11 +12,9 @@
 #include "filmFilters.h"
 #include "mangaFilters.h"
 
-using std::string;
 class FilterVisitor : public Visitors {
 private:
     Filters* contenutoWidget;
-    string tipologia;
 public:
     FilterVisitor(Filters* ptr = nullptr); 
 
@@ -26,7 +24,5 @@ public:
     virtual void visit(Anime& anm) override;
 
     Filters* getFilters() const;
-
-    string getType() const;
 };
 #endif //FILTER_VISITOR_H

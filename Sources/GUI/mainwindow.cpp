@@ -1,7 +1,7 @@
 #include "../../Headers/GUI/mainwindow.h"
 
 MainWindow::MainWindow(QWidget* parent, ContentManager* mngr) : QMainWindow(parent), manager(mngr), toolBar(new QToolBar(this)), windows(new QStackedWidget(this)) {
-    setMinimumSize(1600, 800);
+    setMinimumSize(1200, 800);
     toolBar = addToolBar("Strumenti");
     toolBar->setMovable(false);
     

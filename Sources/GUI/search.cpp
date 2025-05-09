@@ -1,6 +1,7 @@
 #include "../../Headers/GUI/search.h"
 
 Search::Search(QWidget* parent, ContentManager* mngr) : MainWidget(parent), manager(mngr), advancedResearchButton(new QCheckBox("Ricerca Avanzata", this)), ricerca(new QPushButton("Avvia Ricerca", this)) {   
+    setStyleSheet("border: 1px solid white;");
     ricerca->setFixedSize(50, 50);
     titleLayout->addWidget(ricerca);
     topLayout->addWidget(advancedResearchButton);
@@ -47,9 +48,7 @@ void Search::startSearch() {
         else {
             unordered_map<string, string> parametri = qobject_cast<Filters*>(filtri->currentWidget())->raccogliDati();
             parametri.insert({"Titolo", title});
-            qDebug() << "Ricerca per filtraggio iniziata";
             res =  manager->cercaContenuto(filtri->currentIndex(), parametri);
-            qDebug() << "Contenuti trovati : " << res.size();
         }
         
         if(res.size() == 0) {
