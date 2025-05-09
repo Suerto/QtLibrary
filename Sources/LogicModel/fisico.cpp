@@ -11,15 +11,15 @@ Fisico::Fisico(string n, unsigned int a, Lingua l, Copertina ca, unsigned int p)
                 Contenuto(n, a, l), copertina(ca), pagine(p) {}
 
 string Fisico::getCopertina() const { 
-    auto it = MappaCopertine.find(copertina);
-    return it != MappaCopertine.end() ? it->second : "Indefinita";
+    auto it = Fisico::MappaCopertine.find(copertina);
+    return it != Fisico::MappaCopertine.end() ? it->second : "Indefinita";
 }
 
 unsigned int Fisico::getPagine() const { return pagine; }
 
 void Fisico::setCopertina(const string& cp) {
     if(!cp.empty()) {
-        for(const auto&[cop, str] : MappaCopertine) {
+        for(const auto&[cop, str] : Fisico::MappaCopertine) {
             if(cp == str) { 
                 copertina = cop;
                 return;

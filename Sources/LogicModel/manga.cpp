@@ -18,8 +18,8 @@ string Manga::getEditore() const { return editore; }
 unsigned int Manga::getCapitoli() const { return capitoli; }
 
 string Manga::getGenere() const {
-    auto it = MappaGeneri.find(genere);
-    return it != MappaGeneri.end() ? it->second : "Indefinito";
+    auto it = Manga::MappaGeneri.find(genere);
+    return it != Manga::MappaGeneri.end() ? it->second : "Indefinito";
 }
 
 void Manga::setMangaka(const string& mngk) { mangaka = mngk; }
@@ -33,9 +33,9 @@ void Manga::setCapitoli(const unsigned int& cp) {
 
 void Manga::setGenere(const string& gnr) {
     if(!gnr.empty()) {
-        for(const auto&[g, s] : MappaGeneri) {
-            if(gnr == s) {
-                genere = g;
+        for(const auto&[gen, str] : Manga::MappaGeneri) {
+            if(gnr == str) {
+                genere = gen;
                 return;
             }
         }

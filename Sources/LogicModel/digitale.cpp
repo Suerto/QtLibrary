@@ -18,14 +18,14 @@ unsigned int Digitale::getDurata() const { return durata; }
 
 void Digitale::setRisoluzione(const string& res) {
     if(!res.empty()) {
-        for(const auto&[r, s] : MappaRisoluzioni) {
-            if(res == s) {
-                risoluzione = r;
+        for(const auto&[rsl, str] : Digitale::MappaRisoluzioni) {
+            if(res == str) {
+                risoluzione = rsl;
                 return;
             }
         }
     }
-    risoluzione = Risoluzione::Indefinita;
+    risoluzione = Digitale::Risoluzione::Indefinita;
 }
 
 void Digitale::setDurata(const unsigned int& dur) { durata = dur; }

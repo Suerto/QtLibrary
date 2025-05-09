@@ -16,8 +16,8 @@ string Contenuto::getNome() const { return nome; }
 unsigned int Contenuto::getAnno() const { return anno; }
 
 string Contenuto::getLingua() const { 
-    auto it = MappaLingue.find(lingua);
-    return it != MappaLingue.end() ?  it->second : "Indefinita";
+    auto it = Contenuto::MappaLingue.find(lingua);
+    return it != Contenuto::MappaLingue.end() ?  it->second : "Indefinita";
 }
 
 void Contenuto::setNome(const string& nm) { nome = nm; }
@@ -26,9 +26,9 @@ void Contenuto::setAnno(const unsigned int& ann) { anno = ann; }
 
 void Contenuto::setLingua(const string& lng) {
     if(!lng.empty()) {
-        for(const auto&[l, s] : Contenuto::MappaLingue) {
-            if(lng == s) {
-                lingua = l;
+        for(const auto&[lan, str] : Contenuto::MappaLingue) {
+            if(lng == str) {
+                lingua = lan;
                 return;
             }
         } 

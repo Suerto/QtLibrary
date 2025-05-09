@@ -20,8 +20,8 @@ string Film::getComposer() const { return composer; }
 string Film::getProducer() const { return producer; }
 
 string Film::getGenere() const {
-    auto it = MappaGeneri.find(genere);
-    return it != MappaGeneri.end() ? it->second : "Indefinito";
+    auto it = Film::MappaGeneri.find(genere);
+    return it != Film::MappaGeneri.end() ? it->second : "Indefinito";
 }
 
 void Film::setRegista(const string& rgs) { regista = rgs; }
@@ -32,9 +32,9 @@ void Film::setComposer(const string& cmp) { composer = cmp; }
 
 void Film::setGenere(const string& gnr) {
     if(!gnr.empty()) {
-        for(const auto&[g, s] : MappaGeneri) {
-            if(gnr == s) {
-                genere = g; 
+        for(const auto&[gen, str] : Film::MappaGeneri) {
+            if(gnr == str) {
+                genere = gen; 
                 return;
             }
          }

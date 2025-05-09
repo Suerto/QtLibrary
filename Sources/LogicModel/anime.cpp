@@ -19,8 +19,8 @@ bool Anime::isSubtitled() const { return sottotitolato; }
 string Anime::getProducer() const { return producer; }
 
 string Anime::getGenere() const {
-    auto it = MappaGeneri.find(genere);
-    return it != MappaGeneri.end() ? it->second : "Indefinito";
+    auto it = Anime::MappaGeneri.find(genere);
+    return it != Anime::MappaGeneri.end() ? it->second : "Indefinito";
 }
 
 void Anime::setEpisodi(const unsigned int& ep) { 
@@ -39,9 +39,9 @@ void Anime::setProducer(const string& prd) { producer = prd; }
 
 void Anime::setGenere(const string& gnr) {
     if(!gnr.empty()) {
-        for(const auto&[g, s] : MappaGeneri) {
-            if(gnr == s) {
-                genere = g;
+        for(const auto&[gen, str] : MappaGeneri) {
+            if(gnr == str) {
+                genere = gen;
                 return;
             }
         }

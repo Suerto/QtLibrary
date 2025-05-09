@@ -10,18 +10,19 @@ const unordered_map<const Periodico::Cadenza, const string> Periodico::MappaCade
 Periodico::Periodico(Cadenza ca) : cadenza(ca) {}
 
 string Periodico::getCadenza() const {
-    auto it = MappaCadenze.find(cadenza);
-    return it != MappaCadenze.end() ? it->second : "Indefinita";
+    auto it = Periodico::MappaCadenze.find(cadenza);
+    return it != Periodico::MappaCadenze.end() ? it->second : "Indefinita";
 }
 
 void Periodico::setCadenza(const string& cdn) {
     if(!cdn.empty()) {
-        for(const auto& c : MappaCadenze) {
-            if(cdn == c.second) cadenza = c.first;
-            break;
+        for(const auto&[cad, str] : Periodico::MappaCadenze) {
+           if(cdn == str) {
+                cadenza = cad;
+                return;
+           } 
         }
     }
-
     else cadenza = Periodico::Cadenza::Indefinita;
 }
 

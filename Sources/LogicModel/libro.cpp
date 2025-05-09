@@ -32,9 +32,11 @@ void Libro::setPublisher(const string& pu) { publisher = pu; }
 
 void Libro::setGenere(const string& ge) {
     if(!ge.empty()) {
-        for(const auto& g : MappaGeneri) {
-            if(ge == g.second) genere = g.first;
-            break;
+        for(const auto&[gen, str] : Libro::MappaGeneri) {
+            if(ge == str) {
+                genere = gen;
+                return;
+            }
         }
     }
 
