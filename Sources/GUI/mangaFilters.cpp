@@ -8,9 +8,11 @@ MangaFilters::MangaFilters(QWidget* parent) : Filters(parent), cover(new QComboB
 
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Generi Manga", genre);
     filtersLayout->addRow("Genere : ", genre);
-
+    
+    pages->setMaximum(10000);
     filtersLayout->addRow("Numero di Pagine : ", pages);
-
+    
+    pages->setMaximum(10000);
     filtersLayout->addRow("Numero di Capitoli : ", chapters);
     
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Cadenze", cadence);
@@ -33,7 +35,7 @@ unordered_map<string, string> MangaFilters::raccogliDati() const {
     parametri.insert({"Pagine", std::to_string(pages->value())});
     
     //Periodico
-    (cadence->currentText().toStdString()).empty() ? parametri.insert({"Cadenza", "Indefinita"}) : parametri.insert({"Cadenza", language->currentText().toStdString()});
+    (cadence->currentText().toStdString()).empty() ? parametri.insert({"Cadenza", "Indefinita"}) : parametri.insert({"Cadenza", cadence->currentText().toStdString()});
 
     //Manga
     (editor->text().toStdString()).empty() ? parametri.insert({"Editore", "Indefinito"}) :parametri.insert({"Editore", editor->text().toStdString()});
@@ -85,4 +87,51 @@ void MangaFilters::setChapters(const unsigned int& chpt) {
 
 void MangaFilters::setGenre(const QString& gnr) {
     genre->setCurrentText(gnr);
+}
+
+void MangaFilters::setModifiable(const bool& mdf) {
+    Filters::setModifiable(mdf);
+
+    cover->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+    cover->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+    cover->setStyleSheet(!mdf ?
+            "QComboBox { border: none; background: transparent; padding-left: 2px; }"
+            "QComboBox::drop-down { border: none; width: 0px; }"
+            "QComboBox::down-arrow { image: none; }" : "");
+
+    pages->setReadOnly(!mdf);
+    pages->setButtonSymbols(mdf ? QAbstractSpinBox::UpDownArrows : QAbstractSpinBox::NoButtons);
+    pages->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+    pages->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+    pages->setStyleSheet(!mdf ? "QSpinBox { border: none; background: transparent; }" : "");
+
+    cadence->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+    cadence->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+    cadence->setStyleSheet(!mdf ?
+            "QComboBox { border: none; background: transparent; padding-left: 2px; }"
+            "QComboBox::drop-down { border: none; width: 0px; }"
+            "QComboBox::down-arrow { image: none; }" : "");
+
+    chapters->setReadOnly(!mdf);
+    chapters->setButtonSymbols(mdf ? QAbstractSpinBox::UpDownArrows : QAbstractSpinBox::NoButtons);
+    chapters->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+    chapters->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+    chapters->setStyleSheet(!mdf ? "QSpinBox { border: none; background: transparent; }" : "");
+
+    mangaka->setReadOnly(!mdf);
+    mangaka->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+    mangaka->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+    mangaka->setStyleSheet(!mdf ? "QLineEdit { border: none; background: transparent; }" : "");
+
+    editor->setReadOnly(!mdf);
+    editor->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+    editor->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+    editor->setStyleSheet(!mdf ? "QLineEdit { border: none; background: transparent; }" : "");
+
+    genre->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+    genre->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+    genre->setStyleSheet(!mdf ?
+            "QComboBox { border: none; background: transparent; padding-left: 2px; }"
+            "QComboBox::drop-down { border: none; width: 0px; }"
+            "QComboBox::down-arrow { image: none; }" : "");
 }

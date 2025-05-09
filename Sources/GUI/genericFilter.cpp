@@ -1,4 +1,5 @@
 #include "../../Headers/GUI/genericFilters.h"
+#include "qnamespace.h"
 
 Filters::Filters(QWidget* parent) : QWidget(parent), language(new QComboBox(this)), year(new QSpinBox(this)), filtersLayout(new QFormLayout(this)) {
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Lingue", language);
@@ -25,4 +26,20 @@ void Filters::setLanguage(const QString& lng) {
 
 void Filters::setYear(const unsigned int& yr) {
     year->setValue(yr);
+}
+
+void Filters::setModifiable(const bool& mdf) {
+    language->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+    language->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+    language->setStyleSheet(!mdf ?
+            "QComboBox { border: none; background: transparent; padding-left: 2px; }"
+            "QComboBox::drop-down { border: none; width: 0px; }"
+            "QComboBox::down-arrow { image: none; }" : "");
+
+    year->setReadOnly(!mdf);
+    year->setButtonSymbols(mdf ? QAbstractSpinBox::UpDownArrows : QAbstractSpinBox::NoButtons);
+    year->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+    year->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+    year->setStyleSheet(!mdf ?
+            "QSpinBox { border: none; background: transparent; }" : "");
 }

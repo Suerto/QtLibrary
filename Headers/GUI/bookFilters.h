@@ -28,6 +28,8 @@ public:
    void setEditor(const QString& edtr);
    void setPublisher(const QString& pshr);
    void setGenre(const QString& gnr);
+
+   virtual void setModifiable(const bool& mdf) override;
 };
 
 #endif //BOOKFILTERS_H 

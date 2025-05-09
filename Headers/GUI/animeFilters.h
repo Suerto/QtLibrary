@@ -35,6 +35,8 @@ public:
     void setSubtitle(const bool& sbtd);
     void setGenre(const QString& gnr);
     void setCadence(const QString& cdnc);
+
+    virtual void setModifiable(const bool& mdf) override;
 };
 
 #endif //ANIMEFILTERS_H
