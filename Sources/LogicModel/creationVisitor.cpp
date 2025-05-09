@@ -14,7 +14,7 @@ void CreationVisitor::visit(Libro& lib) {
     lib.setLingua(it->second);
     // Copertina
     it = parametri.find("Copertina");
-      
+    lib.setCopertina(it->second); 
     // Pagine
     it = parametri.find("Pagine");
     lib.setPagine(static_cast<unsigned int>(std::stoi(it->second)));
@@ -34,10 +34,6 @@ void CreationVisitor::visit(Libro& lib) {
     // Genere
     it = parametri.find("Genere");
     lib.setGenere(it->second);
-    
-           for(const auto&[T, V] : parametri) {
-                qDebug() << QString::fromStdString(T) << " : " << QString::fromStdString(V) << "\n";
-           }
 }
 
 void CreationVisitor::visit(Manga& mng) {

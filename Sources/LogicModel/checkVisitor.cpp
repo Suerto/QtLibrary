@@ -1,14 +1,9 @@
 #include "../../Headers/LogicModel/checkVisitor.h"
+#include "qdebug.h"
 
 CheckVisitor::CheckVisitor(unordered_map<string, string> prm, bool sml) : parametri(prm), similar(sml) {}
 
 void CheckVisitor::visit(Libro& lib) {
-    string titolo = parametri.find("Titolo")->second;
-    if(titolo != lib.getNome()) {
-        similar = false;
-        return;
-    }
-
     unsigned int anno = static_cast<unsigned int>(stoi(parametri.find("Anno")->second));
     if(anno != 0) {
         if(anno != lib.getAnno()) {
@@ -19,7 +14,7 @@ void CheckVisitor::visit(Libro& lib) {
 
     string lingua = parametri.find("Lingua")->second;
     if(lingua != "Indefinita") {
-        if(lingua != lib.getAutore()) {
+        if(lingua != lib.getLingua()) {
             similar = false; 
             return;
         }
@@ -75,11 +70,6 @@ void CheckVisitor::visit(Libro& lib) {
 }
 
 void CheckVisitor::visit(Manga& mng) {
-    string titolo = parametri.find("Titolo")->second;
-    if(titolo != mng.getNome()) {
-        similar = false;
-        return;
-    }
     unsigned int anno = static_cast<unsigned int>(stoi(parametri.find("Anno")->second));
     if(anno != 0) {
         if(anno != mng.getAnno()) {
@@ -154,11 +144,6 @@ void CheckVisitor::visit(Manga& mng) {
 }
 
 void CheckVisitor::visit(Film& flm) {
-    string titolo = parametri.find("Titolo")->second;
-    if(titolo != flm.getNome()) {
-        similar = false;
-        return;
-    }
     unsigned int anno = static_cast<unsigned int>(stoi(parametri.find("Anno")->second));
     if(anno != 0) {
         if(anno != flm.getAnno()) {
@@ -167,6 +152,7 @@ void CheckVisitor::visit(Film& flm) {
         }
     }
 
+    qDebug() << "Anno trovato";
     string lingua = parametri.find("Lingua")->second;
     if(lingua != "Indefinita") {
         if(lingua != flm.getLingua()) {
@@ -175,6 +161,7 @@ void CheckVisitor::visit(Film& flm) {
         }
     }
 
+    qDebug() << "Lingua trovato";
     string risoluzione = parametri.find("Risoluzione")->second;
     if(risoluzione != "Indefinita") {
         if(risoluzione != flm.getRisoluzione()) {
@@ -207,7 +194,7 @@ void CheckVisitor::visit(Film& flm) {
         }
     }
 
-    string produttore = parametri.find("Produttore")->second;
+    string produttore = parametri.find("Producer")->second;
     if(produttore != "Indefinito") {
         if(produttore != flm.getProducer()) {
             similar = false; 
@@ -225,11 +212,6 @@ void CheckVisitor::visit(Film& flm) {
 }
 
 void CheckVisitor::visit(Anime& anm) {
-    string titolo = parametri.find("Titolo")->second;
-    if(titolo != anm.getNome()) {
-        similar = false;
-        return;
-    }
     unsigned int anno = static_cast<unsigned int>(stoi(parametri.find("Anno")->second));
     if(anno != 0) {
         if(anno != anm.getAnno()) {
@@ -271,7 +253,7 @@ void CheckVisitor::visit(Anime& anm) {
         }
     }
 
-    string produttore = parametri.find("Produttore")->second;
+    string produttore = parametri.find("Producer")->second;
     if(produttore != "Indefinito") {
         if(produttore != anm.getProducer()) {
             similar = false; 

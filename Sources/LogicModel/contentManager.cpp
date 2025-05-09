@@ -1,6 +1,8 @@
 #include "../../Headers/LogicModel/contentManager.h"
 
 #include "QDebug"
+#include <algorithm>
+#include <cctype>
 ContentManager::ContentManager() : memoria() {}
 
 std::unordered_map<int, std::function<Contenuto*()>> ContentManager::creatore = {
@@ -24,9 +26,14 @@ vector<Contenuto*> ContentManager::cercaContenuto(const int& index, const unorde
     vector<Contenuto*> risultati;
     CheckVisitor* check = new CheckVisitor(map);
     
+    const string& title = map.find("Titolo")->second;
     for(Contenuto* element : memoria[index]) {
-       element->accept(check);
-       if(check->isSimilar()) risultati.push_back(element);
+        if(element->getNome().size() >= title.size() && 
+           std::equal(title.begin(), title.end(), element->getNome().begin(), 
+           [](char a, char b) { return std::tolower(a) == std::tolower(b);})) {
+            element->accept(check);
+            if(check->isSimilar()) risultati.push_back(element);
+        }
     }
     return risultati;
 }
@@ -36,7 +43,13 @@ vector<Contenuto*> ContentManager::cercaPerTitolo(const string& title) const {
     
     for(vector<Contenuto*> tipologia : memoria) {
         for(Contenuto* content : tipologia) {
-            if(title == content->getNome()) risultati.push_back(content); 
+            if(content->getNome().size() >= title.size() && 
+                    std::equal(title.begin(), title.end(), content->getNome().begin(), 
+                        [](char a, char b) {
+                            return std::tolower(a) == std::tolower(b); 
+                            }
+                    )
+            ) risultati.push_back(content); 
         }
     }
     qDebug() << risultati.size();
