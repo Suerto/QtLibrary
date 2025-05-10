@@ -86,3 +86,53 @@ void MangaFilters::setChapters(const unsigned int& chpt) {
 void MangaFilters::setGenre(const QString& gnr) {
     genre->setCurrentText(gnr);
 }
+
+void MangaFilters::setModifiable(const bool& mdf) {
+    Filters::setModifiable(mdf);
+
+    cover->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+    cover->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+    cover->setStyleSheet(!mdf ?
+            "QComboBox { border: none; background: transparent; padding-left: 2px; }"
+            "QComboBox::drop-down { border: none; width: 0px; }"
+            "QComboBox::down-arrow { image: none; }" : "");
+
+    cadence->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+    cadence->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+    cadence->setStyleSheet(!mdf ?
+                "QComboBox { border: none; background: transparent; padding-left: 2px; }"
+                "QComboBox::drop-down { border: none; width: 0px; }"
+                "QComboBox::down-arrow { image: none; }" : "");
+    pages->setReadOnly(!mdf);
+    pages->setButtonSymbols(mdf ? QAbstractSpinBox::UpDownArrows : QAbstractSpinBox::NoButtons);
+    pages->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+    pages->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+    pages->setStyleSheet(!mdf ?
+            "QSpinBox { border: none; background: transparent; }" : "");
+
+    mangaka->setReadOnly(!mdf);
+    mangaka->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+    mangaka->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+    mangaka->setStyleSheet(!mdf ?
+        "QLineEdit { border: none; background: transparent; }" : "");
+
+    editor->setReadOnly(!mdf);
+    editor->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+    editor->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+    editor->setStyleSheet(!mdf ?
+        "QLineEdit { border: none; background: transparent; }" : "");
+
+    chapters->setReadOnly(!mdf);
+    chapters->setButtonSymbols(mdf ? QAbstractSpinBox::UpDownArrows : QAbstractSpinBox::NoButtons);
+    chapters->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+    chapters->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+    chapters->setStyleSheet(!mdf ?
+            "QSpinBox { border: none; background: transparent; }" : "");
+
+    genre->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+    genre->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+    genre->setStyleSheet(!mdf ?
+            "QComboBox { border: none; background: transparent; padding-left: 2px; }"
+            "QComboBox::drop-down { border: none; width: 0px; }"
+            "QComboBox::down-arrow { image: none; }" : "");
+}

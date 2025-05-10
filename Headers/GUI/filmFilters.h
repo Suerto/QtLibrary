@@ -28,6 +28,8 @@ public:
     void setComposer(const QString& cmps);
     void setProducer(const QString& prdc);
     void setGenre(const QString& gnr);
+
+    virtual void setModifiable(const bool& mdf) override;
 };
 
 #endif //FILMFILTERS_H

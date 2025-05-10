@@ -79,3 +79,47 @@ void BookFilters::setPublisher(const QString& pshr) {
 void BookFilters::setGenre(const QString& gnr) {
     genre->setCurrentText(gnr);
 }
+
+void BookFilters::setModifiable(const bool& mdf) {
+    Filters::setModifiable(mdf);
+
+    cover->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+    cover->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+    cover->setStyleSheet(!mdf ?
+            "QComboBox { border: none; background: transparent; padding-left: 2px; }"
+            "QComboBox::drop-down { border: none; width: 0px; }"
+            "QComboBox::down-arrow { image: none; }" : "");
+
+    pages->setReadOnly(!mdf);
+    pages->setButtonSymbols(mdf ? QAbstractSpinBox::UpDownArrows : QAbstractSpinBox::NoButtons);
+    pages->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+    pages->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+    pages->setStyleSheet(!mdf ?
+            "QSpinBox { border: none; background: transparent; }" : "");
+
+    author->setReadOnly(!mdf);
+    author->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+    author->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+    author->setStyleSheet(!mdf ?
+        "QLineEdit { border: none; background: transparent; }" : "");
+    
+    author->setReadOnly(!mdf);
+    author->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+    author->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+    author->setStyleSheet(!mdf ?
+        "QLineEdit { border: none; background: transparent; }" : "");
+
+
+    author->setReadOnly(!mdf);
+    author->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+    author->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+    author->setStyleSheet(!mdf ?
+        "QLineEdit { border: none; background: transparent; }" : "");
+
+    genre->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+    genre->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+    genre->setStyleSheet(!mdf ?
+            "QComboBox { border: none; background: transparent; padding-left: 2px; }"
+            "QComboBox::drop-down { border: none; width: 0px; }"
+            "QComboBox::down-arrow { image: none; }" : "");
+}

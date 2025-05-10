@@ -31,6 +31,8 @@ public:
     void setEditor(const QString& edtr);
     void setChapters(const unsigned int& chpt);
     void setGenre(const QString& gnr);
+
+    virtual void setModifiable(const bool& mdf) override;
 };
 
 #endif //MANGAFILTERS_H

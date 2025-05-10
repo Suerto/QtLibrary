@@ -26,3 +26,14 @@ void Filters::setLanguage(const QString& lng) {
 void Filters::setYear(const unsigned int& yr) {
     year->setValue(yr);
 }
+
+void Filters::setModifiable(const bool& mdf) {
+        language->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+        language->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+        language->setStyleSheet(!mdf ?
+            "QComboBox { border: none; background: transparent; padding-left: 2px; }"
+            "QComboBox::drop-down { border: none; width: 0px; }"
+            "QComboBox::down-arrow { image: none; }" : "");
+        
+
+}

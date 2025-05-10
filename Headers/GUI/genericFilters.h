@@ -24,6 +24,7 @@ public:
 
     void setLanguage(const QString& lng);
     void setYear(const unsigned int& yr);
+    virtual void setModifiable(const bool& mdf);
 };
 
 #endif //GENERIC_H

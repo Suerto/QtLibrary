@@ -68,4 +68,47 @@ void FilmFilters::setProducer(const QString& prdc) {
 }
 void FilmFilters::setGenre(const QString& gnr) {
     genre->setCurrentText(gnr);
-}   
+}  
+
+void FilmFilters::setModifiable(const bool& mdf) {
+    Filters::setModifiable(mdf);
+
+        resolution->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+        resolution->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+        resolution->setStyleSheet(!mdf ?
+            "QComboBox { border: none; background: transparent; padding-left: 2px; }"
+            "QComboBox::drop-down { border: none; width: 0px; }"
+            "QComboBox::down-arrow { image: none; }" : "");
+
+        duration->setReadOnly(!mdf);
+        duration->setButtonSymbols(mdf ? QAbstractSpinBox::UpDownArrows : QAbstractSpinBox::NoButtons);
+        duration->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+        duration->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+        duration->setStyleSheet(!mdf ?
+            "QSpinBox { border: none; background: transparent; }" : "");
+
+        producer->setReadOnly(!mdf);
+        producer->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+        producer->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+        producer->setStyleSheet(!mdf ?
+            "QLineEdit { border: none; background: transparent; }" : "");        
+
+        producer->setReadOnly(!mdf);
+        producer->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+        producer->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+        producer->setStyleSheet(!mdf ?
+            "QLineEdit { border: none; background: transparent; }" : "");
+
+        producer->setReadOnly(!mdf);
+        producer->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+        producer->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+        producer->setStyleSheet(!mdf ?
+            "QLineEdit { border: none; background: transparent; }" : "");
+
+        genre->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+        genre->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+        genre->setStyleSheet(!mdf ?
+            "QComboBox { border: none; background: transparent; padding-left: 2px; }"
+            "QComboBox::drop-down { border: none; width: 0px; }"
+            "QComboBox::down-arrow { image: none; }" : "");
+}
