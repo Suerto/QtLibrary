@@ -1,12 +1,14 @@
 #include "../../Headers/GUI/creation.h"
 #include "qglobal.h"
+#include "qnamespace.h"
 
 Creation::Creation(QWidget* parent, ContentManager* mngr) : MainWidget(parent), manager(mngr), crea(new QPushButton("Avvia Creazione", this)) {
     crea->setFixedSize(50, 50);
     titleLayout->addWidget(crea);
     
     pulsantiera->setVisible(true);
-
+    
+    mainLayout->setAlignment(Qt::AlignCenter);
     connect(crea, &QPushButton::clicked, this, &Creation::startCreation);
 
     setLayout(mainLayout);

@@ -6,7 +6,6 @@ Research::Research(QWidget* parent, ContentManager* mngr) : QWidget(parent), man
     searchSection->setFixedWidth(500);
     searchSection->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
     researchLayout->addWidget(searchSection, Qt::AlignLeft);
-    //C'è un problemone qui!!!
     connect(searchSection, &Search::risultatiOttenuti, this, &Research::showResults);
 
    setLayout(researchLayout);

@@ -8,9 +8,11 @@ MangaFilters::MangaFilters(QWidget* parent) : Filters(parent), cover(new QComboB
 
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Generi Manga", genre);
     filtersLayout->addRow("Genere : ", genre);
-
+    
+    pages->setMaximum(10000);
     filtersLayout->addRow("Numero di Pagine : ", pages);
-
+    
+    chapters->setMaximum(10000);
     filtersLayout->addRow("Numero di Capitoli : ", chapters);
     
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Cadenze", cadence);

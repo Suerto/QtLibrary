@@ -7,14 +7,14 @@ BookFilters::BookFilters(QWidget* parent) : Filters(parent), cover(new QComboBox
     filtersLayout->addRow("Editore : ", editor);
  
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Generi Libri", genre);
-    filtersLayout->addRow("Selezionare Genere : ", genre);
+    filtersLayout->addRow("Genere : ", genre);
 
     pages->setMinimum(0);
     pages->setMaximum(10000);
     filtersLayout->addRow("Numero di Pagine : ", pages);
     
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Copertine", cover);
-    filtersLayout->addRow("Selezionare Copertina : ", cover);
+    filtersLayout->addRow("Copertina : ", cover);
 
     filtersLayout->addRow("Publisher : ", publisher);
 

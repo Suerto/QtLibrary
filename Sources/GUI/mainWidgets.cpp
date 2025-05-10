@@ -1,4 +1,5 @@
 #include "../../Headers/GUI/mainWidgets.h"
+#include "qwidget.h"
 
 MainWidget::MainWidget(QWidget* parent, ContentManager* mngr) : QWidget(parent), manager(mngr), mainLayout(new QVBoxLayout(this)), topLayout(new QVBoxLayout()), titleLayout(new QHBoxLayout()), titolo(new QLineEdit(this)), reset(new QPushButton("Ripristina Filtri", this)), filtersButtonsLayout(new QHBoxLayout()), pulsantiera(new QWidget(this)), tipologia(new QButtonGroup(pulsantiera)), filtri(new QStackedWidget(this)) {
     titolo->setPlaceholderText("Inserire titolo del Contenuto : ");
@@ -38,12 +39,14 @@ MainWidget::MainWidget(QWidget* parent, ContentManager* mngr) : QWidget(parent),
     MangaFilters* filtroManga = new MangaFilters(this);
     FilmFilters* filtroFilm = new FilmFilters(this);
     AnimeFilters* filtroAnime = new AnimeFilters(this);
-    
+
     filtri->insertWidget(0, filtroLibro);
     filtri->insertWidget(1, filtroManga);
     filtri->insertWidget(2, filtroFilm);
     filtri->insertWidget(3, filtroAnime);
-    
+
+    filtri->setCurrentIndex(-1);
+
     filtri->setVisible(false);
     filtri->setFixedSize(410, maximumHeight());
 
@@ -54,7 +57,6 @@ MainWidget::MainWidget(QWidget* parent, ContentManager* mngr) : QWidget(parent),
     connect(tipologia, &QButtonGroup::idToggled, this, &MainWidget::mostraFiltro);
 
     connect(reset, &QPushButton::clicked, this, &MainWidget::ripristinaFiltri);
-
 }
 
 void MainWidget::ripristinaFiltri() {

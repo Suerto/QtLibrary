@@ -8,13 +8,15 @@ Search::Search(QWidget* parent, ContentManager* mngr) : MainWidget(parent), mana
     connect(advancedResearchButton, &QCheckBox::toggled, this, &Search::advancedResearch);
 
     connect(ricerca, &QPushButton::clicked, this, &Search::startSearch);
-
-    connect(tipologia, &QButtonGroup::idToggled, this, &Search::mostraFiltro); 
 }
 
 void Search::advancedResearch(bool checked) {
     if(checked) {
         pulsantiera->setVisible(true);
+        
+        qDebug() << tipologia->checkedId();
+        if(tipologia->checkedId() != -1) filtri->setVisible(true);
+        connect(tipologia, &QButtonGroup::idToggled, this, &Search::mostraFiltro);
     }
 
     else {
@@ -25,8 +27,10 @@ void Search::advancedResearch(bool checked) {
 }
 
 void Search::mostraFiltro(int id) {
+    if(id != 4) {
         filtri->setCurrentIndex(id);
         filtri->setVisible(true);
+    }
 }
 
 void Search::startSearch() {

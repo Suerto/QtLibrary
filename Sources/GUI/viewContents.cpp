@@ -3,7 +3,7 @@
 ViewContents::ViewContents(std::vector<Contenuto*> result, QWidget* parent) : QWidget(parent), contentsLayout(new QGridLayout(this)) {
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed); // Larghezza espandibile, altezza fissa
 
-    int widgetWidth = 300;
+    int widgetWidth = 350;
     int containerWidth = parent->width() - 400;  // Ottieni larghezza disponibile
     int colonne = std::max(1, containerWidth / widgetWidth);  // Calcola quante colonne
     contentsLayout->setSpacing(5);
@@ -13,7 +13,7 @@ ViewContents::ViewContents(std::vector<Contenuto*> result, QWidget* parent) : QW
         content->accept(&visitor);
         ContentViewer* filtro = new ContentViewer(QString::fromStdString(content->getNome()), QString::fromStdString(visitor.getType()), visitor.getFilters());
         
-        filtro->setFixedSize(widgetWidth, 300);  // Imposta la dimensione fissa del filtro
+        filtro->setFixedSize(widgetWidth, 350);  // Imposta la dimensione fissa del filtro
         contentsLayout->addWidget(filtro, row, col);
         ++col;
         if (col >= colonne) {
