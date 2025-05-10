@@ -42,3 +42,8 @@ void Filters::setModifiable(const bool& mdf) {
         year->setStyleSheet(!mdf ?
             "QSpinBox { border: none; background: transparent; }" : "");
 }
+
+void Filters::setAttributes(const std::unordered_map<string, string>& attributes) {
+    setLanguage(QString::fromStdString(attributes.find("Lingua")->second));
+    setYear(std::stoi(attributes.find("Anno")->second));
+}

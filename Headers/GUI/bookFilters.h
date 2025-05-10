@@ -30,6 +30,7 @@ public:
    void setGenre(const QString& gnr);
 
    virtual void setModifiable(const bool& mdf) override;
+   virtual void setAttributes(const unordered_map<string, string>& map) override;
 };
 
 #endif //BOOKFILTERS_H 

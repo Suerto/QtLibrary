@@ -112,3 +112,15 @@ void FilmFilters::setModifiable(const bool& mdf) {
             "QComboBox::drop-down { border: none; width: 0px; }"
             "QComboBox::down-arrow { image: none; }" : "");
 }
+
+void FilmFilters::setAttributes(const unordered_map<string, string>& attributes) {
+    Filters::setAttributes(attributes);
+
+    setResolution(QString::fromStdString(attributes.find("Risoluzione")->second));
+    setDuration(std::stoi(attributes.find("Durata")->second));
+
+    setDirector(QString::fromStdString(attributes.find("Regista")->second));
+    setComposer(QString::fromStdString(attributes.find("Compositore")->second));
+    setProducer(QString::fromStdString(attributes.find("Producer")->second));
+    setGenre(QString::fromStdString(attributes.find("Genere")->second));
+}

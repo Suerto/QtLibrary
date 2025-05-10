@@ -37,6 +37,7 @@ public:
     void setCadence(const QString& cdnc);
 
     virtual void setModifiable(const bool& mdf) override;
+    virtual void setAttributes(const unordered_map<string, string>& attributes) override;
 };
 
 #endif //ANIMEFILTERS_H

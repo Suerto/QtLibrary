@@ -62,6 +62,8 @@ void FilterVisitor::visit(Anime& anm) {
     anime->setSeasons(anm.getStagioni());
     anime->setSubtitle(anm.isSubtitled());
     anime->setGenre(QString::fromStdString(anm.getGenere()));
+
+    contenutoWidget = anime;
 }
 
 void FilterVisitor::visit(Film& flm) {

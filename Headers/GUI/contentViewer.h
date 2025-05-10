@@ -25,8 +25,16 @@ QLineEdit* title;
     QVBoxLayout* contentLayout;
     QHBoxLayout* buttonsLayout;
 public:
-    ContentViewer(const QString& ttl, const QString& tp, Filters* flts, QWidget* parent);
+    ContentViewer(const QString& ttl, const QString& tp, Filters* flts, QWidget* parent = nullptr);
+    void abilitaPulsantiReadOnly(const bool& rom);
+
+    void pulsantiModificaAttivi(const bool& rom);
+
+    void restoreFilter(const std::unordered_map<string, string>& attributes);
 public slots:
     void modifica();
+signals:
+    void modificaAvviata(ContentViewer* contenuto);
+    void modificaAnnullata();
 };
 #endif //CONTENT_VIEWER_H

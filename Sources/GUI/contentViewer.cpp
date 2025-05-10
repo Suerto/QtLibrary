@@ -33,23 +33,36 @@ ContentViewer::ContentViewer(const QString& ttl, const QString& tp, Filters* flt
     //connect(remove, &QPushButton::clicked, this, &)
 }
 
+void ContentViewer::restoreFilter(const unordered_map<string, string>& attributes) { dettagli->setAttributes(attributes); }
+
+void ContentViewer::abilitaPulsantiReadOnly(const bool& rom) {
+    remove->setVisible(rom);
+    modify->setVisible(rom);
+
+    save->setVisible(!rom);
+    cancel->setVisible(!rom);
+}
+
 void ContentViewer::modifica() {
+    emit modificaAvviata(this);
+    
+    std::unordered_map<string, string> tmp = dettagli->raccogliDati();
+
     dettagli->setModifiable(true);
     
-    remove->setVisible(false);
-    modify->setVisible(false);
+    abilitaPulsantiReadOnly(false);
+    connect(cancel, &QPushButton::clicked, this, [tmp, this]() {
 
-    cancel->setVisible(true);
-    save->setVisible(true);
+            dettagli->setModifiable(false);
 
-    connect(cancel, &QPushButton::clicked, this, [this]() {
-                dettagli->setModifiable(false);
-                
-                cancel->setVisible(false);
-                save->setVisible(false);
-                
-                remove->setVisible(true);
-                modify->setVisible(true);
+            emit modificaAnnullata();
+            dettagli->setModifiable(false);
+            abilitaPulsantiReadOnly(true);
+            restoreFilter(tmp);
+            });
+    }
 
-               });
+void ContentViewer::pulsantiModificaAttivi(const bool& rom) {
+    remove->setVisible(rom);
+    modify->setVisible(rom);
 }

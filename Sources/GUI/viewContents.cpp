@@ -20,6 +20,24 @@ ViewContents::ViewContents(std::vector<Contenuto*> result, QWidget* parent) : QW
             col = 0;
             ++row;
         }
+        
+        contentsWidgets.push_back(filtro);
+        connect(filtro, &ContentViewer::modificaAvviata, this, &ViewContents::bloccaContenuti);
+        connect(filtro, &ContentViewer::modificaAnnullata, this, &ViewContents::ripristinaContenuto);
     }
     setLayout(contentsLayout);
+}
+
+void ViewContents::bloccaContenuti(ContentViewer* contenuto) {
+    for(ContentViewer* content : contentsWidgets) {
+        if(contenuto != content) {
+            content->pulsantiModificaAttivi(false);
+        }
+    }
+}
+
+void ViewContents::ripristinaContenuto() {
+    for(ContentViewer* content : contentsWidgets) {
+        content->pulsantiModificaAttivi(true);
+    }
 }

@@ -40,7 +40,7 @@ unordered_map<string, string> AnimeFilters::raccogliDati() const {
     //Anime
     parametri.insert({"Episodi", std::to_string(episodes->value())});
     parametri.insert({"Stagioni", std::to_string(seasons->value())});
-    parametri.insert({"Sottotitolato", std::to_string(subtitled->isChecked())});
+    parametri.insert({"Sottotitolato", subtitled->isChecked() ? "true" : "false"});
     (producer->text().toStdString()).empty() ? parametri.insert({"Producer", "Indefinito"}) : parametri.insert({"Producer", producer->text().toStdString()});
     (genre->currentText().toStdString()).empty() ? parametri.insert({"Genere", "Indefinito"}) : parametri.insert({"Genere", genre->currentText().toStdString()});
     return parametri;
@@ -110,6 +110,12 @@ void AnimeFilters::setModifiable(const bool& mdf) {
                 "QComboBox::drop-down { border: none; width: 0px; }"
                 "QComboBox::down-arrow { image: none; }" : "");
 
+        producer->setReadOnly(!mdf);
+        producer->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+        producer->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+        producer->setStyleSheet(!mdf ?
+            "QLineEdit { border: none; background: transparent; }" : "");
+
         genre->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
         genre->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
         genre->setStyleSheet(!mdf ?
@@ -133,14 +139,26 @@ void AnimeFilters::setModifiable(const bool& mdf) {
 
         subtitled->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
         subtitled->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
-        subtitled->setStyleSheet(!mdf ?
-            "QCheckBox::indicator { width: 0px; height: 0px; }" : "");
 
-       
         genre->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
         genre->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
         genre->setStyleSheet(!mdf ?
             "QComboBox { border: none; background: transparent; padding-left: 2px; }"
             "QComboBox::drop-down { border: none; width: 0px; }"
             "QComboBox::down-arrow { image: none; }" : "");
+}
+
+void AnimeFilters::setAttributes(const unordered_map<string, string>& attributes) {
+    Filters::setAttributes(attributes);
+
+    setResolution(QString::fromStdString(attributes.find("Risoluzione")->second));
+    setDuration(std::stoi(attributes.find("Durata")->second));
+
+    setCadence(QString::fromStdString(attributes.find("Cadenza")->second));
+
+    setProducer(QString::fromStdString(attributes.find("Producer")->second));
+    setEpisodes(std::stoi(attributes.find("Episodi")->second));
+    setSeasons(std::stoi(attributes.find("Stagioni")->second));
+    setSubtitle(attributes.find("Sottotitolato")->second == "true" ? 1 : 0);
+    setGenre(QString::fromStdString(attributes.find("Genere")->second));
 }

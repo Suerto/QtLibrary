@@ -136,3 +136,17 @@ void MangaFilters::setModifiable(const bool& mdf) {
             "QComboBox::drop-down { border: none; width: 0px; }"
             "QComboBox::down-arrow { image: none; }" : "");
 }
+
+void MangaFilters::setAttributes(const unordered_map<string, string>& attributes) {
+    Filters::setAttributes(attributes);
+
+    setCover(QString::fromStdString(attributes.find("Copertina")->second));
+    setPages(std::stoi(attributes.find("Pagine")->second));
+
+    setCadence(QString::fromStdString(attributes.find("Cadenza")->second));
+
+    setMangaka(QString::fromStdString(attributes.find("Mangaka")->second));
+    setEditor(QString::fromStdString(attributes.find("Editore")->second));
+    setChapters(std::stoi(attributes.find("Capitoli")->second));
+    setGenre(QString::fromStdString(attributes.find("Genere")->second));
+}

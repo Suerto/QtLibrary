@@ -123,3 +123,15 @@ void BookFilters::setModifiable(const bool& mdf) {
             "QComboBox::drop-down { border: none; width: 0px; }"
             "QComboBox::down-arrow { image: none; }" : "");
 }
+
+void BookFilters::setAttributes(const unordered_map<string, string>& attributes) {
+    Filters::setAttributes(attributes);
+
+    setCover(QString::fromStdString(attributes.find("Copertina")->second));
+    setPages(std::stoi(attributes.find("Pagine")->second));
+
+    setAuthor(QString::fromStdString(attributes.find("Autore")->second));
+    setEditor(QString::fromStdString(attributes.find("Editore")->second));
+    setPublisher(QString::fromStdString(attributes.find("Publisher")->second));
+    setGenre(QString::fromStdString(attributes.find("Genere")->second));
+}

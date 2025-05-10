@@ -21,7 +21,8 @@ public:
     Filters(QWidget* parent = nullptr);
     virtual void reset();
     virtual unordered_map<string, string> raccogliDati() const = 0;
-
+    
+    virtual void setAttributes(const unordered_map<string, string>& attributes);
     void setLanguage(const QString& lng);
     void setYear(const unsigned int& yr);
     virtual void setModifiable(const bool& mdf);
