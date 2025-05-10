@@ -110,11 +110,12 @@ void AnimeFilters::setModifiable(const bool& mdf) {
                 "QComboBox::drop-down { border: none; width: 0px; }"
                 "QComboBox::down-arrow { image: none; }" : "");
 
-        producer->setReadOnly(!mdf);
-        producer->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
-        producer->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
-        producer->setStyleSheet(!mdf ?
-            "QLineEdit { border: none; background: transparent; }" : "");
+        genre->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+        genre->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+        genre->setStyleSheet(!mdf ?
+            "QComboBox { border: none; background: transparent; padding-left: 2px; }"
+            "QComboBox::drop-down { border: none; width: 0px; }"
+            "QComboBox::down-arrow { image: none; }" : "");
 
         episodes->setReadOnly(!mdf);
         episodes->setButtonSymbols(mdf ? QAbstractSpinBox::UpDownArrows : QAbstractSpinBox::NoButtons);

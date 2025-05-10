@@ -55,7 +55,6 @@ MainWidget::MainWidget(QWidget* parent, ContentManager* mngr) : QWidget(parent),
 
     connect(reset, &QPushButton::clicked, this, &MainWidget::ripristinaFiltri);
 
-    setStyleSheet("border: 1px solid white;");
 }
 
 void MainWidget::ripristinaFiltri() {

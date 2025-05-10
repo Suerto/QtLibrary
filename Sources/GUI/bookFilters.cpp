@@ -103,17 +103,17 @@ void BookFilters::setModifiable(const bool& mdf) {
     author->setStyleSheet(!mdf ?
         "QLineEdit { border: none; background: transparent; }" : "");
     
-    author->setReadOnly(!mdf);
-    author->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
-    author->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
-    author->setStyleSheet(!mdf ?
+    editor->setReadOnly(!mdf);
+    editor->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+    editor->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+    editor->setStyleSheet(!mdf ?
         "QLineEdit { border: none; background: transparent; }" : "");
 
 
-    author->setReadOnly(!mdf);
-    author->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
-    author->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
-    author->setStyleSheet(!mdf ?
+    publisher->setReadOnly(!mdf);
+    publisher->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+    publisher->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+    publisher->setStyleSheet(!mdf ?
         "QLineEdit { border: none; background: transparent; }" : "");
 
     genre->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);

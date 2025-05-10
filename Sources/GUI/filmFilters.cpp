@@ -87,16 +87,16 @@ void FilmFilters::setModifiable(const bool& mdf) {
         duration->setStyleSheet(!mdf ?
             "QSpinBox { border: none; background: transparent; }" : "");
 
-        producer->setReadOnly(!mdf);
-        producer->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
-        producer->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
-        producer->setStyleSheet(!mdf ?
+        director->setReadOnly(!mdf);
+        director->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+        director->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+        director->setStyleSheet(!mdf ?
             "QLineEdit { border: none; background: transparent; }" : "");        
 
-        producer->setReadOnly(!mdf);
-        producer->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
-        producer->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
-        producer->setStyleSheet(!mdf ?
+        composer->setReadOnly(!mdf);
+        composer->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+        composer->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+        composer->setStyleSheet(!mdf ?
             "QLineEdit { border: none; background: transparent; }" : "");
 
         producer->setReadOnly(!mdf);

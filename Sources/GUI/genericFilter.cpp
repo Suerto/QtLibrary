@@ -35,5 +35,10 @@ void Filters::setModifiable(const bool& mdf) {
             "QComboBox::drop-down { border: none; width: 0px; }"
             "QComboBox::down-arrow { image: none; }" : "");
         
-
+        year->setReadOnly(!mdf);
+        year->setButtonSymbols(mdf ? QAbstractSpinBox::UpDownArrows : QAbstractSpinBox::NoButtons);
+        year->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+        year->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+        year->setStyleSheet(!mdf ?
+            "QSpinBox { border: none; background: transparent; }" : "");
 }

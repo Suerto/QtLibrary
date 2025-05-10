@@ -24,7 +24,8 @@ ContentViewer::ContentViewer(const QString& ttl, const QString& tp, Filters* flt
     save->setVisible(false);
 
     contentLayout->addLayout(buttonsLayout);
-
+    
+    dettagli->setModifiable(false);
     setLayout(contentLayout);
 
     connect(modify, &QPushButton::clicked, this, &ContentViewer::modifica);

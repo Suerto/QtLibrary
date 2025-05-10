@@ -33,7 +33,7 @@ unordered_map<string, string> MangaFilters::raccogliDati() const {
     parametri.insert({"Pagine", std::to_string(pages->value())});
     
     //Periodico
-    (cadence->currentText().toStdString()).empty() ? parametri.insert({"Cadenza", "Indefinita"}) : parametri.insert({"Cadenza", language->currentText().toStdString()});
+    (cadence->currentText().toStdString()).empty() ? parametri.insert({"Cadenza", "Indefinita"}) : parametri.insert({"Cadenza", cadence->currentText().toStdString()});
 
     //Manga
     (editor->text().toStdString()).empty() ? parametri.insert({"Editore", "Indefinito"}) :parametri.insert({"Editore", editor->text().toStdString()});
