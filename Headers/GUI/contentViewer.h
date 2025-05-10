@@ -13,7 +13,7 @@
 class ContentViewer : public QWidget {
     Q_OBJECT 
 private:
-QLineEdit* title;
+    QLineEdit* title;
     QLineEdit* type;
     Filters* dettagli;
 
