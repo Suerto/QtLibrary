@@ -1,5 +1,5 @@
 #include "../../Headers/LogicModel/creationVisitor.h"
-#include <QDebug>
+
 CreationVisitor::CreationVisitor(const unordered_map<string, string>& prmts) : parametri(prmts) {}
 
 void CreationVisitor::visit(Libro& lib) {
@@ -75,10 +75,6 @@ void CreationVisitor::visit(Manga& mng) {
     // Genere
     it = parametri.find("Genere");
         mng.setGenere(it->second);
-
-           for(const auto&[T, V] : parametri) {
-                qDebug() << QString::fromStdString(T) << " : " << QString::fromStdString(V) << "\n";
-           }
 }
 
 void CreationVisitor::visit(Film& flm) {
@@ -116,10 +112,6 @@ void CreationVisitor::visit(Film& flm) {
     // Genere
     it = parametri.find("Genere");
     flm.setGenere(it->second);
-
-           for(const auto&[T, V] : parametri) {
-                qDebug() << QString::fromStdString(T) << " : " << QString::fromStdString(V) << "\n";
-           }
 }
 
 void CreationVisitor::visit(Anime& anm) {
@@ -156,7 +148,7 @@ void CreationVisitor::visit(Anime& anm) {
 
     // Sottotitolato
     it = parametri.find("Sottotitolato");
-    anm.setSubtitle(static_cast<bool>(std::stoi(it->second)));
+    anm.setSubtitle(it->second == "true" ? true : false);
 
     // Produttore
     it = parametri.find("Producer");
@@ -164,11 +156,7 @@ void CreationVisitor::visit(Anime& anm) {
 
     // Genere
     it = parametri.find("Genere");
-        anm.setGenere(it->second);
-
-           for(const auto&[T, V] : parametri) {
-                qDebug() << QString::fromStdString(T) << " : " << QString::fromStdString(V) << "\n";
-           }
+    anm.setGenere(it->second);
 }
 
 unordered_map<string, string> CreationVisitor::getMap() const { return parametri; }

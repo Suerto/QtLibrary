@@ -1,7 +1,6 @@
 #include "../../Headers/LogicModel/contenuto.h"
 
 const unordered_map<const Contenuto::Lingua, const string> Contenuto::MappaLingue = {
-    { Contenuto::Lingua::Indefinita, "Indefinita" },
     { Contenuto::Lingua::Italiano, "Italiano" },
     { Contenuto::Lingua::Inglese, "Inglese" },
     { Contenuto::Lingua::Tedesco, "Tedesco" },
