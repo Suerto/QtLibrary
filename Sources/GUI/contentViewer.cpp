@@ -1,6 +1,6 @@
 #include "../../Headers/GUI/contentViewer.h"
 
-ContentViewer::ContentViewer(const QString& ttl, const QString& tp, Filters* flts, QWidget* parent) : QWidget(parent), title(new QLineEdit(this)), type(new QLineEdit(this)), dettagli(flts), modify(new QPushButton("Modifica", this)), remove(new QPushButton("Elimina", this)), save(new QPushButton("Salva", this)), cancel(new QPushButton("Annulla", this)), contentLayout(new QVBoxLayout(this)), buttonsLayout(new QHBoxLayout()) {
+ContentViewer::ContentViewer(const QString& ttl, const QString& tp, Filters* flts, QWidget* parent) : QWidget(parent), title(new QLineEdit(this)), type(new QLineEdit(this)), dettagli(flts), modify(new QPushButton("Modifica", this)), remove(new QPushButton("Elimina", this)), save(new QPushButton("Salva", this)), cancel(new QPushButton("Annulla", this)), contentLayout(new QVBoxLayout(this)), buttonsLayout(new QHBoxLayout(this)) {
     title->setText(ttl);
     title->setAlignment(Qt::AlignCenter);
     title->setReadOnly(true);
@@ -26,11 +26,16 @@ ContentViewer::ContentViewer(const QString& ttl, const QString& tp, Filters* flt
     contentLayout->addLayout(buttonsLayout);
     
     dettagli->setModifiable(false);
+    dettagli->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     setLayout(contentLayout);
 
     connect(modify, &QPushButton::clicked, this, &ContentViewer::modifica);
 
-    //connect(remove, &QPushButton::clicked, this, &)
+    connect(remove, &QPushButton::clicked, this, &ContentViewer::rimuovi);
+}
+
+void ContentViewer::rimuovi() {
+    emit rimuoviContenuto(this);
 }
 
 void ContentViewer::restoreFilter(const unordered_map<string, string>& attributes) { dettagli->setAttributes(attributes); }
@@ -65,4 +70,8 @@ void ContentViewer::modifica() {
 void ContentViewer::pulsantiModificaAttivi(const bool& rom) {
     remove->setVisible(rom);
     modify->setVisible(rom);
+}
+
+ContentViewer::~ContentViewer() {
+    delete dettagli;
 }

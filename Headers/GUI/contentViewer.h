@@ -33,8 +33,12 @@ public:
     void restoreFilter(const std::unordered_map<string, string>& attributes);
 public slots:
     void modifica();
+    void rimuovi();
 signals:
     void modificaAvviata(ContentViewer* contenuto);
     void modificaAnnullata();
+    void rimuoviContenuto(ContentViewer* contenuto);
+    
+    ~ContentViewer();
 };
 #endif //CONTENT_VIEWER_H

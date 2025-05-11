@@ -6,7 +6,8 @@ FilmFilters::FilmFilters(QWidget* parent) : Filters(parent), resolution(new QCom
     filtersLayout->addRow("Compositore :", composer);
 
     filtersLayout->addRow("Produttore :", producer);
-
+    
+    duration->setMaximum(300);
     filtersLayout->addRow("Durata : ", duration);
     
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Generi Film", genre);

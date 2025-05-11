@@ -56,4 +56,8 @@ vector<Contenuto*> ContentManager::cercaPerTitolo(const string& title) const {
     return risultati;
 }
 
+void ContentManager::eliminaOggetto(int index) {
+    
+}
+
 ContentManager::~ContentManager() = default;

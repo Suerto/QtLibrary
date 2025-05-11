@@ -92,63 +92,39 @@ void AnimeFilters::setCadence(const QString& cdnc) {
 void AnimeFilters::setModifiable(const bool& mdf) {
     Filters::setModifiable(mdf);
 
-        resolution->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
-        resolution->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
-        resolution->setStyleSheet(!mdf ?
+    auto applyComboBoxReadOnly = [mdf](QComboBox* combo) {
+        combo->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+        combo->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+        combo->setStyleSheet(!mdf ?
             "QComboBox { border: none; background: transparent; padding-left: 2px; }"
             "QComboBox::drop-down { border: none; width: 0px; }"
-            "QComboBox::down-arrow { image: none; }" : "");
+            "QComboBox::down-arrow { image: none; }"
+            :
+            ""
+        );
+    };
 
-        duration->setReadOnly(!mdf);
-        duration->setButtonSymbols(mdf ? QAbstractSpinBox::UpDownArrows : QAbstractSpinBox::NoButtons);
-        duration->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
-        duration->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
-        duration->setStyleSheet(!mdf ?
-            "QSpinBox { border: none; background: transparent; }" : "");
-        
-        cadence->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
-        cadence->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
-        cadence->setStyleSheet(!mdf ?
-                "QComboBox { border: none; background: transparent; padding-left: 2px; }"
-                "QComboBox::drop-down { border: none; width: 0px; }"
-                "QComboBox::down-arrow { image: none; }" : "");
-
-        producer->setReadOnly(!mdf);
-        producer->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
-        producer->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
-        producer->setStyleSheet(!mdf ?
+    auto applyLineEditReadOnly = [mdf](QLineEdit* lineEdit) {
+        lineEdit->setReadOnly(!mdf);
+        lineEdit->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+        lineEdit->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+        lineEdit->setStyleSheet(!mdf ?
             "QLineEdit { border: none; background: transparent; }" : "");
+    };
 
-        genre->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
-        genre->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
-        genre->setStyleSheet(!mdf ?
-            "QComboBox { border: none; background: transparent; padding-left: 2px; }"
-            "QComboBox::drop-down { border: none; width: 0px; }"
-            "QComboBox::down-arrow { image: none; }" : "");
+    applyComboBoxReadOnly(resolution);
+    applyComboBoxReadOnly(genre);
 
-        episodes->setReadOnly(!mdf);
-        episodes->setButtonSymbols(mdf ? QAbstractSpinBox::UpDownArrows : QAbstractSpinBox::NoButtons);
-        episodes->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
-        episodes->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
-        episodes->setStyleSheet(!mdf ?
-            "QSpinBox { border: none; background: transparent; }" : "");
+    duration->setReadOnly(!mdf);
+    duration->setButtonSymbols(mdf ? QAbstractSpinBox::UpDownArrows : QAbstractSpinBox::NoButtons);
+    duration->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
+    duration->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
+    duration->setStyleSheet(!mdf ?
+        "QSpinBox { border: none; background: transparent; }" : "");
 
-        seasons->setReadOnly(!mdf);
-        seasons->setButtonSymbols(mdf ? QAbstractSpinBox::UpDownArrows : QAbstractSpinBox::NoButtons);
-        seasons->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
-        seasons->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
-        seasons->setStyleSheet(!mdf ?
-            "QSpinBox { border: none; background: transparent; }" : "");
-
-        subtitled->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
-        subtitled->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
-
-        genre->setFocusPolicy(mdf ? Qt::StrongFocus : Qt::NoFocus);
-        genre->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
-        genre->setStyleSheet(!mdf ?
-            "QComboBox { border: none; background: transparent; padding-left: 2px; }"
-            "QComboBox::drop-down { border: none; width: 0px; }"
-            "QComboBox::down-arrow { image: none; }" : "");
+    applyLineEditReadOnly(director);
+    applyLineEditReadOnly(composer);
+    applyLineEditReadOnly(producer);
 }
 
 void AnimeFilters::setAttributes(const unordered_map<string, string>& attributes) {

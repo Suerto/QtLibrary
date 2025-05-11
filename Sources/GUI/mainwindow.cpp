@@ -103,8 +103,8 @@ void MainWindow::showSearching() {
         windows->setVisible(true);
     
     if(windows->currentIndex() == 1) {
-        ErrorChanging* change = new ErrorChanging(this);
-        connect(change, &ErrorChanging::azione, this, [this](const QString& choice) {
+        ErrorChanging change;
+        connect(&change, &ErrorChanging::azione, this, [this](const QString& choice) {
             if(choice == "Conferma") {
                qobject_cast<Creation*>(windows->currentWidget())->ripristinaFiltri();
                windows->setCurrentIndex(0);
@@ -116,7 +116,7 @@ void MainWindow::showSearching() {
                 searching->setChecked(false);
             }
         });
-        change->exec();
+        change.exec();
 
     }
 }

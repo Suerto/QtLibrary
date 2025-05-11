@@ -1,4 +1,5 @@
 #include "../../Headers/GUI/viewContents.h"
+#include "qglobal.h"
 
 ViewContents::ViewContents(std::vector<Contenuto*> result, QWidget* parent) : QWidget(parent), contentsLayout(new QGridLayout(this)) {
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed); // Larghezza espandibile, altezza fissa
@@ -24,6 +25,7 @@ ViewContents::ViewContents(std::vector<Contenuto*> result, QWidget* parent) : QW
         contentsWidgets.push_back(filtro);
         connect(filtro, &ContentViewer::modificaAvviata, this, &ViewContents::bloccaContenuti);
         connect(filtro, &ContentViewer::modificaAnnullata, this, &ViewContents::ripristinaContenuto);
+        connect(filtro, &ContentViewer::rimuoviContenuto, this, &ViewContents::eliminaContenuto);
     }
     setLayout(contentsLayout);
 }
@@ -40,4 +42,37 @@ void ViewContents::ripristinaContenuto() {
     for(ContentViewer* content : contentsWidgets) {
         content->pulsantiModificaAttivi(true);
     }
+}
+
+void ViewContents::eliminaContenuto(ContentViewer* contenuto) {
+   for(std::size_t i = 0; i < contentsWidgets.size(); ++i) {
+        if (contenuto == contentsWidgets[i]) {
+            qDebug() << QString::fromStdString("Pre-eliminazione") << contentsWidgets.size();
+            contentsLayout->removeWidget(contenuto);
+            delete contenuto;
+            contentsWidgets.erase(contentsWidgets.begin() + i);
+            qDebug() << QString::fromStdString("Post-eliminazione") << contentsWidgets.size();
+            break;
+            emit distruggiOggetto(i);
+            
+        }
+   }     // Ricostruisci la griglia in modo compatto
+    // Prima: rimuovi tutti i widget dal layout
+   QLayoutItem* item;
+   while ((item = contentsLayout->takeAt(0)) != nullptr) {
+       // Non cancelliamo qui i widget: sono ancora in contentsWidgets
+       item->widget()->setParent(nullptr); // necessario per evitare che rimangano agganciati
+       delete item;
+   }
+    // Poi: reinserisci i widget nel layout in ordine compatto
+   const int columns = 3; // ad esempio, 3 colonne nella griglia
+   int row = 0, col = 0;
+   for (ContentViewer* w : contentsWidgets) {
+       contentsLayout->addWidget(w, row, col);
+       if (++col == columns) {
+           col = 0;
+           ++row;
+       }
+   }
+
 }

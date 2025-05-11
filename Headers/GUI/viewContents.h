@@ -29,6 +29,9 @@ public:
 public slots :
     void bloccaContenuti(ContentViewer* contenuto);
     void ripristinaContenuto();
+    void eliminaContenuto(ContentViewer* contenuto);
+signals:
+    void distruggiOggetto(int oggetto);
 };
 
 #endif //VIEW_CONTENTS_H
