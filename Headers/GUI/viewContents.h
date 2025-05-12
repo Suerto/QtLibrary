@@ -6,6 +6,7 @@
 #include <QGridLayout>
 
 #include "filterVisitor.h"
+#include "../LogicModel/indexVisitor.h"
 #include "../LogicModel/contenuto.h"
 #include "genericFilters.h"
 #include "contentViewer.h"
@@ -15,6 +16,7 @@
 using std::vector;
 
 class ViewContents : public QWidget {
+    Q_OBJECT
 private:
     vector<ContentViewer*> contentsWidgets;
     QGridLayout* contentsLayout;
@@ -31,7 +33,7 @@ public slots :
     void ripristinaContenuto();
     void eliminaContenuto(ContentViewer* contenuto);
 signals:
-    void distruggiOggetto(int oggetto);
+    void eliminaOggetto(int index, Contenuto* object);
 };
 
 #endif //VIEW_CONTENTS_H
