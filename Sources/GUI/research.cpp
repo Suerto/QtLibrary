@@ -20,4 +20,9 @@ void Research::showResults(vector<Contenuto*> res) {
     results = new ViewContents(res, this);
     results->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     researchLayout->addWidget(results);
+
+    connect(results, &ViewContents::eliminaOggetto, this, [this](int index, Contenuto* oggetto) {
+            qDebug() << "Inizio eliminazione : " << index << " " << static_cast<void*>(oggetto);
+            manager->eliminaContenuto(index, oggetto);
+            });
 }

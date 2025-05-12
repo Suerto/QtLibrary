@@ -11,6 +11,16 @@ Filters::Filters(QWidget* parent) : QWidget(parent), language(new QComboBox(this
     setLayout(filtersLayout);
 
     reset();
+
+    setStyleSheet(R"(    
+        QComboBox { 
+            background-color : #ABADAB;  
+        }
+
+        QCheckBox {
+            background-color : #F9F6EE;
+        }
+    )");
 }
 
 void Filters::reset() { 

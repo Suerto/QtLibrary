@@ -58,6 +58,6 @@ void Search::startSearch() {
             ErrorNoResult* error = new ErrorNoResult(this);
             error->exec();
         }
-        else emit risultatiOttenuti(res); 
+        else emit risultatiOttenuti(res);
     } 
 }

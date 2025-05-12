@@ -9,10 +9,10 @@ ErrorChanging::ErrorChanging(QWidget* parent) : ErrorStructure(parent), action(n
     setWindowFlags(windowFlags() & ~Qt::WindowCloseButtonHint);
     errorLayout->addWidget(text, Qt::AlignCenter);
 
-    QPushButton* confirm = new QPushButton("Conferma", this);
+    QPushButton* confirm = new QPushButton("Conferma ✅", this);
     action->addButton(confirm, 0);
 
-    QPushButton* cancel = new QPushButton("Annulla", this);
+    QPushButton* cancel = new QPushButton("Annulla ❌", this);
     action->addButton(cancel, 1);
     
     QHBoxLayout* actionLayout = new QHBoxLayout();
@@ -21,6 +21,12 @@ ErrorChanging::ErrorChanging(QWidget* parent) : ErrorStructure(parent), action(n
     errorLayout->addLayout(actionLayout);
     
     connect(action, &QButtonGroup::idClicked, this, &ErrorChanging::changeWidget);
+
+    confirm->setStyleSheet(
+            " QPushButton { background-color : green; }"
+            " QPushButton::hover { background-color : #039322; }");
+
+    cancel->setStyleSheet("background-color : red;");
 }
 
 void ErrorChanging::changeWidget(int id) {

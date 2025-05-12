@@ -56,17 +56,21 @@ MainWindow::MainWindow(QWidget* parent, ContentManager* mngr) : QMainWindow(pare
     connect(creation, &QAction::triggered, this, &MainWindow::showCreation);
 
     //Design
-    toolBar->setStyleSheet(R"(
+    setStyleSheet(R"(
+        QMainWindow {
+            background-color : #426585;
+        }
+
         QToolBar {
-            background-color: #F1E1B0;
+            background-color: #4D91C6;
             spacing: 6px;             
             padding: 4px;
             border: none;
         }
         
         QToolButton {
-            color: white;             
-            background-color: #DFCBAA;
+            color: #002FA7;             
+            background-color: #E6E6FA;
             border: none;
             padding: 6px 12px;
             border-radius: 6px;
@@ -89,7 +93,7 @@ MainWindow::MainWindow(QWidget* parent, ContentManager* mngr) : QMainWindow(pare
         }
         
         QLabel {
-            color : #C99A52;
+            color : #002FA7;
             font-family : Century Gothic;
             font-weight : bold italic;
             font-size : 15px;

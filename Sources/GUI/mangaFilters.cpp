@@ -152,15 +152,3 @@ void MangaFilters::setAttributes(const unordered_map<string, string>& attributes
     setChapters(std::stoi(attributes.find("Capitoli")->second));
     setGenre(QString::fromStdString(attributes.find("Genere")->second));
 }
-
-MangaFilters::~MangaFilters() {
-    delete cover;
-    delete pages;
-
-    delete cadence;
-    
-    delete mangaka;
-    delete editor;
-    delete chapters;
-    delete genre;
-}
