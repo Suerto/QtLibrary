@@ -26,13 +26,10 @@ public:
 
     void creaContenuto(const int& index, Visitors* visitor);
     void salvaContenuto(const int& index, Contenuto* contenuto);
-    void eliminaContenuto(const int& index, Contenuto* contenuto);
-    //void modificaContenuto(Contenuto* contenuto);
-    
+    void eliminaContenuto(const int& index, const unordered_map<string, string>& attributi);    
     vector<Contenuto*> cercaPerTitolo(const string& title) const; 
     vector<Contenuto*> cercaContenuto(const int& index, const unordered_map<string, string>& map) const;
-
-
+    void modificaContenuto(const int& index, const unordered_map<string, string>& original, const unordered_map<string, string>& modifiche);
 };
 
 #endif //CONTENT_MANAGER_H

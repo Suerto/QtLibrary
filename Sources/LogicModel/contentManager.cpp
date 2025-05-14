@@ -56,15 +56,31 @@ vector<Contenuto*> ContentManager::cercaPerTitolo(const string& title) const {
     return risultati;
 }
 
-void ContentManager::eliminaContenuto(const int& index, Contenuto* contenuto) {
-    qDebug() << "Passo finale : eliminazione in ContentManager" << index << " " << static_cast<void*>(contenuto);
+void ContentManager::eliminaContenuto(const int& index, const unordered_map<string, string>& attributi) {
     for(auto it = memoria[index].begin(); it != memoria[index].end(); ++it) {
-        if(*it == contenuto) {
-            qDebug() << "Memoria pre-eliminazione : " << memoria[index].size();
-            qDebug() << "Contenuto trovato!" << static_cast<void*>(contenuto) << " " << static_cast<void*>(*it);
+        CheckVisitor visitor(attributi);
+        qDebug() << "Memoria pre-eliminazione : " << memoria[index].size();
+
+        (*it)->accept(&visitor);
+        
+        if(visitor.isSimilar()) {
             delete *it;
             memoria[index].erase(it);
             qDebug() << "Memoria post-eliminazione : " << memoria[index].size();
+            break;
+        }
+    }
+}
+
+void ContentManager::modificaContenuto(const int& index, const unordered_map<string, string>& original, const unordered_map<string, string>& modifiche) {
+    for(auto it = memoria[index].begin(); it != memoria[index].end(); ++it) {
+        CheckVisitor visitor(original);
+
+        (*it)->accept(&visitor);
+
+        if(visitor.isSimilar()) {
+            CreationVisitor visitor(modifiche);
+            (*it)->accept(&visitor);
             break;
         }
     }
