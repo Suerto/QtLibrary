@@ -2,7 +2,6 @@
 #include "../../Headers/GUI/mainwindow.h"
 
 App::App(int& argc, char** argv, ContentManager* mngr) : QApplication(argc, argv), main(new MainWindow(nullptr, mngr)) {
-    //Per il salvataggio dei filtri generali dei contenuti all'interno della QCOmboBox
     JsonHandler::saveEnumToJson(Contenuto::getMappaLingue(), "Data/Dati.json" , "Lingue");
 
     JsonHandler::saveEnumToJson(Fisico::getMappaCopertine(), "Data/Dati.json", "Copertine");
@@ -20,3 +19,5 @@ App::App(int& argc, char** argv, ContentManager* mngr) : QApplication(argc, argv
     JsonHandler::saveEnumToJson(Anime::getMappaGeneri(), "Data/Dati.json", "Generi Anime");
     main->show();
 }
+
+App::~App() { delete main; qDebug() << "App distrutta"; }

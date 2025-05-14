@@ -12,7 +12,7 @@ ViewContents::ViewContents(std::vector<Contenuto*> result, QWidget* parent) : QW
     for (Contenuto* content : result) {
         FilterVisitor visitor;
         content->accept(&visitor);
-        ContentViewer* filtro = new ContentViewer(QString::fromStdString(content->getNome()), QString::fromStdString(visitor.getType()), visitor.getFilters(), content);
+        ContentViewer* filtro = new ContentViewer(QString::fromStdString(content->getNome()), QString::fromStdString(visitor.getType()), visitor.getFilters());
         
         filtro->setFixedSize(widgetWidth, 350);  // Imposta la dimensione fissa del filtro
         contentsLayout->addWidget(filtro, row, col);
@@ -26,6 +26,10 @@ ViewContents::ViewContents(std::vector<Contenuto*> result, QWidget* parent) : QW
         connect(filtro, &ContentViewer::modificaAvviata, this, &ViewContents::bloccaContenuti);
         connect(filtro, &ContentViewer::modificaAnnullata, this, &ViewContents::ripristinaContenuto);
         connect(filtro, &ContentViewer::rimuoviContenuto, this, &ViewContents::eliminaContenuto);
+        
+        connect(filtro, &ContentViewer::modificaConfermata, this, [this](const int& index, const unordered_map<string, string> original, const unordered_map<string, string>& modifiche) {
+                emit modificaOggetto(index, original, modifiche);
+                });
     }
     setLayout(contentsLayout);
 }
@@ -44,22 +48,18 @@ void ViewContents::ripristinaContenuto() {
     }
 }
 
-void ViewContents::eliminaContenuto(ContentViewer* contenuto) {
+void ViewContents::eliminaContenuto(ContentViewer* contenuto, const int& index, 
+        const unordered_map<string, string>& attributi) {
    for(std::size_t i = 0; i < contentsWidgets.size(); ++i) {
         if (contenuto == contentsWidgets[i]) {
             qDebug() << QString::fromStdString("Pre-eliminazione") << contentsWidgets.size();
-            contentsLayout->removeWidget(contenuto);
-            IndexVisitor visitor;
-            qDebug() << "Visitor creato " << static_cast<void*>(&visitor);
-            contenuto->getObject()->accept(&visitor);
-            qDebug() << "Oggetto ricevuto : " << static_cast<void*>(contenuto->getObject());
-            emit eliminaOggetto(visitor.getIndex(), contenuto->getObject());
+            contentsLayout->removeWidget(contenuto); 
+            emit eliminaOggetto(index, attributi);
             delete contenuto;
             qDebug() << "Delete di contenuto fatta : " << static_cast<void*>(contenuto);
             contentsWidgets.erase(contentsWidgets.begin() + i);
             qDebug() << QString::fromStdString("Post-eliminazione") << contentsWidgets.size();
-            break;
-            
+            break; 
         }
    }     // Ricostruisci la griglia in modo compatto
     // Prima: rimuovi tutti i widget dal layout

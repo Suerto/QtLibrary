@@ -152,3 +152,8 @@ void MangaFilters::setAttributes(const unordered_map<string, string>& attributes
     setChapters(std::stoi(attributes.find("Capitoli")->second));
     setGenre(QString::fromStdString(attributes.find("Genere")->second));
 }
+
+
+void MangaFilters::accept(GuiVisitor* visitor) const {
+    visitor->visit(*this);
+}

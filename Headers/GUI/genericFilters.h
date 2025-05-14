@@ -7,6 +7,8 @@
 #include <QFormLayout>
 #include <unordered_map>
 
+#include "guiVisitor.h"
+
 #include "../../Sources/JSON/JsonHandler.hpp"
 
 using std::unordered_map;
@@ -19,13 +21,15 @@ protected:
     QFormLayout* filtersLayout;
 public:
     Filters(QWidget* parent = nullptr);
-    virtual void reset();
-    virtual unordered_map<string, string> raccogliDati() const = 0;
-    
-    virtual void setAttributes(const unordered_map<string, string>& attributes);
     void setLanguage(const QString& lng);
     void setYear(const unsigned int& yr);
+    
+    virtual void reset();
     virtual void setModifiable(const bool& mdf);
+    virtual void setAttributes(const unordered_map<string, string>& attributes);
+
+    virtual unordered_map<string, string> raccogliDati() const = 0;
+    virtual void accept(GuiVisitor* visitor) const = 0;
 };
 
 #endif //GENERIC_H

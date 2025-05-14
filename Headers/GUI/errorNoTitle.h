@@ -4,12 +4,15 @@
 #include <QPushButton>
 
 #include "errorStructure.h"
+#include <string>
+
+using std::string;
 
 class ErrorNoTitle : public ErrorStructure {
 private:
     QPushButton* confirm;
 public:
-    ErrorNoTitle(QWidget* parent = nullptr);
+    ErrorNoTitle(const string& title = string(), QWidget* parent = nullptr);
 public slots:
     void chiudiErrore();
 };

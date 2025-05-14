@@ -10,7 +10,7 @@ class ErrorMissing : public ErrorStructure {
 private:
     QPushButton* confirm;
 public:
-    ErrorMissing(QWidget* parent = nullptr, const string& title = string());
+    ErrorMissing(QWidget* parent = nullptr, const string& mode = string(), const string& title = string());
 public slots:
     void chiudiErrore();
 };

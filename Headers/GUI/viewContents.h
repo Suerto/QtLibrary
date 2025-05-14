@@ -6,7 +6,7 @@
 #include <QGridLayout>
 
 #include "filterVisitor.h"
-#include "../LogicModel/indexVisitor.h"
+
 #include "../LogicModel/contenuto.h"
 #include "genericFilters.h"
 #include "contentViewer.h"
@@ -31,9 +31,11 @@ public:
 public slots :
     void bloccaContenuti(ContentViewer* contenuto);
     void ripristinaContenuto();
-    void eliminaContenuto(ContentViewer* contenuto);
+    void eliminaContenuto(ContentViewer* contenuto, const int& index, 
+        const unordered_map<string, string>& attributi);
 signals:
-    void eliminaOggetto(int index, Contenuto* object);
+    void eliminaOggetto(const int& index, const unordered_map<string, string>& attributi);
+    void modificaOggetto(const int& index, const unordered_map<string, string>& original, const unordered_map<string, string>& modifiche);
 };
 
 #endif //VIEW_CONTENTS_H

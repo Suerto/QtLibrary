@@ -165,3 +165,7 @@ void AnimeFilters::setAttributes(const unordered_map<string, string>& attributes
     setSubtitle(attributes.find("Sottotitolato")->second == "true" ? 1 : 0);
     setGenre(QString::fromStdString(attributes.find("Genere")->second));
 }
+
+void AnimeFilters::accept(GuiVisitor* visitor) const {
+    visitor->visit(*this);
+}

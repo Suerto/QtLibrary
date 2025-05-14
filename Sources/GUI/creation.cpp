@@ -2,8 +2,9 @@
 #include "qglobal.h"
 #include "qnamespace.h"
 
-Creation::Creation(QWidget* parent, ContentManager* mngr) : MainWidget(parent), manager(mngr), crea(new QPushButton("Avvia Creazione", this)) {
+Creation::Creation(QWidget* parent, ContentManager* mngr) : MainWidget(parent), manager(mngr), crea(new QPushButton(this)) {
     crea->setFixedSize(50, 50);
+    crea->setIcon(QIcon("➕"));
     titleLayout->addWidget(crea);
     
     pulsantiera->setVisible(true);
@@ -15,7 +16,6 @@ Creation::Creation(QWidget* parent, ContentManager* mngr) : MainWidget(parent), 
 }
 
 void Creation::mostraFiltro(int id) {
-    //gestione del tentativo di cambio del widget durante la creazione dell'oggetto
     if(filtri->currentIndex() != id && filtri->isVisible()) {
             ErrorChanging change(this);
             connect(&change, &ErrorChanging::azione, this, [this, id](const QString& choice) {
@@ -47,16 +47,17 @@ void Creation::startCreation() {
        unordered_map<string, string> parameters = qobject_cast<Filters*>(filtri->currentWidget())->raccogliDati();
        parameters.insert({"Titolo", titolo->text().toStdString()});
        if(!checkMap(parameters)) {
-           ErrorMissing error(this, titolo->text().toStdString());
+           ErrorMissing error(this, "Creazione", titolo->text().toStdString());
            error.exec();
        }
        else {
            CreationVisitor creator(parameters);
+           //AGGIUNGERE NON POSSIBILITÀ DI CREARE DUPLICATI
            manager->creaContenuto(filtri->currentIndex(), &creator);
        }
    }
    else {
-       ErrorNoTitle error(this);
+       ErrorNoTitle error("Creazione", this);
        error.exec();        
    }
 }

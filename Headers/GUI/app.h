@@ -11,6 +11,7 @@ private:
     MainWindow* main;
 public: 
     App(int& argc, char** argv, ContentManager* mngr);
+    ~App();
 };
 
 #endif //APP_H

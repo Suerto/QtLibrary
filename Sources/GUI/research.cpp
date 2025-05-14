@@ -21,8 +21,10 @@ void Research::showResults(vector<Contenuto*> res) {
     results->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     researchLayout->addWidget(results);
 
-    connect(results, &ViewContents::eliminaOggetto, this, [this](int index, Contenuto* oggetto) {
-            qDebug() << "Inizio eliminazione : " << index << " " << static_cast<void*>(oggetto);
-            manager->eliminaContenuto(index, oggetto);
+    connect(results, &ViewContents::eliminaOggetto, this, [this](const int& index, const unordered_map<string, string>& attributi) {
+            manager->eliminaContenuto(index, attributi);
+            });
+    connect(results, &ViewContents::modificaOggetto, this, [this](const int& index, const unordered_map<string, string>& original, const unordered_map<string, string>& modifiche) {
+            manager->modificaContenuto(index, original, modifiche);
             });
 }

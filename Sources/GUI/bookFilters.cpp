@@ -131,3 +131,8 @@ void BookFilters::setAttributes(const unordered_map<string, string>& attributes)
     setPublisher(QString::fromStdString(attributes.find("Publisher")->second));
     setGenre(QString::fromStdString(attributes.find("Genere")->second));
 }
+
+
+void BookFilters::accept(GuiVisitor* visitor) const {
+    visitor->visit(*this);
+}

@@ -9,15 +9,13 @@
 #include <QHBoxLayout>
 
 #include "genericFilters.h"
-#include "../LogicModel/creationVisitor.h"
+#include "errorMissing.h"
+#include "indexVisitor.h"
 #include "../LogicModel/contenuto.h"
-
 
 class ContentViewer : public QWidget {
     Q_OBJECT 
 private:
-    Contenuto* object;
-
     QLineEdit* title;
     QLineEdit* type;
     Filters* dettagli;
@@ -30,14 +28,16 @@ private:
     QVBoxLayout* contentLayout;
     QHBoxLayout* buttonsLayout;
 public:
-    ContentViewer(const QString& ttl, const QString& tp, Filters* flts, Contenuto* obj, QWidget* parent = nullptr);
+    ContentViewer(const QString& ttl, const QString& tp, Filters* flts, 
+                  QWidget* parent = nullptr);
     void abilitaPulsantiReadOnly(const bool& rom);
 
     void pulsantiModificaAttivi(const bool& rom);
 
     void restoreFilter(const std::unordered_map<string, string>& attributes);
+    Filters* getFilter() const;
 
-    Contenuto* getObject() const;
+    bool checkMap(const unordered_map<string, string>& map) const;
     ~ContentViewer();
 public slots:
     void rimuovi();
@@ -45,7 +45,7 @@ public slots:
 signals:
     void modificaAvviata(ContentViewer* contenuto);
     void modificaAnnullata();
-    void rimuoviContenuto(ContentViewer* contenuto);
-    void modificaContenuto(const unordered_map<string, string>& modifiche);
+    void rimuoviContenuto(ContentViewer* contenuto, const int& index, const unordered_map<string, string>& attributi);
+    void modificaConfermata(const int& index, const unordered_map<string, string>& original, const unordered_map<string, string>& modifiche);
 };
 #endif //CONTENT_VIEWER_H

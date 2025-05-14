@@ -37,8 +37,8 @@ void Search::startSearch() {
     //Identificare a chi dover passare il vettore dei contenuti :
     //  O alla MainWindow, però converrebbe fosse un widget legato alla sezione di Ricerca
     if(titolo->text().toStdString().empty()) {
-        ErrorNoTitle* error = new ErrorNoTitle(this);
-        error->exec();
+        ErrorNoTitle error("Ricerca", this);
+        error.exec();
     }
     else {
         const string& title = titolo->text().toStdString();
@@ -55,8 +55,8 @@ void Search::startSearch() {
         }
         
         if(res.size() == 0) {
-            ErrorNoResult* error = new ErrorNoResult(this);
-            error->exec();
+            ErrorNoResult error(this);
+            error.exec();
         }
         else emit risultatiOttenuti(res);
     } 

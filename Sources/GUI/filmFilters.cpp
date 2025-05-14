@@ -125,3 +125,8 @@ void FilmFilters::setAttributes(const unordered_map<string, string>& attributes)
     setProducer(QString::fromStdString(attributes.find("Producer")->second));
     setGenre(QString::fromStdString(attributes.find("Genere")->second));
 }
+
+
+void FilmFilters::accept(GuiVisitor* visitor) const {
+    visitor->visit(*this);
+}
