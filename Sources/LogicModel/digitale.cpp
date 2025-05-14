@@ -31,3 +31,5 @@ void Digitale::setRisoluzione(const string& res) {
 void Digitale::setDurata(const unsigned int& dur) { durata = dur; }
 
 const unordered_map<const Digitale::Risoluzione, const string> Digitale::getMappaRisoluzioni() { return MappaRisoluzioni; }
+
+Digitale::~Digitale() = default;

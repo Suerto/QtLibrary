@@ -21,6 +21,8 @@ public:
     void setPagine(const unsigned int& pg);
 
     static unordered_map<const Copertina, const string> getMappaCopertine();
+
+    virtual ~Fisico();
 };
 
 #endif

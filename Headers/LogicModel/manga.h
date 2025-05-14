@@ -30,5 +30,7 @@ public:
     virtual void accept(Visitors* visitor) override;
 
     static const unordered_map<const Genere, const string> getMappaGeneri();
+
+    virtual ~Manga();
 };
 #endif

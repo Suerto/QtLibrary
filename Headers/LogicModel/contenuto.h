@@ -34,6 +34,8 @@ public:
     virtual void accept(Visitors* visitor) = 0;
 
     static const unordered_map<const Contenuto::Lingua, const string> getMappaLingue(); 
+    
+    virtual ~Contenuto();
 };
 
 #endif

@@ -20,6 +20,8 @@ public:
     void setDurata(const unsigned int& dur);
 
     static const unordered_map<const Risoluzione, const string> getMappaRisoluzioni();
+
+    virtual ~Digitale();
 };
 
 #endif

@@ -7,8 +7,13 @@ const unordered_map<const Anime::Genere, const string> Anime::MappaGeneri = {
     { Anime::Genere::Mecha, "Mecha" },
 };
 
-Anime::Anime(string n, unsigned int a, Lingua l, Risoluzione res, unsigned int d, Cadenza ca, unsigned int ep, unsigned int s, bool sub, string prd, Genere g) : 
-    Digitale(n, a, l, res, d), Periodico(ca), episodi(getDurata() > 0 ? ep : 0), stagioni(episodi > 0 ? s : 0), sottotitolato(sub), producer(prd), genere(g) {} 
+Anime::Anime(string n, unsigned int a, Lingua l, 
+             Risoluzione res, unsigned int d, 
+             Cadenza ca, 
+             unsigned int ep, unsigned int s, bool sub, string prd, Genere g) : 
+        Digitale(n, a, l, res, d), Periodico(ca), 
+        episodi(getDurata() > 0 ? ep : 0), stagioni(episodi > 0 ? s : 0), 
+        sottotitolato(sub), producer(prd), genere(g) {} 
 
 unsigned int Anime::getEpisodi() const { return episodi; }
 
@@ -39,7 +44,7 @@ void Anime::setProducer(const string& prd) { producer = prd; }
 
 void Anime::setGenere(const string& gnr) {
     if(!gnr.empty()) {
-        for(const auto&[gen, str] : MappaGeneri) {
+        for(const auto&[gen, str] : Anime::MappaGeneri) {
             if(gnr == str) {
                 genere = gen;
                 return;
@@ -54,3 +59,5 @@ void Anime::accept(Visitors* visitor) {
 }
 
 const unordered_map<const Anime::Genere, const string> Anime::getMappaGeneri() { return MappaGeneri; }
+
+Anime::~Anime() = default;

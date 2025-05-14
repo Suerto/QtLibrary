@@ -48,3 +48,5 @@ void Libro::accept(Visitors* visitor) {
 }
 
 const unordered_map<const Libro::Genere, const string> Libro::getMappaGeneri() { return MappaGeneri; }
+
+Libro::~Libro() = default;

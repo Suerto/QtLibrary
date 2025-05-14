@@ -36,3 +36,5 @@ void Contenuto::setLingua(const string& lng) {
 }
 
 const unordered_map<const Contenuto::Lingua, const string> Contenuto::getMappaLingue() { return MappaLingue; }
+
+Contenuto::~Contenuto() = default;
