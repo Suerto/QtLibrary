@@ -47,5 +47,3 @@ void Film::accept(Visitors* visitor) {
 }
 
 const unordered_map<const Film::Genere, const string> Film::getMappaGeneri() { return MappaGeneri; }
-
-Digitale::~Digitale() = default;

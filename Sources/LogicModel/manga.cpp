@@ -48,5 +48,3 @@ void Manga::accept(Visitors* visitor) {
 }
 
 const unordered_map<const Manga::Genere, const string> Manga::getMappaGeneri() { return MappaGeneri; }
-
-Manga::~Manga() = default;

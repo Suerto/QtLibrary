@@ -32,5 +32,3 @@ void Fisico::setCopertina(const string& cp) {
 void Fisico::setPagine(const unsigned int& pg) { pagine = pg; }
 
 unordered_map<const Fisico::Copertina, const string> Fisico::getMappaCopertine() { return MappaCopertine; }
-
-Fisico::~Fisico() = default;

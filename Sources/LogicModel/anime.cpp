@@ -59,5 +59,3 @@ void Anime::accept(Visitors* visitor) {
 }
 
 const unordered_map<const Anime::Genere, const string> Anime::getMappaGeneri() { return MappaGeneri; }
-
-Anime::~Anime() = default;
