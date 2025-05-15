@@ -1,7 +1,6 @@
 #ifndef MAIN_WIDGETS_H
 #define MAIN_WIDGETS_H
 
-#include <QWidget>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QHBoxLayout>
@@ -20,9 +19,8 @@
 
 class MainWidget : public QWidget {
     Q_OBJECT
-private:
-    ContentManager* manager;
 protected:
+    ContentManager* manager;
     QVBoxLayout* mainLayout;
     QVBoxLayout* topLayout;
     QHBoxLayout* titleLayout;
@@ -34,6 +32,7 @@ protected:
     QStackedWidget* filtri; 
 public:
     MainWidget(QWidget* parent = nullptr, ContentManager* mngr = nullptr);
+    virtual ~MainWidget();
 public slots:
     virtual void mostraFiltro(int id) = 0;
     void ripristinaFiltri();

@@ -130,3 +130,5 @@ void FilmFilters::setAttributes(const unordered_map<string, string>& attributes)
 void FilmFilters::accept(GuiVisitor* visitor) const {
     visitor->visit(*this);
 }
+
+FilmFilters::~FilmFilters() = default;

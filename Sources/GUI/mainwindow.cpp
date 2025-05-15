@@ -8,14 +8,14 @@ MainWindow::MainWindow(QWidget* parent, ContentManager* mngr) : QMainWindow(pare
     toolBar->addAction(searching);
     searching->setCheckable(true);
 
-    QWidget* spaziatoreSx = new QWidget();
+    QWidget* spaziatoreSx = new QWidget(this);
     spaziatoreSx->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     toolBar->addWidget(spaziatoreSx);
     
-    QLabel* title = new QLabel("Benvenuto in QtLibrary!");
+    QLabel* title = new QLabel("Benvenuto in QtLibrary!", this);
     toolBar->addWidget(title);
 
-    QWidget* spaziatoreDx = new QWidget();
+    QWidget* spaziatoreDx = new QWidget(this);
     spaziatoreDx->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     toolBar->addWidget(spaziatoreDx);
 
@@ -134,4 +134,10 @@ void MainWindow::showCreation() {
         creation->setChecked(true);
         searching->setChecked(false);
     }
+}
+
+MainWindow::~MainWindow() {
+    qDebug() << "\n\n---- DISTRUZIONE MAINWINDOW ----\n\n";
+    manager = nullptr;
+    qDebug() << "indirizzo manager : " << static_cast<void*>(manager) << "\n\n";
 }

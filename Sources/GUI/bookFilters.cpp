@@ -136,3 +136,5 @@ void BookFilters::setAttributes(const unordered_map<string, string>& attributes)
 void BookFilters::accept(GuiVisitor* visitor) const {
     visitor->visit(*this);
 }
+
+BookFilters::~BookFilters() = default;

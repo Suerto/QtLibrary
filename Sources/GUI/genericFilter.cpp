@@ -57,3 +57,5 @@ void Filters::setAttributes(const std::unordered_map<string, string>& attributes
     setLanguage(QString::fromStdString(attributes.find("Lingua")->second));
     setYear(std::stoi(attributes.find("Anno")->second));
 }
+
+Filters::~Filters() = default;

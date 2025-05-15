@@ -29,6 +29,7 @@ public:
     virtual void setAttributes(const unordered_map<string, string>& attributes);
 
     virtual unordered_map<string, string> raccogliDati() const = 0;
+    virtual ~Filters();
     virtual void accept(GuiVisitor* visitor) const = 0;
 };
 

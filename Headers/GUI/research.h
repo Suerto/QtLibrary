@@ -15,6 +15,7 @@ private:
     ViewContents* results;
 public:
     Research(QWidget* parent = nullptr, ContentManager* mgnr = nullptr);
+    ~Research();
 public slots:
     void showResults(vector<Contenuto*> res);
 };

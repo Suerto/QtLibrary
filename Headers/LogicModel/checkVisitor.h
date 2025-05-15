@@ -12,7 +12,8 @@ private:
     unordered_map<string, string> parametri;
     bool similar;
 public:
-    CheckVisitor(unordered_map<string, string> prm = unordered_map<string, string>(), bool sml = true);
+    CheckVisitor(unordered_map<string, string> prm = unordered_map<string, string>(),
+                 bool sml = true);
 
     virtual void visit(Libro& lib) override;
     virtual void visit(Film& flm) override;

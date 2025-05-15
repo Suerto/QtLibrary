@@ -45,7 +45,10 @@ public slots:
 signals:
     void modificaAvviata(ContentViewer* contenuto);
     void modificaAnnullata();
-    void rimuoviContenuto(ContentViewer* contenuto, const int& index, const unordered_map<string, string>& attributi);
-    void modificaConfermata(const int& index, const unordered_map<string, string>& original, const unordered_map<string, string>& modifiche);
+    void rimuoviContenuto(ContentViewer* contenuto, const int& index, 
+            const unordered_map<string, string>& attributi);
+    void modificaConfermata(const int& index, 
+            const unordered_map<string, string>& original, const unordered_map<string, 
+            string>& modifiche);
 };
 #endif //CONTENT_VIEWER_H

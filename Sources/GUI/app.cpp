@@ -20,4 +20,9 @@ App::App(int& argc, char** argv, ContentManager* mngr) : QApplication(argc, argv
     main->show();
 }
 
-App::~App() { delete main; qDebug() << "App distrutta"; }
+App::~App() { 
+    manager = nullptr;
+    delete main;
+    main = nullptr;
+    qDebug() << "----- DISTRUZIONE APP ----\n\nIndirizzo main : " << static_cast<void*>(main) << "\nIndirizzo manager : " << static_cast<void*>(manager) ; 
+}

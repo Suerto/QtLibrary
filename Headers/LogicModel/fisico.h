@@ -12,7 +12,8 @@ private:
     Copertina copertina;
     unsigned int pagine;
 public:
-    Fisico(string n = "", unsigned int a = 1970, Lingua l = Lingua::Indefinita, Copertina ca = Copertina::Indefinita, unsigned int p = 0);
+    Fisico(string n = "", unsigned int a = 1970, Lingua l = Lingua::Indefinita, 
+           Copertina ca = Copertina::Indefinita, unsigned int p = 0);
 
     string getCopertina() const;
     unsigned int getPagine() const;

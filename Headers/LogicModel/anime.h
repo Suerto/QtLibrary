@@ -15,7 +15,11 @@ private:
     Genere genere;
     static const unordered_map<const Genere, const string> MappaGeneri;
 public:
-    Anime(string n = "", unsigned int a = 1970, Lingua l = Lingua::Indefinita, Risoluzione res = Risoluzione::Indefinita, unsigned int d = 0, Cadenza ca = Cadenza::Indefinita, unsigned int ep = 0, unsigned int s = 0, bool sub = false, string prd = "", Genere g = Genere::Indefinito);
+    Anime(string n = "", unsigned int a = 1970, Lingua l = Lingua::Indefinita, 
+          Risoluzione res = Risoluzione::Indefinita, unsigned int d = 0, 
+          Cadenza ca = Cadenza::Indefinita, 
+          unsigned int ep = 0, unsigned int s = 0, bool sub = false, string prd = "", 
+          Genere g = Genere::Indefinito);
 
     unsigned int getEpisodi() const;
     unsigned int getStagioni() const;

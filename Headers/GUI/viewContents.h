@@ -22,12 +22,7 @@ private:
     QGridLayout* contentsLayout;
 public:
     ViewContents(vector<Contenuto*> res, QWidget* parent = nullptr);
-    //Dovrà sicuramente ricevere un vettore di contenuti per poter creare la
-    //griglia, successivamente sarà necessario un visitor che prende i contenuti
-    //e crea un Filters adatto ponendo gli attributi esattamente come sono nel contenuto
-    //
-    //Successivamente dovrò fare in modo che siano in modalità non edit e valutare
-    //l'ipotesi di aggiungere
+    ~ViewContents();
 public slots :
     void bloccaContenuti(ContentViewer* contenuto);
     void ripristinaContenuto();
@@ -35,7 +30,8 @@ public slots :
         const unordered_map<string, string>& attributi);
 signals:
     void eliminaOggetto(const int& index, const unordered_map<string, string>& attributi);
-    void modificaOggetto(const int& index, const unordered_map<string, string>& original, const unordered_map<string, string>& modifiche);
+    void modificaOggetto(const int& index, const unordered_map<string, string>& original, 
+            const unordered_map<string, string>& modifiche);
 };
 
 #endif //VIEW_CONTENTS_H

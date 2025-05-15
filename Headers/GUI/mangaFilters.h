@@ -36,6 +36,7 @@ public:
     virtual void setAttributes(const unordered_map<string, string>& attributes)
                                 override;
     virtual void accept(GuiVisitor* visitor) const override;
+    virtual ~MangaFilters() override;
 };
 
 #endif //MANGAFILTERS_H

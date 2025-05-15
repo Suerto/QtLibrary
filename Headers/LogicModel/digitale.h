@@ -11,7 +11,8 @@ private:
     unsigned int durata;
     static const unordered_map<const Risoluzione, const string> MappaRisoluzioni;
 public:
-    Digitale(string n = "", unsigned int a = 1970, Lingua l = Lingua::Indefinita, Risoluzione res = Risoluzione::Indefinita, unsigned int dur = 0);
+    Digitale(string n = "", unsigned int a = 1970, Lingua l = Lingua::Indefinita,
+             Risoluzione res = Risoluzione::Indefinita, unsigned int dur = 0);
 
     string getRisoluzione() const;
     unsigned int getDurata() const;

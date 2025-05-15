@@ -28,7 +28,8 @@ unordered_map<string, string> MangaFilters::raccogliDati() const {
     unordered_map<string, string> parametri;
 
     parametri.insert({"Anno", std::to_string(year->value())});
-    (language->currentText().toStdString()).empty() ? parametri.insert({"Lingua", "Indefinita"}) : parametri.insert({"Lingua", language->currentText().toStdString()});
+    (language->currentText().toStdString()).empty() ? parametri.insert({"Lingua",
+     "Indefinita"}) : parametri.insert({"Lingua", language->currentText().toStdString()});
     
     //Fisico
     (cover->currentText().toStdString()).empty() ? parametri.insert({"Copertina", "Indefinita"}) : parametri.insert({"Copertina", cover->currentText().toStdString()});
@@ -157,3 +158,5 @@ void MangaFilters::setAttributes(const unordered_map<string, string>& attributes
 void MangaFilters::accept(GuiVisitor* visitor) const {
     visitor->visit(*this);
 }
+
+MangaFilters::~MangaFilters() = default;

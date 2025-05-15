@@ -13,7 +13,9 @@ private:
     string publisher;
     Genere genere;
 public:
-    Libro(string n = "", unsigned int a = 0, Lingua l = Lingua::Indefinita, Copertina c = Copertina::Indefinita, unsigned int np = 0, string au = "", string ed = "", string pu = "", Genere g = Genere::Indefinito);
+    Libro(string n = "", unsigned int a = 0, Lingua l = Lingua::Indefinita, 
+          Copertina c = Copertina::Indefinita, unsigned int np = 0, 
+          string au = "", string ed = "", string pu = "", Genere g = Genere::Indefinito);
 
     string getAutore() const;
     string getEditore() const;

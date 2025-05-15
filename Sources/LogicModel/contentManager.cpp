@@ -57,6 +57,7 @@ vector<Contenuto*> ContentManager::cercaPerTitolo(const string& title) const {
 }
 
 void ContentManager::eliminaContenuto(const int& index, const unordered_map<string, string>& attributi) {
+    qDebug() << "Ingresso in ContentManager::eliminaContenuto() avvenuto";
     for(auto it = memoria[index].begin(); it != memoria[index].end(); ++it) {
         CheckVisitor visitor(attributi);
         qDebug() << "Memoria pre-eliminazione : " << memoria[index].size();

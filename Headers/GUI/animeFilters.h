@@ -38,6 +38,7 @@ public:
     virtual void setModifiable(const bool& mdf) override;
     virtual void setAttributes(const unordered_map<string, string>& attributes) override;
     virtual void accept(GuiVisitor* visitor) const override;
+    virtual ~AnimeFilters() override;
 };
 
 #endif //ANIMEFILTERS_H

@@ -13,7 +13,12 @@ using std::vector;
 
 class Contenuto {
 public:
-    enum Lingua { Indefinita, Italiano, Inglese, Tedesco, Francese, Giapponese };
+    enum Lingua { Indefinita,
+                  Italiano, 
+                  Inglese, 
+                  Tedesco, 
+                  Francese, 
+                  Giapponese };
 protected:
     static const unordered_map<const Contenuto::Lingua, const string> MappaLingue;
 private:

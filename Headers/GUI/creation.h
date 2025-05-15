@@ -11,6 +11,7 @@ private:
 public:
     Creation(QWidget* parent = nullptr, ContentManager* mngr = nullptr);
     bool checkMap(const std::unordered_map<string, string>& map) const;
+    virtual ~Creation() override;
 public slots:
     void startCreation();
     void mostraFiltro(int id) override;

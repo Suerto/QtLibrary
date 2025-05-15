@@ -1,4 +1,5 @@
 #include "../../Headers/GUI/research.h"
+#include "qglobal.h"
 #include "qnamespace.h"
 #include "qwidget.h"
 
@@ -20,11 +21,19 @@ void Research::showResults(vector<Contenuto*> res) {
     results = new ViewContents(res, this);
     results->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     researchLayout->addWidget(results);
+    
 
     connect(results, &ViewContents::eliminaOggetto, this, [this](const int& index, const unordered_map<string, string>& attributi) {
+            qDebug() << "Ingresso in Research::eliminaContenuto() avvenuta";
+            qDebug() << "Invocazione di manager->eliminaContenuto() avvenuta";
             manager->eliminaContenuto(index, attributi);
+            qDebug() << "Ritorno da eliminaContenuto avvenuto, il problema non è in Research!";
             });
     connect(results, &ViewContents::modificaOggetto, this, [this](const int& index, const unordered_map<string, string>& original, const unordered_map<string, string>& modifiche) {
             manager->modificaContenuto(index, original, modifiche);
             });
+}
+
+Research::~Research() {
+    manager = nullptr;
 }

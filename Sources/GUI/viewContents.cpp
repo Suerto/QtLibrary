@@ -48,13 +48,17 @@ void ViewContents::ripristinaContenuto() {
     }
 }
 
-void ViewContents::eliminaContenuto(ContentViewer* contenuto, const int& index, 
+void ViewContents::eliminaContenuto(ContentViewer* contenuto, const int& index,
         const unordered_map<string, string>& attributi) {
+   qDebug() << "Ingresso in ViewContents::eliminaContenuto() avvenuta";
    for(std::size_t i = 0; i < contentsWidgets.size(); ++i) {
         if (contenuto == contentsWidgets[i]) {
             qDebug() << QString::fromStdString("Pre-eliminazione") << contentsWidgets.size();
             contentsLayout->removeWidget(contenuto); 
+            qDebug() << "Contenuto rimosso dal contentLayout";
+            qDebug() << "Emit di eliminaOggetto avvenuta";
             emit eliminaOggetto(index, attributi);
+            qDebug() << "Ritorno da eliminaOggetto avvenuto. Eliminazione di contenuto : " << static_cast<void*>(contenuto);
             delete contenuto;
             qDebug() << "Delete di contenuto fatta : " << static_cast<void*>(contenuto);
             contentsWidgets.erase(contentsWidgets.begin() + i);
@@ -80,4 +84,9 @@ void ViewContents::eliminaContenuto(ContentViewer* contenuto, const int& index,
        }
    }
 
+}
+
+ViewContents::~ViewContents() {
+    for(ContentViewer* content : contentsWidgets) delete content;
+    contentsWidgets.clear();
 }

@@ -6,7 +6,14 @@
 
 class Film : public Digitale {
 public:
-    enum Genere { Horror, Thriller, Action, Comedy, Guerra, Autobiografico, Romantico, Indefinito };
+    enum Genere { Horror,
+                  Thriller, 
+                  Action, 
+                  Comedy, 
+                  Guerra, 
+                  Autobiografico, 
+                  Romantico, 
+                  Indefinito };
 private:
     static const unordered_map<const Genere, const string> MappaGeneri;
     string regista;
@@ -14,7 +21,10 @@ private:
     string producer;
     Genere genere;
 public:
-    Film(string n = "", unsigned int a = 1970, Lingua l = Lingua::Indefinita, Risoluzione res = Risoluzione::Indefinita, unsigned int dur = 0, string rgs = "", string prd = "", string cmp = "", Genere g = Genere::Indefinito);
+    Film(string n = "", unsigned int a = 1970, Lingua l = Lingua::Indefinita,
+         Risoluzione res = Risoluzione::Indefinita, unsigned int dur = 0, 
+         string rgs = "", string prd = "", string cmp = "",
+         Genere g = Genere::Indefinito);
     
     string getRegista() const;
     string getComposer() const;

@@ -1,6 +1,6 @@
 #include "../../Headers/GUI/search.h"
 
-Search::Search(QWidget* parent, ContentManager* mngr) : MainWidget(parent), manager(mngr), advancedResearchButton(new QCheckBox("Ricerca Avanzata", this)), ricerca(new QPushButton("Avvia Ricerca", this)) {   
+Search::Search(QWidget* parent, ContentManager* mngr) : MainWidget(parent, mngr), advancedResearchButton(new QCheckBox("Ricerca Avanzata", this)), ricerca(new QPushButton("Avvia Ricerca", this)) {   
     ricerca->setFixedSize(50, 50);
     titleLayout->addWidget(ricerca);
     topLayout->addWidget(advancedResearchButton);
@@ -14,7 +14,6 @@ void Search::advancedResearch(bool checked) {
     if(checked) {
         pulsantiera->setVisible(true);
         
-        qDebug() << tipologia->checkedId();
         if(tipologia->checkedId() != -1) filtri->setVisible(true);
         connect(tipologia, &QButtonGroup::idToggled, this, &Search::mostraFiltro);
     }
@@ -34,8 +33,6 @@ void Search::mostraFiltro(int id) {
 }
 
 void Search::startSearch() {
-    //Identificare a chi dover passare il vettore dei contenuti :
-    //  O alla MainWindow, però converrebbe fosse un widget legato alla sezione di Ricerca
     if(titolo->text().toStdString().empty()) {
         ErrorNoTitle error("Ricerca", this);
         error.exec();
@@ -44,9 +41,7 @@ void Search::startSearch() {
         const string& title = titolo->text().toStdString();
         vector<Contenuto*> res;
         if(!advancedResearchButton->isChecked()) {
-            qDebug() << "Ricerca Per Titolo Avviata";
             res = manager->cercaPerTitolo(title);
-            qDebug() << res.size();
         }
         else {
             unordered_map<string, string> parametri = qobject_cast<Filters*>(filtri->currentWidget())->raccogliDati();
@@ -61,3 +56,5 @@ void Search::startSearch() {
         else emit risultatiOttenuti(res);
     } 
 }
+
+Search::~Search() = default;

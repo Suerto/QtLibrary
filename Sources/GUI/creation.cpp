@@ -53,7 +53,16 @@ void Creation::startCreation() {
        else {
            CreationVisitor creator(parameters);
            //AGGIUNGERE NON POSSIBILITÀ DI CREARE DUPLICATI
-           manager->creaContenuto(filtri->currentIndex(), &creator);
+           if(manager->cercaContenuto(filtri->currentIndex(), parameters).size() != 0) {
+                    //definire una classe sia per la creazione avvenuta che per
+                    //la copia trovata
+                    //ErrorCopy error("Copia dupplicata", this);
+                    //error.exec();
+           }
+           else {
+               manager->creaContenuto(filtri->currentIndex(), &creator);
+               qDebug() << "Contenuto creato in memoria \n\n";  
+           }
        }
    }
    else {
@@ -61,3 +70,5 @@ void Creation::startCreation() {
        error.exec();        
    }
 }
+
+Creation::~Creation() = default;

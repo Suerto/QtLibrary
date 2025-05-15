@@ -84,3 +84,7 @@ MainWidget::MainWidget(QWidget* parent, ContentManager* mngr) : QWidget(parent),
 void MainWidget::ripristinaFiltri() {
    qobject_cast<Filters*>(filtri->currentWidget())->reset();
 }
+
+MainWidget::~MainWidget() {
+    manager = nullptr;
+}

@@ -21,6 +21,8 @@ private:
     QAction* creation;
 public: 
     MainWindow(QWidget* parent = nullptr, ContentManager* mngr = nullptr);
+
+    ~MainWindow();
 private slots :
     void showSearching();
     void showCreation();

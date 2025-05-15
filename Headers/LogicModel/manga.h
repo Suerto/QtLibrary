@@ -15,7 +15,11 @@ private:
     unsigned int capitoli;
     Genere genere;
 public: 
-    Manga(string n = "", unsigned int a = 0, Lingua l = Lingua::Indefinita, Copertina co = Copertina::Indefinita, unsigned int p = 0, Periodico::Cadenza ca = Periodico::Cadenza::Indefinita, string m = "", string ed = "", unsigned int cp = 0, Genere g = Genere::Indefinito);
+    Manga(string n = "", unsigned int a = 0, Lingua l = Lingua::Indefinita,
+          Copertina co = Copertina::Indefinita, unsigned int p = 0, 
+          Periodico::Cadenza ca = Periodico::Cadenza::Indefinita, 
+          string m = "", string ed = "", unsigned int cp = 0, 
+          Genere g = Genere::Indefinito);
 
     string getMangaka() const;
     string getEditore() const;
