@@ -35,6 +35,16 @@ void Contenuto::setLingua(const string& lng) {
     lingua = Contenuto::Lingua::Indefinita;
 }
 
+unordered_map<string, string> Contenuto::fromObjectToMap() const {
+    unordered_map<string, string> attributi;
+
+    attributi.insert({"Titolo", getNome()});
+    attributi.insert({"Anno", std::to_string(getAnno())});
+    attributi.insert({"Lingua", getLingua()});
+
+    return attributi;
+}
+
 const unordered_map<const Contenuto::Lingua, const string> Contenuto::getMappaLingue() { return MappaLingue; }
 
 Contenuto::~Contenuto() = default;

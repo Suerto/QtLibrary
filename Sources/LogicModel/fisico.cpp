@@ -31,4 +31,13 @@ void Fisico::setCopertina(const string& cp) {
 
 void Fisico::setPagine(const unsigned int& pg) { pagine = pg; }
 
+unordered_map<string, string> Fisico::fromObjectToMap() const {
+    unordered_map<string, string> attributi = Contenuto::fromObjectToMap();
+
+    attributi.insert({"Copertina", getCopertina()});
+    attributi.insert({"Pagine", std::to_string(getPagine())});
+ 
+    return attributi;
+}
+
 unordered_map<const Fisico::Copertina, const string> Fisico::getMappaCopertine() { return MappaCopertine; }

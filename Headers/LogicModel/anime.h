@@ -32,7 +32,8 @@ public:
     void setSubtitle(const bool& sub);
     void setProducer(const string& prd);
     void setGenere(const string& gnr);
-
+    
+    virtual unordered_map<string, string> fromObjectToMap() const override;
     virtual void accept(Visitors* visitor) override;
 
     static const unordered_map<const Genere, const string> getMappaGeneri();

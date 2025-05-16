@@ -1,6 +1,7 @@
 #ifndef CONTENT_MANAGER_H
 #define CONTENT_MANAGER_H
 
+#include <string>
 #include <array>
 #include <vector>
 #include <functional>
@@ -15,9 +16,11 @@
 using std::vector;
 using std::array;
 using std::function;
+using std::string;
 
 class ContentManager {
 private:
+    array<string, 4> json;
     array<vector<Contenuto*>, 4> memoria;
     static unordered_map<int, std::function<Contenuto*()>> creatore;
 public:
@@ -38,6 +41,8 @@ public:
     void modificaContenuto(const int& index,
                            const unordered_map<string, string>& original, 
                            const unordered_map<string, string>& modifiche);
+
+    void uploadContenuti();
 };
 
 #endif //CONTENT_MANAGER_H

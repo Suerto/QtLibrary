@@ -36,6 +36,7 @@ public:
     void setAnno(const unsigned int& an);
     void setLingua(const string& lng);
     
+    virtual unordered_map<string, string> fromObjectToMap() const;
     virtual void accept(Visitors* visitor) = 0;
 
     static const unordered_map<const Contenuto::Lingua, const string> getMappaLingue(); 

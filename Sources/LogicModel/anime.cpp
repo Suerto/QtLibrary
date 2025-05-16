@@ -1,4 +1,5 @@
 #include "../../Headers/LogicModel/anime.h"
+#include <string>
 
 const unordered_map<const Anime::Genere, const string> Anime::MappaGeneri = {
     { Anime::Genere::Isekai, "Isekai" },
@@ -59,3 +60,17 @@ void Anime::accept(Visitors* visitor) {
 }
 
 const unordered_map<const Anime::Genere, const string> Anime::getMappaGeneri() { return MappaGeneri; }
+
+unordered_map<string, string> Anime::fromObjectToMap() const {
+    unordered_map<string, string> attributi = Digitale::fromObjectToMap();
+
+    attributi.insert({"Cadenza", getCadenza()});
+    
+    attributi.insert({"Episodi", std::to_string(getEpisodi())});
+    attributi.insert({"Stagioni", std::to_string(getStagioni())});
+    attributi.insert({"Sottotitolato", std::to_string(isSubtitled())});
+    attributi.insert({"Producer", getProducer()});
+    attributi.insert({"Genere", getGenere()});
+
+    return attributi;
+}

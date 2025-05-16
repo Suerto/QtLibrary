@@ -47,4 +47,17 @@ void Manga::accept(Visitors* visitor) {
     visitor->visit(*this);
 }
 
+unordered_map<string, string> Manga::fromObjectToMap() const {
+    unordered_map<string, string> attributi = Fisico::fromObjectToMap();
+    
+    attributi.insert({"Cadenza", getCadenza()});
+
+    attributi.insert({"Mangaka", getMangaka()});
+    attributi.insert({"Editore", getEditore()});
+    attributi.insert({"Capitoli", std::to_string(getCapitoli())});
+    attributi.insert({"Genere", getGenere()});
+
+    return attributi;
+}
+
 const unordered_map<const Manga::Genere, const string> Manga::getMappaGeneri() { return MappaGeneri; }

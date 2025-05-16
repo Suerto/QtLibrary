@@ -47,4 +47,15 @@ void Libro::accept(Visitors* visitor) {
     visitor->visit(*this);
 }
 
+unordered_map<string, string> Libro::fromObjectToMap() const {
+    unordered_map<string, string> attributi = Fisico::fromObjectToMap();
+
+    attributi.insert({"Autore", getAutore()});
+    attributi.insert({"Editore", getEditore()});
+    attributi.insert({"Publisher", getPublisher()});
+    attributi.insert({"Genere", getGenere()});
+
+    return attributi;
+}
+
 const unordered_map<const Libro::Genere, const string> Libro::getMappaGeneri() { return MappaGeneri; }

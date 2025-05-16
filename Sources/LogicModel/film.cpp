@@ -46,4 +46,15 @@ void Film::accept(Visitors* visitor) {
     visitor->visit(*this);
 }
 
+unordered_map<string, string> Film::fromObjectToMap() const {
+    unordered_map<string, string> attributi = Digitale::fromObjectToMap();
+
+    attributi.insert({"Regista", getRegista()});
+    attributi.insert({"Compositore", getComposer()});
+    attributi.insert({"Producer", getProducer()});
+    attributi.insert({"Genere", getGenere()});
+
+    return attributi;
+}
+
 const unordered_map<const Film::Genere, const string> Film::getMappaGeneri() { return MappaGeneri; }

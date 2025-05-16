@@ -21,6 +21,7 @@ public:
     void setCopertina(const string& co);
     void setPagine(const unsigned int& pg);
 
+    virtual unordered_map<string, string> fromObjectToMap() const override;
     static unordered_map<const Copertina, const string> getMappaCopertine();
 };
 

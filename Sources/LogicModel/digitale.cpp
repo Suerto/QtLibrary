@@ -30,4 +30,13 @@ void Digitale::setRisoluzione(const string& res) {
 
 void Digitale::setDurata(const unsigned int& dur) { durata = dur; }
 
+unordered_map<string, string> Digitale::fromObjectToMap() const {
+    unordered_map<string, string> attributi = Contenuto::fromObjectToMap();
+
+    attributi.insert({"Risoluzione", getRisoluzione()});
+    attributi.insert({"Durata", std::to_string(getDurata())});
+
+    return attributi;
+}
+
 const unordered_map<const Digitale::Risoluzione, const string> Digitale::getMappaRisoluzioni() { return MappaRisoluzioni; }
