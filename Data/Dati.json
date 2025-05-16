@@ -37,10 +37,6 @@
     ],
     "Generi Anime": [
         {
-            "enum": 0,
-            "nome": "Indefinito"
-        },
-        {
             "enum": 4,
             "nome": "Mecha"
         },
@@ -137,10 +133,6 @@
     ],
     "Lingue": [
         {
-            "enum": 6,
-            "nome": "Mandarino"
-        },
-        {
             "enum": 5,
             "nome": "Giapponese"
         },
@@ -159,10 +151,6 @@
         {
             "enum": 1,
             "nome": "Italiano"
-        },
-        {
-            "enum": 0,
-            "nome": "Indefinita"
         }
     ],
     "Risoluzioni": [
