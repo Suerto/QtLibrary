@@ -21,8 +21,7 @@ App::App(int& argc, char** argv, ContentManager* mngr) : QApplication(argc, argv
 }
 
 App::~App() { 
-    manager = nullptr;
     delete main;
     main = nullptr;
-    qDebug() << "----- DISTRUZIONE APP ----\n\nIndirizzo main : " << static_cast<void*>(main) << "\nIndirizzo manager : " << static_cast<void*>(manager) ; 
+    manager = nullptr;
 }

@@ -136,8 +136,4 @@ void MainWindow::showCreation() {
     }
 }
 
-MainWindow::~MainWindow() {
-    qDebug() << "\n\n---- DISTRUZIONE MAINWINDOW ----\n\n";
-    manager = nullptr;
-    qDebug() << "indirizzo manager : " << static_cast<void*>(manager) << "\n\n";
-}
+MainWindow::~MainWindow() {}

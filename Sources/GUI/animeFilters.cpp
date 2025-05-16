@@ -162,7 +162,7 @@ void AnimeFilters::setAttributes(const unordered_map<string, string>& attributes
     setProducer(QString::fromStdString(attributes.find("Producer")->second));
     setEpisodes(std::stoi(attributes.find("Episodi")->second));
     setSeasons(std::stoi(attributes.find("Stagioni")->second));
-    setSubtitle(attributes.find("Sottotitolato")->second == "true" ? 1 : 0);
+    setSubtitle(attributes.find("Sottotitolato")->second == "true" ? true : false);
     setGenre(QString::fromStdString(attributes.find("Genere")->second));
 }
 
