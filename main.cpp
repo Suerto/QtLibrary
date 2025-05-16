@@ -3,6 +3,9 @@
 int main(int argc, char** argv) {
     ContentManager appManager;
     App app(argc, argv, &appManager);
-    return app.exec();
-    qDebug() << "Applicazione chiusa";
+    int end =  app.exec();
+    
+    appManager.uploadContenuti();
+
+    return end;
 }
