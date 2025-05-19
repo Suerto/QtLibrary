@@ -8,7 +8,7 @@ const unordered_map<const Contenuto::Lingua, const string> Contenuto::MappaLingu
     { Contenuto::Lingua::Giapponese, "Giapponese" },
 };
 
-Contenuto::Contenuto(string n, unsigned int a, Contenuto::Lingua l) : nome(n), anno(a), lingua(l) {}
+Contenuto::Contenuto(string n, unsigned int a, Contenuto::Lingua l, string ant) : nome(n), anno(a), lingua(l), anteprima(ant) {}
 
 string Contenuto::getNome() const { return nome; }
 
@@ -18,6 +18,8 @@ string Contenuto::getLingua() const {
     auto it = Contenuto::MappaLingue.find(lingua);
     return it != Contenuto::MappaLingue.end() ?  it->second : "Indefinita";
 }
+
+string Contenuto::getAnteprima() const { return anteprima; }
 
 void Contenuto::setNome(const string& nm) { nome = nm; }
 
@@ -35,12 +37,15 @@ void Contenuto::setLingua(const string& lng) {
     lingua = Contenuto::Lingua::Indefinita;
 }
 
+void Contenuto::setAnteprima(const string& ant) { anteprima = ant; }
+
 unordered_map<string, string> Contenuto::fromObjectToMap() const {
     unordered_map<string, string> attributi;
 
     attributi.insert({"Titolo", getNome()});
     attributi.insert({"Anno", std::to_string(getAnno())});
     attributi.insert({"Lingua", getLingua()});
+    attributi.insert({"Anteprima", getAnteprima()});
 
     return attributi;
 }

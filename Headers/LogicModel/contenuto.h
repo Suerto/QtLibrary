@@ -25,17 +25,20 @@ private:
     string nome;
     unsigned int anno;
     Lingua lingua;
+    string anteprima;
 public:   
-    Contenuto(string n = "", unsigned int a = 1970, Lingua l = Lingua::Indefinita);
+    Contenuto(string n = "", unsigned int a = 1970, Lingua l = Lingua::Indefinita, string ant = "");
 
     string getNome() const;
     unsigned int getAnno() const;
     string getLingua() const;
+    string getAnteprima() const;
 
     void setNome(const string& nm);
     void setAnno(const unsigned int& an);
     void setLingua(const string& lng);
-    
+    void setAnteprima(const string& ant);
+
     virtual unordered_map<string, string> fromObjectToMap() const;
     virtual void accept(Visitors* visitor) = 0;
 
