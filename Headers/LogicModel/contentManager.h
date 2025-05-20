@@ -43,6 +43,8 @@ public:
                            const unordered_map<string, string>& modifiche);
 
     void uploadContenuti();
+
+    bool controllaDuplicato(const int& index, const unordered_map<string, string>& map) const;
 };
 
 #endif //CONTENT_MANAGER_H
