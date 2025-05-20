@@ -20,14 +20,12 @@ using std::vector;
 
 class JsonHandler {
 public:
-    //fix necessario per poter salvare tutte le modifiche e aggiungere elementi
     template <class T>
     static void saveEnumToJson(const unordered_map<const T, const string>& map, const QString& filePath, const QString& key) {
         QFile file(filePath);
     
         QJsonObject root;
     
-        // Se il file esiste e contiene dati, leggili
         if (file.exists() && file.open(QIODevice::ReadOnly)) {
             QByteArray data = file.readAll();
             file.close();
@@ -37,7 +35,6 @@ public:
                 root = existingDoc.object();
         }
     
-        // Costruisci l'array per il nuovo enum
         QJsonArray array;
         for (const auto& [type, name] : map) {
             QJsonObject obj;
@@ -46,10 +43,8 @@ public:
             array.append(obj);
         }
     
-        // Sovrascrivi (o aggiungi) la chiave specifica
         root[key] = array;
     
-        // Salva tutto nel file
         if (file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
             QJsonDocument doc(root);
             file.write(doc.toJson(QJsonDocument::Indented));
@@ -78,7 +73,7 @@ public:
 
         QJsonArray array = root[key].toArray();
 
-        comboBox->clear(); // Pulisce prima eventuali elementi precedenti
+        comboBox->clear();
 
         for (const auto& value : array) {
             if (value.isObject()) {
