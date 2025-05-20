@@ -6,5 +6,5 @@ DuplicateVerifier::DuplicateVerifier(ContentManager* mngr) : manager(mngr) {
 }
 
 bool DuplicateVerifier::isThereADuplicate(const int& index, const unordered_map<string, string>& map) const {
-    return manager->cercaContenuto(index, map).size() != 0;
+    return manager->controllaDuplicato(index, map);
 }

@@ -1,8 +1,8 @@
 #include "../../Headers/GUI/viewContents.h"
 #include "qglobal.h"
 
-ViewContents::ViewContents(std::vector<Contenuto*> result, QWidget* parent)
-    : QWidget(parent), contentsLayout(new QGridLayout()) // non this
+ViewContents::ViewContents(DuplicateVerifier* vrfr, std::vector<Contenuto*> result, QWidget* parent)
+    : QWidget(parent), verifier(vrfr), contentsLayout(new QGridLayout()) // non this
 {
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
@@ -33,6 +33,7 @@ ViewContents::ViewContents(std::vector<Contenuto*> result, QWidget* parent)
         FilterVisitor visitor;
         content->accept(&visitor);
         ContentViewer* filtro = new ContentViewer(
+            verifier,
             QString::fromStdString(content->getNome()),
             QString::fromStdString(visitor.getType()),
             visitor.getFilters());
@@ -61,6 +62,10 @@ ViewContents::ViewContents(std::vector<Contenuto*> result, QWidget* parent)
 
     setStyleSheet(R"(
         background-color : #426585;
+
+        ContentViewer {
+            border : 1px solid red;
+        }
     )"); 
 }
 

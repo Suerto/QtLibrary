@@ -4,6 +4,7 @@
 MainWidget::MainWidget(QWidget* parent, ContentManager* mngr) : QWidget(parent), manager(mngr), mainLayout(new QVBoxLayout(this)), topLayout(new QVBoxLayout()), titleLayout(new QHBoxLayout()), titolo(new QLineEdit(this)), reset(new QPushButton("Ripristina Filtri", this)), filtersButtonsLayout(new QHBoxLayout()), pulsantiera(new QWidget(this)), tipologia(new QButtonGroup(pulsantiera)), filtri(new QStackedWidget(this)) {
     titolo->setPlaceholderText("Inserire titolo del Contenuto : ");
     titolo->setFixedSize(300, 50);
+    titolo->setStyleSheet("QLineEdit::placeholder { color : white; }");
     titleLayout->addWidget(titolo);
     
     reset->setFixedSize(50, 50);
@@ -77,6 +78,11 @@ MainWidget::MainWidget(QWidget* parent, ContentManager* mngr) : QWidget(parent),
             color : white;
             font-size : 13px;
             font-family : Fira Code;
+        }
+
+        QLineEdit {
+            background-color: #66CCCC;
+            color : white;
         }
     )");
 }

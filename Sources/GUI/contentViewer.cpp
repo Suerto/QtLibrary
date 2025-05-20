@@ -1,7 +1,7 @@
 #include "../../Headers/GUI/contentViewer.h"
 #include "qglobal.h"
 
-ContentViewer::ContentViewer(const QString& ttl, const QString& tp, Filters* flts, QWidget* parent) : QWidget(parent), picture(new QLabel(this)), title(new QLineEdit(this)), type(new QLineEdit(this)), dettagli(flts), modify(new QPushButton("Modifica", this)), remove(new QPushButton("Elimina", this)), save(new QPushButton("Salva", this)), cancel(new QPushButton("Annulla", this)), mainLayout(new QHBoxLayout()), contentLayout(new QVBoxLayout()), buttonsLayout(new QHBoxLayout()){
+ContentViewer::ContentViewer(DuplicateVerifier* vrfr, const QString& ttl, const QString& tp, Filters* flts, QWidget* parent) : QWidget(parent), verifier(vrfr), picture(new QLabel(this)), title(new QLineEdit(this)), type(new QLineEdit(this)), dettagli(flts), modify(new QPushButton("Modifica", this)), remove(new QPushButton("Elimina", this)), save(new QPushButton("Salva", this)), cancel(new QPushButton("Annulla", this)), mainLayout(new QHBoxLayout()), contentLayout(new QVBoxLayout()), buttonsLayout(new QHBoxLayout()){
     picture->setFixedSize(240, 330);  // Larghezza fissa, altezza come tutto il widget
     picture->setScaledContents(true);
     picture->setPixmap(QPixmap(QString::fromStdString(dettagli->raccogliDati().find("Anteprima")->second)));
@@ -42,7 +42,6 @@ ContentViewer::ContentViewer(const QString& ttl, const QString& tp, Filters* flt
     connect(modify, &QPushButton::clicked, this, &ContentViewer::modifica);
     connect(remove, &QPushButton::clicked, this, &ContentViewer::rimuovi);
 
-    setStyleSheet("ContentViewer { border: 2px solid black; border-radius: 8px;}");
 }
 
 void ContentViewer::rimuovi() {
@@ -74,40 +73,52 @@ void ContentViewer::modifica() {
 
     abilitaPulsantiReadOnly(false);
     connect(cancel, &QPushButton::clicked, this, [original, this]() {
-            dettagli->setModifiable(false);
+        dettagli->setModifiable(false);
 
-            emit modificaAnnullata();
-            dettagli->setModifiable(false);
-            abilitaPulsantiReadOnly(true);
-            restoreFilter(original);
-            });
+        emit modificaAnnullata();
+        dettagli->setModifiable(false);
+        abilitaPulsantiReadOnly(true);
+        restoreFilter(original);
+    });
 
     connect(save, &QPushButton::clicked, this, [original, this]() {
-            unordered_map<string, string> modifiche = dettagli->raccogliDati();
-            modifiche.insert({"Titolo", title->text().toStdString()});
-            if(!checkMap(modifiche)) {
+        unordered_map<string, string> modifiche = dettagli->raccogliDati();
+        modifiche.insert({"Titolo", title->text().toStdString()});
+        //check che non ci siano attributi vuoti
+        if(!checkMap(modifiche)) {
                 ErrorMissing error(this, "Modifica" , title->text().toStdString());
                 error.exec();
-            }
+                emit modificaAnnullata();
+                dettagli->setModifiable(false);
+                abilitaPulsantiReadOnly(true);
+                restoreFilter(original);
+        }
 
-            if(original == modifiche) { 
+        else if(original == modifiche) { 
                 emit modificaAnnullata();
                 dettagli->setModifiable(false);
                 abilitaPulsantiReadOnly(true);
                 restoreFilter(original);
             }
 
-            else {
+        else {
             IndexVisitor visitor;
             dettagli->accept(&visitor);
-
+            if(verifier->isThereADuplicate(visitor.getIndex(), modifiche)) {
+                qDebug() << "Trovato un duplicato, modifica non possibile";
+                dettagli->setModifiable(false);
+                abilitaPulsantiReadOnly(true);
+                restoreFilter(original);
+            }    
+            
+            else {
             emit modificaConfermata(visitor.getIndex(), original, modifiche);
             dettagli->setModifiable(false);
             abilitaPulsantiReadOnly(true);
             restoreFilter(modifiche);
             picture->setPixmap(QPixmap(QString::fromStdString(dettagli->raccogliDati().find("Anteprima")->second)));
-            //emit refresh();
             }
+        }
             });
 }
 
@@ -127,7 +138,6 @@ bool ContentViewer::checkMap(const unordered_map<string, string>& map) const {
     for(const auto&[T, V] : map) {
         if(V == "Indefinito" || V == "Indefinita" || (V == "0" && T != "Sottotitolato")) {
             return false;
-            break;
         }
     }
     return true;

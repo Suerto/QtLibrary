@@ -5,6 +5,18 @@ ErrorNoTitle::ErrorNoTitle(const string& mode, QWidget* parent) : ErrorStructure
     errorLayout->addWidget(confirm);
     
     connect(confirm, &QPushButton::clicked, this, &ErrorNoTitle::chiudiErrore);
+    setStyleSheet(R"(
+        QLabel {
+            color : white;
+            font-family : Fira Code;
+            font-size : 15px;
+        }
+
+        QDialog {
+            background-color: #848687;
+            border: 2px solid #0078D7;
+        }
+        )");
 }
 
 void ErrorNoTitle::chiudiErrore() { close(); }

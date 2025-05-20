@@ -14,13 +14,15 @@ void Research::showResults(vector<Contenuto*> res) {
     if(results) {
         delete results;
         results = nullptr;
+        delete verifier;
+        verifier = nullptr;
     }
-
-    results = new ViewContents(res, this);
+    
+    verifier = new DuplicateVerifier(manager);
+    results = new ViewContents(verifier, res, this);
     results->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     researchLayout->addWidget(results);
     
-
     connect(results, &ViewContents::eliminaOggetto, this, [this](const int& index, const unordered_map<string, string>& attributi) {
             manager->eliminaContenuto(index, attributi);
             });

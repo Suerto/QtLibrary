@@ -20,9 +20,11 @@ Filters::Filters(QWidget* parent) : QWidget(parent), pathImmagine("Data/Immagini
         QComboBox { 
             background-color : #ABADAB;  
         }
-
-        QCheckBox {
-            background-color : #F9F6EE;
+        QSpinBox { 
+            background-color : #ABADAB;  
+        }
+        QLineEdit { 
+            background-color : #ABADAB;  
         }
     )");
 

@@ -2,7 +2,7 @@
 
 ErrorChanging::ErrorChanging(QWidget* parent) : ErrorStructure(parent), action(new QButtonGroup(this)) { 
     text->setText("Attenzione! Così facendo verranno persi tutti i filtri inseriti. Si è sicuri di voler procedere?");
-    errorLayout->addWidget(text, Qt::AlignCenter);
+    //errorLayout->addWidget(text, Qt::AlignCenter);
 
     QPushButton* confirm = new QPushButton("Conferma ✅", this);
     action->addButton(confirm, 0);

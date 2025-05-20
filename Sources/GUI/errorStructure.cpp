@@ -5,9 +5,11 @@ ErrorStructure::ErrorStructure(QWidget* parent) : QDialog(parent), text(new QLab
 
     setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint);
     setModal(true);  // se vuoi bloccare l'interazione con altre finestre
-
+    
+    adjustSize();
     setStyleSheet(R"(
         QLabel {
+            color : white;
             font-family : Fira Code;
             font-size : 15px;
         }
