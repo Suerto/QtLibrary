@@ -8,14 +8,16 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 
+#include "duplicateVerifier.h"
 #include "genericFilters.h"
 #include "errorMissing.h"
 #include "indexVisitor.h"
-#include "../LogicModel/contenuto.h"
 
 class ContentViewer : public QWidget {
     Q_OBJECT 
 private:
+    DuplicateVerifier* verifier;
+    QLabel* picture;
     QLineEdit* title;
     QLineEdit* type;
     Filters* dettagli;
@@ -24,7 +26,8 @@ private:
     QPushButton* remove;
     QPushButton* save;
     QPushButton* cancel;
-
+    
+    QHBoxLayout* mainLayout;
     QVBoxLayout* contentLayout;
     QHBoxLayout* buttonsLayout;
 public:

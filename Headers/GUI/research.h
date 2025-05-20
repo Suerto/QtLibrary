@@ -7,7 +7,6 @@
 #include "viewContents.h"
 
 class Research : public QWidget {
-
 private:
     ContentManager* manager;
     QHBoxLayout* researchLayout;
