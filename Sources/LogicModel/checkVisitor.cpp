@@ -75,7 +75,6 @@ void CheckVisitor::visit(Libro& lib) {
             return;
         }
     }
-
     qDebug() << "Tutti gli attributi sono uguali/indefiniti";
 }
 

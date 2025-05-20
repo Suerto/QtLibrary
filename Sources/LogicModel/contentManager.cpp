@@ -45,13 +45,27 @@ vector<Contenuto*> ContentManager::cercaContenuto(const int& index, const unorde
     const string& title = map.find("Titolo")->second;
     for(Contenuto* element : memoria[index]) {
         CheckVisitor check(map);
-        qDebug() << QString::fromStdString(element->getNome());
         if(element->getNome().size() >= title.size() && std::equal(title.begin(), title.end(), element->getNome().begin(), [](char a, char b) { return std::tolower(a) == std::tolower(b);})) {
             element->accept(&check);
             if(check.isSimilar()) risultati.push_back(element);
         }
     }
     return risultati;
+}
+
+bool ContentManager::controllaDuplicato(const int& index, const unordered_map<string, string>& map) const {
+    CheckVisitor check(map);
+    
+    const string& title = map.find("Titolo")->second;
+    qDebug() << "Titolo " << QString::fromStdString(title);
+    for(Contenuto* element : memoria[index]) {
+        if(element->getNome() == title) {
+            qDebug() << "Trovato un contenuto con lo stesso titolo";
+            element->accept(&check);
+            if(check.isSimilar()) return true;
+        }
+    }
+    return false;
 }
 
 vector<Contenuto*> ContentManager::cercaPerTitolo(const string& title) const {
@@ -68,7 +82,7 @@ vector<Contenuto*> ContentManager::cercaPerTitolo(const string& title) const {
             ) risultati.push_back(content); 
         }
     }
-    qDebug() << risultati.size();
+
     return risultati;
 }
 
