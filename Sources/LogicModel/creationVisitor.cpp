@@ -78,8 +78,8 @@ void CreationVisitor::visit(Manga& mng) {
 
     // Genere
     it = parametri.find("Genere");
-        mng.setGenere(it->second);
-
+    mng.setGenere(it->second);
+    
     it = parametri.find("Anteprima");
     mng.setAnteprima(it->second);
 }
@@ -119,7 +119,7 @@ void CreationVisitor::visit(Film& flm) {
     // Genere
     it = parametri.find("Genere");
     flm.setGenere(it->second);
-
+    
     it = parametri.find("Anteprima");
     flm.setAnteprima(it->second);
 }
@@ -142,7 +142,6 @@ void CreationVisitor::visit(Anime& anm) {
     // Durata
     it = parametri.find("Durata");
     anm.setDurata(static_cast<unsigned int>(std::stoi(it->second)));
-    qDebug() << "Durata ok";
 
     // Cadenza
     it = parametri.find("Cadenza");
@@ -151,12 +150,10 @@ void CreationVisitor::visit(Anime& anm) {
     // Episodi
     it = parametri.find("Episodi");
     anm.setEpisodi(static_cast<unsigned int>(std::stoi(it->second)));
-    qDebug() << "Episodi ok";
 
     // Stagioni
     it = parametri.find("Stagioni");
     anm.setStagioni(static_cast<unsigned int>(std::stoi(it->second)));
-    qDebug() << "Stagioni ok";
     // Sottotitolato
     it = parametri.find("Sottotitolato");
     anm.setSubtitle(std::stoi(it->second));
@@ -168,7 +165,7 @@ void CreationVisitor::visit(Anime& anm) {
     // Genere
     it = parametri.find("Genere");
     anm.setGenere(it->second);
-
+    
     it = parametri.find("Anteprima");
     anm.setAnteprima(it->second);
 }

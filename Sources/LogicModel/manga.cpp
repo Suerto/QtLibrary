@@ -56,6 +56,7 @@ unordered_map<string, string> Manga::fromObjectToMap() const {
     attributi.insert({"Editore", getEditore()});
     attributi.insert({"Capitoli", std::to_string(getCapitoli())});
     attributi.insert({"Genere", getGenere()});
+    attributi.insert({"Anteprima", getAnteprima()});
 
     return attributi;
 }

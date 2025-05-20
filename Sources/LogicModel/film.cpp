@@ -53,7 +53,7 @@ unordered_map<string, string> Film::fromObjectToMap() const {
     attributi.insert({"Compositore", getComposer()});
     attributi.insert({"Producer", getProducer()});
     attributi.insert({"Genere", getGenere()});
-
+    attributi.insert({"Anteprima", getAnteprima()});
     return attributi;
 }
 

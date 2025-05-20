@@ -41,13 +41,12 @@ void ContentManager::salvaContenuto(const int& index, Contenuto* contenuto) {
 
 vector<Contenuto*> ContentManager::cercaContenuto(const int& index, const unordered_map<string, string>& map) const {
     vector<Contenuto*> risultati;
-    CheckVisitor check(map);
     
     const string& title = map.find("Titolo")->second;
     for(Contenuto* element : memoria[index]) {
-        if(element->getNome().size() >= title.size() && 
-           std::equal(title.begin(), title.end(), element->getNome().begin(), 
-           [](char a, char b) { return std::tolower(a) == std::tolower(b);})) {
+        CheckVisitor check(map);
+        qDebug() << QString::fromStdString(element->getNome());
+        if(element->getNome().size() >= title.size() && std::equal(title.begin(), title.end(), element->getNome().begin(), [](char a, char b) { return std::tolower(a) == std::tolower(b);})) {
             element->accept(&check);
             if(check.isSimilar()) risultati.push_back(element);
         }
@@ -69,7 +68,7 @@ vector<Contenuto*> ContentManager::cercaPerTitolo(const string& title) const {
             ) risultati.push_back(content); 
         }
     }
-
+    qDebug() << risultati.size();
     return risultati;
 }
 

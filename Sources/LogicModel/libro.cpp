@@ -54,7 +54,7 @@ unordered_map<string, string> Libro::fromObjectToMap() const {
     attributi.insert({"Editore", getEditore()});
     attributi.insert({"Publisher", getPublisher()});
     attributi.insert({"Genere", getGenere()});
-
+    attributi.insert({"Anteprima", getAnteprima()});
     return attributi;
 }
 
