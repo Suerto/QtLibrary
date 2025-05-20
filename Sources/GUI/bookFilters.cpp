@@ -1,5 +1,4 @@
 #include "../../Headers/GUI/bookFilters.h"
-#include <string>
 
 BookFilters::BookFilters(QWidget* parent) : Filters(parent), cover(new QComboBox(this)), pages(new QSpinBox(this)), author(new QLineEdit(this)), editor(new QLineEdit(this)), publisher(new QLineEdit(this)), genre(new QComboBox(this)) { 
     filtersLayout->addRow("Autore : ", author);
@@ -17,16 +16,16 @@ BookFilters::BookFilters(QWidget* parent) : Filters(parent), cover(new QComboBox
     filtersLayout->addRow("Copertina : ", cover);
 
     filtersLayout->addRow("Publisher : ", publisher);
-
+    
     reset();
 }
 
 unordered_map<string, string> BookFilters::raccogliDati() const {
-    unordered_map<string, string> parametri;
-    
+    unordered_map<string, string> parametri; 
     //Contenuto
     parametri.insert({"Anno", std::to_string(year->value())});
     (language->currentText().toStdString()).empty() ? parametri.insert({"Lingua", "Indefinita"}) : parametri.insert({"Lingua", language->currentText().toStdString()});
+    parametri.insert({"Anteprima", pathImmagine.toStdString()});
     
     //Fisico
     (cover->currentText().toStdString()).empty() ? parametri.insert({"Copertina", "Indefinita"}) : parametri.insert({"Copertina", cover->currentText().toStdString()});
@@ -44,12 +43,12 @@ unordered_map<string, string> BookFilters::raccogliDati() const {
 void BookFilters::reset() {
    Filters::reset();
     
-   author->clear();
-   editor->clear();
+   author->setText("");
+   editor->setText("");
    genre->setCurrentIndex(-1);
-   pages->clear();
+   pages->setValue(0);
    cover->setCurrentIndex(-1);
-   publisher->clear();
+   publisher->setText("");
 }
 
 void BookFilters::setCover(const QString& cvr) {

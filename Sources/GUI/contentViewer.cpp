@@ -1,7 +1,11 @@
 #include "../../Headers/GUI/contentViewer.h"
 #include "qglobal.h"
 
-ContentViewer::ContentViewer(const QString& ttl, const QString& tp, Filters* flts, QWidget* parent) : QWidget(parent), title(new QLineEdit(this)), type(new QLineEdit(this)), dettagli(flts), modify(new QPushButton("Modifica", this)), remove(new QPushButton("Elimina", this)), save(new QPushButton("Salva", this)), cancel(new QPushButton("Annulla", this)), contentLayout(new QVBoxLayout()), buttonsLayout(new QHBoxLayout()){
+ContentViewer::ContentViewer(const QString& ttl, const QString& tp, Filters* flts, QWidget* parent) : QWidget(parent), picture(new QLabel(this)), title(new QLineEdit(this)), type(new QLineEdit(this)), dettagli(flts), modify(new QPushButton("Modifica", this)), remove(new QPushButton("Elimina", this)), save(new QPushButton("Salva", this)), cancel(new QPushButton("Annulla", this)), mainLayout(new QHBoxLayout()), contentLayout(new QVBoxLayout()), buttonsLayout(new QHBoxLayout()){
+    picture->setFixedSize(215, 350);  // Larghezza fissa, altezza come tutto il widget
+    picture->setScaledContents(true);
+    picture->setPixmap(QPixmap(QString::fromStdString(dettagli->raccogliDati().find("Anteprima")->second)));
+
     title->setText(ttl);
     title->setAlignment(Qt::AlignCenter);
     title->setReadOnly(true);
@@ -25,28 +29,32 @@ ContentViewer::ContentViewer(const QString& ttl, const QString& tp, Filters* flt
     save->setVisible(false);
 
     contentLayout->addLayout(buttonsLayout);
-    
+   
+    mainLayout->addWidget(picture);
+    mainLayout->addLayout(contentLayout);
+    mainLayout->setSpacing(10);
+    mainLayout->setContentsMargins(10, 10, 10, 10);
     dettagli->setModifiable(false);
+
     dettagli->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-    setLayout(contentLayout);
+    setLayout(mainLayout);
 
     connect(modify, &QPushButton::clicked, this, &ContentViewer::modifica);
     connect(remove, &QPushButton::clicked, this, &ContentViewer::rimuovi);
+
+    setStyleSheet("ContentViewer { border: 2px solid black; border-radius: 8px;}");
 }
 
 void ContentViewer::rimuovi() {
-    qDebug() << "Ingresso in ContentViewer::rimuovi() avvenuta";
     IndexVisitor visitor;
-    qDebug() << "\nCreazione del visitor IndexVisitor avvenuta : " << static_cast<void*>(&visitor); 
     dettagli->accept(&visitor);
-    qDebug() << "\nAccept del visitor avvenuta. Indice trovato : " << visitor.getIndex();
     unordered_map<string, string> attributi = dettagli->raccogliDati();
-    qDebug() << "\nEmit di rimuoviContenuto avvenuta";
     emit rimuoviContenuto(this, visitor.getIndex(), attributi);
-    qDebug() << "Ritorno da rimuoviContenuto() avvenuto. Problema risolto";
 }
 
-void ContentViewer::restoreFilter(const unordered_map<string, string>& attributes) { dettagli->setAttributes(attributes); }
+void ContentViewer::restoreFilter(const unordered_map<string, string>& attributes) { 
+    dettagli->setAttributes(attributes); 
+}
 
 void ContentViewer::abilitaPulsantiReadOnly(const bool& rom) {
     remove->setVisible(rom);
@@ -59,9 +67,9 @@ void ContentViewer::abilitaPulsantiReadOnly(const bool& rom) {
 void ContentViewer::modifica() {
     emit modificaAvviata(this);
 
-    qDebug() << QString::fromStdString("Siamo nella modifica");
     std::unordered_map<string, string> original = dettagli->raccogliDati();
-
+    
+    original.insert({"Titolo", title->text().toStdString()});
     dettagli->setModifiable(true);
 
     abilitaPulsantiReadOnly(false);
@@ -75,25 +83,40 @@ void ContentViewer::modifica() {
             });
 
     connect(save, &QPushButton::clicked, this, [original, this]() {
-            qDebug() << "Siamo nella connect del save";
             unordered_map<string, string> modifiche = dettagli->raccogliDati();
             modifiche.insert({"Titolo", title->text().toStdString()});
             if(!checkMap(modifiche)) {
-            ErrorMissing error(this, "Modifica " , title->text().toStdString());
-            error.exec();
+                ErrorMissing error(this, "Modifica" , title->text().toStdString());
+                error.exec();
+            }
+            
+            qDebug() << "Attributi di Modifiche : ";
+            for(const auto&[T, V] : modifiche) {
+                qDebug() << QString::fromStdString(T) << " : " << QString::fromStdString(V);
+            }
+            qDebug() << "Attributi di Original : ";
+            for(const auto&[T, V] : modifiche) {
+                qDebug() << QString::fromStdString(T) << " : " << QString::fromStdString(V);
+            }
+            if(original == modifiche) { 
+                emit modificaAnnullata();
+                dettagli->setModifiable(false);
+                abilitaPulsantiReadOnly(true);
+                restoreFilter(original);
             }
 
             else {
             IndexVisitor visitor;
-
             dettagli->accept(&visitor);
+
             emit modificaConfermata(visitor.getIndex(), original, modifiche);
             dettagli->setModifiable(false);
             abilitaPulsantiReadOnly(true);
-            }
             restoreFilter(modifiche); 
+            }
             });
 }
+
 void ContentViewer::pulsantiModificaAttivi(const bool& rom) {
     remove->setVisible(rom);
     modify->setVisible(rom);
@@ -108,10 +131,11 @@ ContentViewer::~ContentViewer() {
 
 bool ContentViewer::checkMap(const unordered_map<string, string>& map) const {
     for(const auto&[T, V] : map) {
-        if(V == "Indefinito" || V == "Indefinita" || V == "0") {
+        if(V == "Indefinito" || V == "Indefinita" || (V == "0" && T != "Sottotitolato")) {
             return false;
             break;
         }
     }
     return true;
 }
+

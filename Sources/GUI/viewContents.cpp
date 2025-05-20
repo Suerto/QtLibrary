@@ -1,37 +1,67 @@
 #include "../../Headers/GUI/viewContents.h"
 #include "qglobal.h"
 
-ViewContents::ViewContents(std::vector<Contenuto*> result, QWidget* parent) : QWidget(parent), contentsLayout(new QGridLayout(this)) {
-    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed); // Larghezza espandibile, altezza fissa
+ViewContents::ViewContents(std::vector<Contenuto*> result, QWidget* parent)
+    : QWidget(parent), contentsLayout(new QGridLayout()) // non this
+{
+    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-    int widgetWidth = 350;
-    int containerWidth = parent->width() - 400;  // Ottieni larghezza disponibile
-    int colonne = std::max(1, containerWidth / widgetWidth);  // Calcola quante colonne
-    contentsLayout->setSpacing(5);
-    int col = 0, row = 0;
+    // Crea il contenitore centrale e il layout
+    QWidget* containerWidget = new QWidget(this);
+    containerWidget->setLayout(contentsLayout);
+
+    contentsLayout->setSpacing(10);   // spazio tra i widget
+    contentsLayout->setContentsMargins(10, 10, 10, 10);
+
+    QScrollArea* scrollArea = new QScrollArea(this);
+    scrollArea->setWidgetResizable(true);
+    scrollArea->setWidget(containerWidget); // container scrollabile
+
+    // Layout principale per ViewContents
+    QVBoxLayout* mainLayout = new QVBoxLayout(this);
+    mainLayout->addWidget(scrollArea);
+    setLayout(mainLayout);
+
+    // Calcolo colonne
+    int widgetWidth = 600;
+    int containerWidth = parent->width() - 200;
+    int colonne = std::max(1, containerWidth / widgetWidth);
+
+    int row = 0, col = 0;
+
     for (Contenuto* content : result) {
         FilterVisitor visitor;
         content->accept(&visitor);
-        ContentViewer* filtro = new ContentViewer(QString::fromStdString(content->getNome()), QString::fromStdString(visitor.getType()), visitor.getFilters());
-        
-        filtro->setFixedSize(widgetWidth, 350);  // Imposta la dimensione fissa del filtro
+        ContentViewer* filtro = new ContentViewer(
+            QString::fromStdString(content->getNome()),
+            QString::fromStdString(visitor.getType()),
+            visitor.getFilters());
+
+        filtro->setFixedSize(widgetWidth, 350);
+
         contentsLayout->addWidget(filtro, row, col);
+
         ++col;
         if (col >= colonne) {
             col = 0;
             ++row;
         }
-        
+
         contentsWidgets.push_back(filtro);
+
         connect(filtro, &ContentViewer::modificaAvviata, this, &ViewContents::bloccaContenuti);
         connect(filtro, &ContentViewer::modificaAnnullata, this, &ViewContents::ripristinaContenuto);
         connect(filtro, &ContentViewer::rimuoviContenuto, this, &ViewContents::eliminaContenuto);
-        
-        connect(filtro, &ContentViewer::modificaConfermata, this, [this](const int& index, const unordered_map<string, string> original, const unordered_map<string, string>& modifiche) {
+        connect(filtro, &ContentViewer::modificaConfermata, this,
+            [this](const int& index, const unordered_map<string, string> original, const unordered_map<string, string>& modifiche) {
                 emit modificaOggetto(index, original, modifiche);
-                });
+                ripristinaContenuto();
+            });
     }
-    setLayout(contentsLayout);
+
+    setStyleSheet(R"(
+        background-color : #426585;
+    )"); 
 }
 
 void ViewContents::bloccaContenuti(ContentViewer* contenuto) {
@@ -50,19 +80,12 @@ void ViewContents::ripristinaContenuto() {
 
 void ViewContents::eliminaContenuto(ContentViewer* contenuto, const int& index,
         const unordered_map<string, string>& attributi) {
-   qDebug() << "Ingresso in ViewContents::eliminaContenuto() avvenuta";
    for(std::size_t i = 0; i < contentsWidgets.size(); ++i) {
         if (contenuto == contentsWidgets[i]) {
-            qDebug() << QString::fromStdString("Pre-eliminazione") << contentsWidgets.size();
             contentsLayout->removeWidget(contenuto); 
-            qDebug() << "Contenuto rimosso dal contentLayout";
-            qDebug() << "Emit di eliminaOggetto avvenuta";
             emit eliminaOggetto(index, attributi);
-            qDebug() << "Ritorno da eliminaOggetto avvenuto. Eliminazione di contenuto : " << static_cast<void*>(contenuto);
             delete contenuto;
-            qDebug() << "Delete di contenuto fatta : " << static_cast<void*>(contenuto);
             contentsWidgets.erase(contentsWidgets.begin() + i);
-            qDebug() << QString::fromStdString("Post-eliminazione") << contentsWidgets.size();
             break; 
         }
    }     // Ricostruisci la griglia in modo compatto

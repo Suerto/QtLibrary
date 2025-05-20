@@ -1,5 +1,4 @@
 #include "../../Headers/GUI/animeFilters.h"
-#include <string>
 
 AnimeFilters::AnimeFilters(QWidget* parent) :Filters(parent), resolution(new QComboBox(this)), duration(new QSpinBox(this)), producer(new QLineEdit(this)), episodes(new QSpinBox(this)), seasons(new QSpinBox(this)), subtitled(new QCheckBox(this)), genre(new QComboBox(this)), cadence(new QComboBox(this)) {
    filtersLayout->addRow("Producer :", producer);
@@ -32,7 +31,8 @@ unordered_map<string, string> AnimeFilters::raccogliDati() const {
     //Contenuto
     parametri.insert({"Anno", std::to_string(year->value())});
     (language->currentText().toStdString()).empty() ? parametri.insert({"Lingua", "Indefinita"}) : parametri.insert({"Lingua", language->currentText().toStdString()});
-    
+    parametri.insert({"Anteprima", pathImmagine.toStdString()});
+
     //Digitale
     (resolution->currentText().toStdString()).empty() ? parametri.insert({"Risoluzione", "Indefinita"}) : parametri.insert({"Risoluzione", resolution->currentText().toStdString()});
     parametri.insert({"Durata", std::to_string(duration->value())});
@@ -43,7 +43,7 @@ unordered_map<string, string> AnimeFilters::raccogliDati() const {
     //Anime
     parametri.insert({"Episodi", std::to_string(episodes->value())});
     parametri.insert({"Stagioni", std::to_string(seasons->value())});
-    parametri.insert({"Sottotitolato", subtitled->isChecked() ? "true" : "false"});
+    parametri.insert({"Sottotitolato", std::to_string(subtitled->isChecked())});
     (producer->text().toStdString()).empty() ? parametri.insert({"Producer", "Indefinito"}) : parametri.insert({"Producer", producer->text().toStdString()});
     (genre->currentText().toStdString()).empty() ? parametri.insert({"Genere", "Indefinito"}) : parametri.insert({"Genere", genre->currentText().toStdString()});
     return parametri;
@@ -162,7 +162,7 @@ void AnimeFilters::setAttributes(const unordered_map<string, string>& attributes
     setProducer(QString::fromStdString(attributes.find("Producer")->second));
     setEpisodes(std::stoi(attributes.find("Episodi")->second));
     setSeasons(std::stoi(attributes.find("Stagioni")->second));
-    setSubtitle(attributes.find("Sottotitolato")->second == "true" ? true : false);
+    setSubtitle(std::stoi(attributes.find("Sottotitolato")->second));
     setGenre(QString::fromStdString(attributes.find("Genere")->second));
 }
 

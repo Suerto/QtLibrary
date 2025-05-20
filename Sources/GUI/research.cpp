@@ -1,15 +1,13 @@
 #include "../../Headers/GUI/research.h"
-#include "qglobal.h"
-#include "qnamespace.h"
-#include "qwidget.h"
 
 Research::Research(QWidget* parent, ContentManager* mngr) : QWidget(parent), manager(mngr), researchLayout(new QHBoxLayout(this)), searchSection(new Search(this, mngr)), results(nullptr) {
     searchSection->setFixedWidth(500);
     searchSection->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
     researchLayout->addWidget(searchSection, Qt::AlignLeft);
+    
     connect(searchSection, &Search::risultatiOttenuti, this, &Research::showResults);
 
-   setLayout(researchLayout);
+    setLayout(researchLayout);
 } 
 
 void Research::showResults(vector<Contenuto*> res) {
@@ -24,10 +22,7 @@ void Research::showResults(vector<Contenuto*> res) {
     
 
     connect(results, &ViewContents::eliminaOggetto, this, [this](const int& index, const unordered_map<string, string>& attributi) {
-            qDebug() << "Ingresso in Research::eliminaContenuto() avvenuta";
-            qDebug() << "Invocazione di manager->eliminaContenuto() avvenuta";
             manager->eliminaContenuto(index, attributi);
-            qDebug() << "Ritorno da eliminaContenuto avvenuto, il problema non è in Research!";
             });
     connect(results, &ViewContents::modificaOggetto, this, [this](const int& index, const unordered_map<string, string>& original, const unordered_map<string, string>& modifiche) {
             manager->modificaContenuto(index, original, modifiche);

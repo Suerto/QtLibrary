@@ -6,7 +6,6 @@ Creation::Creation(QWidget* parent, ContentManager* mngr) : MainWidget(parent), 
     crea->setFixedSize(50, 50);
     crea->setIcon(QIcon("➕"));
     titleLayout->addWidget(crea);
-    
     pulsantiera->setVisible(true);
     
     mainLayout->setAlignment(Qt::AlignCenter);
@@ -22,6 +21,7 @@ void Creation::mostraFiltro(int id) {
                 if(choice == "Conferma") {
                     qobject_cast<Filters*>(filtri->currentWidget())->reset();
                     filtri->setCurrentIndex(id);
+                    qobject_cast<Filters*>(filtri->currentWidget())->setImageButtonVisible();
                 }
                 else {
                     tipologia->button(filtri->currentIndex())->click();
@@ -32,7 +32,8 @@ void Creation::mostraFiltro(int id) {
     else {
         filtri->setCurrentIndex(id);
         filtri->setVisible(true);
-  }
+        qobject_cast<Filters*>(filtri->currentWidget())->setImageButtonVisible();
+    }
 }
 
 bool Creation::checkMap(const unordered_map<string, string>& map) const {
@@ -46,10 +47,12 @@ void Creation::startCreation() {
    if(!titolo->text().toStdString().empty()) { 
        unordered_map<string, string> parameters = qobject_cast<Filters*>(filtri->currentWidget())->raccogliDati();
        parameters.insert({"Titolo", titolo->text().toStdString()});
+       for(const auto&[T, V] : parameters) { qDebug() << QString::fromStdString(T) << " : " << QString::fromStdString(V); }
        if(!checkMap(parameters)) {
            ErrorMissing error(this, "Creazione", titolo->text().toStdString());
            error.exec();
        }
+
        else {
            CreationVisitor creator(parameters);
            //AGGIUNGERE NON POSSIBILITÀ DI CREARE DUPLICATI
@@ -61,7 +64,8 @@ void Creation::startCreation() {
            }
            else {
                manager->creaContenuto(filtri->currentIndex(), &creator);
-               qDebug() << "Contenuto creato in memoria \n\n";  
+               qobject_cast<Filters*>(filtri->currentWidget())->reset();
+               titolo->clear();
            }
        }
    }

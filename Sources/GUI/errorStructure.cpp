@@ -1,16 +1,20 @@
 #include "../../Headers/GUI/errorStructure.h"
 
 ErrorStructure::ErrorStructure(QWidget* parent) : QDialog(parent), text(new QLabel(this)), errorLayout(new QVBoxLayout(this)) {
-   errorLayout->addWidget(text, Qt::AlignCenter);
+    errorLayout->addWidget(text, Qt::AlignCenter);
 
-   setStyleSheet(R"(
+    setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint);
+    setModal(true);  // se vuoi bloccare l'interazione con altre finestre
+
+    setStyleSheet(R"(
         QLabel {
             font-family : Fira Code;
             font-size : 15px;
         }
 
         QDialog {
-            background-color : #848687;
+            background-color: #848687;
+            border: 2px solid #0078D7;
         }
-   )");
+        )");
 }
