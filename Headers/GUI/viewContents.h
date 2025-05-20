@@ -18,10 +18,11 @@ using std::vector;
 class ViewContents : public QWidget {
     Q_OBJECT
 private:
+    DuplicateVerifier* verifier;
     vector<ContentViewer*> contentsWidgets;
     QGridLayout* contentsLayout;
 public:
-    ViewContents(vector<Contenuto*> res, QWidget* parent = nullptr);
+    ViewContents(DuplicateVerifier* vrfr, vector<Contenuto*> res, QWidget* parent = nullptr);
     ~ViewContents();
 public slots :
     void bloccaContenuti(ContentViewer* contenuto);

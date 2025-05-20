@@ -31,7 +31,7 @@ private:
     QVBoxLayout* contentLayout;
     QHBoxLayout* buttonsLayout;
 public:
-    ContentViewer(const QString& ttl, const QString& tp, Filters* flts, 
+    ContentViewer(DuplicateVerifier* vrfr, const QString& ttl, const QString& tp, Filters* flts, 
                   QWidget* parent = nullptr);
     void abilitaPulsantiReadOnly(const bool& rom);
 

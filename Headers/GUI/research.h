@@ -9,6 +9,7 @@
 class Research : public QWidget {
 private:
     ContentManager* manager;
+    DuplicateVerifier* verifier;
     QHBoxLayout* researchLayout;
     Search* searchSection;
     ViewContents* results;
