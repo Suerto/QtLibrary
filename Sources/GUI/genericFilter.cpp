@@ -2,7 +2,7 @@
 #include "qglobal.h"
 #include <string>
 
-Filters::Filters(QWidget* parent) : QWidget(parent), pathImmagine("Data/Immagini/default.jpg"), language(new QComboBox(this)), year(new QSpinBox(this)), coverImage(new QPushButton("Apri Cartella Immagini", this)), filtersLayout(new QFormLayout(this)) {
+Filters::Filters(QWidget* parent) : QWidget(parent), pathImmagine("Data/Immagini/default.jpg"), language(new QComboBox(this)), year(new QSpinBox(this)), coverImage(new QPushButton("Cartella Immagini", this)), filtersLayout(new QFormLayout(this)) {
     filtersLayout->addRow("Anteprima :", coverImage);
     filtersLayout->setRowVisible(coverImage, false);
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Lingue", language);
@@ -65,6 +65,7 @@ void Filters::setModifiable(const bool& mdf) {
         year->setAttribute(Qt::WA_TransparentForMouseEvents, !mdf);
         year->setStyleSheet(!mdf ?
             "QSpinBox { border: none; background: transparent; }" : "");
+        filtersLayout->setRowVisible(coverImage, mdf);
 }
 
 void Filters::setAttributes(const std::unordered_map<string, string>& attributes) {

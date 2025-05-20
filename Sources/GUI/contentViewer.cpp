@@ -2,7 +2,7 @@
 #include "qglobal.h"
 
 ContentViewer::ContentViewer(const QString& ttl, const QString& tp, Filters* flts, QWidget* parent) : QWidget(parent), picture(new QLabel(this)), title(new QLineEdit(this)), type(new QLineEdit(this)), dettagli(flts), modify(new QPushButton("Modifica", this)), remove(new QPushButton("Elimina", this)), save(new QPushButton("Salva", this)), cancel(new QPushButton("Annulla", this)), mainLayout(new QHBoxLayout()), contentLayout(new QVBoxLayout()), buttonsLayout(new QHBoxLayout()){
-    picture->setFixedSize(215, 350);  // Larghezza fissa, altezza come tutto il widget
+    picture->setFixedSize(240, 330);  // Larghezza fissa, altezza come tutto il widget
     picture->setScaledContents(true);
     picture->setPixmap(QPixmap(QString::fromStdString(dettagli->raccogliDati().find("Anteprima")->second)));
 
@@ -89,15 +89,7 @@ void ContentViewer::modifica() {
                 ErrorMissing error(this, "Modifica" , title->text().toStdString());
                 error.exec();
             }
-            
-            qDebug() << "Attributi di Modifiche : ";
-            for(const auto&[T, V] : modifiche) {
-                qDebug() << QString::fromStdString(T) << " : " << QString::fromStdString(V);
-            }
-            qDebug() << "Attributi di Original : ";
-            for(const auto&[T, V] : modifiche) {
-                qDebug() << QString::fromStdString(T) << " : " << QString::fromStdString(V);
-            }
+
             if(original == modifiche) { 
                 emit modificaAnnullata();
                 dettagli->setModifiable(false);
@@ -112,7 +104,9 @@ void ContentViewer::modifica() {
             emit modificaConfermata(visitor.getIndex(), original, modifiche);
             dettagli->setModifiable(false);
             abilitaPulsantiReadOnly(true);
-            restoreFilter(modifiche); 
+            restoreFilter(modifiche);
+            picture->setPixmap(QPixmap(QString::fromStdString(dettagli->raccogliDati().find("Anteprima")->second)));
+            //emit refresh();
             }
             });
 }
