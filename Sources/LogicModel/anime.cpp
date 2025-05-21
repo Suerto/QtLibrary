@@ -12,9 +12,9 @@ Anime::Anime(string n, unsigned int a, Lingua l,
              Risoluzione res, unsigned int d, 
              Cadenza ca, 
              unsigned int ep, unsigned int s, bool sub, string prd, Genere g) : 
-       Digitale(n, a, l, res, d), Periodico(ca), 
-       episodi(getDurata() > 0 ? ep : 0), stagioni(episodi > 0 ? s : 0), 
-       sottotitolato(sub), producer(prd), genere(g) {} 
+    Digitale(n, a, l, res, d), Periodico(ca), 
+    episodi(getDurata() > 0 ? ep : 0), stagioni(episodi > 0 ? s : 0), 
+    sottotitolato(sub), producer(prd), genere(g) {} 
 
 unsigned int Anime::getEpisodi() const { return episodi; }
 
@@ -59,7 +59,8 @@ void Anime::accept(Visitors* visitor) {
     visitor->visit(*this);
 }
 
-const unordered_map<const Anime::Genere, const string> Anime::getMappaGeneri() { return MappaGeneri; }
+const unordered_map<const Anime::Genere, const string> Anime::getMappaGeneri() 
+{ return MappaGeneri; }
 
 unordered_map<string, string> Anime::fromObjectToMap() const {
     unordered_map<string, string> attributi = Digitale::fromObjectToMap();

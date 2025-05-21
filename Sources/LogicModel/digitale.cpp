@@ -7,8 +7,9 @@ const unordered_map<const Digitale::Risoluzione, const string> Digitale::MappaRi
     { Digitale::Risoluzione::UHD, "Ultra HD" },
 };
 
-Digitale::Digitale(string n, unsigned int a, Lingua l, Risoluzione res, unsigned int dur) :
-                   Contenuto(n, a, l), risoluzione(res), durata(dur) {}
+Digitale::Digitale(string n, unsigned int a, Lingua l, 
+                   Risoluzione res, unsigned int dur) :
+    Contenuto(n, a, l), risoluzione(res), durata(dur) {}
 
 string Digitale::getRisoluzione() const {
     auto it = MappaRisoluzioni.find(risoluzione);
@@ -39,4 +40,5 @@ unordered_map<string, string> Digitale::fromObjectToMap() const {
     return attributi;
 }
 
-const unordered_map<const Digitale::Risoluzione, const string> Digitale::getMappaRisoluzioni() { return MappaRisoluzioni; }
+const unordered_map<const Digitale::Risoluzione, const string> 
+Digitale::getMappaRisoluzioni() { return MappaRisoluzioni; }

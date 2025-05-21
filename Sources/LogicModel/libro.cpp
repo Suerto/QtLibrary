@@ -9,8 +9,10 @@ const unordered_map<const Libro::Genere, const string> Libro::MappaGeneri = {
     { Libro::Genere::Fantasy, "Fantasy" },
 };
 
-Libro::Libro(string n, unsigned int a, Lingua l, Copertina c, unsigned int np, string au, string ed, string pu, Genere g) : 
-             Fisico(n, a, l, c, np), autore(au), editore(ed), publisher(pu), genere(g) {}
+Libro::Libro(string n, unsigned int a, Lingua l,
+             Copertina c, unsigned int np, 
+             string au, string ed, string pu, Genere g) : 
+    Fisico(n, a, l, c, np), autore(au), editore(ed), publisher(pu), genere(g) {}
 
 
 string Libro::getAutore() const { return autore; }

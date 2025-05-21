@@ -1,7 +1,8 @@
 #include "../../Headers/LogicModel/checkVisitor.h"
 #include "qdebug.h"
 
-CheckVisitor::CheckVisitor(unordered_map<string, string> prm, bool sml) : parametri(prm), similar(sml) {}
+CheckVisitor::CheckVisitor(unordered_map<string, string> prm, bool sml) : 
+    parametri(prm), similar(sml) {}
 
 void CheckVisitor::visit(Libro& lib) {
     unsigned int anno = static_cast<unsigned int>(stoi(parametri.find("Anno")->second));

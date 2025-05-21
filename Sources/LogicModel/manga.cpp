@@ -8,8 +8,12 @@ const unordered_map<const Manga::Genere, const string> Manga::MappaGeneri = {
     { Manga::Genere::Action, "Action" }
 };
 
-Manga::Manga(string n, unsigned int a, Lingua l, Copertina co, unsigned int p, Cadenza ca, string m, string ed, unsigned int cp, Genere g) :
-            Fisico(n, a, l, co, p), Periodico(ca), mangaka(m), editore(ed), capitoli(getPagine() > 0 ? cp : 0), genere(g) {}
+Manga::Manga(string n, unsigned int a, Lingua l, 
+             Copertina co, unsigned int p, 
+             Cadenza ca, 
+             string m, string ed, unsigned int cp, Genere g) :
+    Fisico(n, a, l, co, p), Periodico(ca), mangaka(m), editore(ed), 
+    capitoli(getPagine() > 0 ? cp : 0), genere(g) {}
     
 string Manga::getMangaka() const { return mangaka; }    
     
@@ -61,4 +65,5 @@ unordered_map<string, string> Manga::fromObjectToMap() const {
     return attributi;
 }
 
-const unordered_map<const Manga::Genere, const string> Manga::getMappaGeneri() { return MappaGeneri; }
+const unordered_map<const Manga::Genere, const string> Manga::getMappaGeneri()
+{ return MappaGeneri; }

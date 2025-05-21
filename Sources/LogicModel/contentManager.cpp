@@ -9,11 +9,14 @@ std::unordered_map<int, std::function<Contenuto*()>> ContentManager::creatore = 
     {3, [](){ return new Anime(); } }
 };
 
-ContentManager::ContentManager() : json({"Data/libro.json", "Data/manga.json", "Data/film.json", "Data/anime.json"}),
-memoria{} {
+ContentManager::ContentManager() : 
+    json({"Data/libro.json", "Data/manga.json", "Data/film.json", "Data/anime.json"}),
+    memoria{} {
 
     for(std::size_t i = 0; i < memoria.size(); ++i) {
-        vector<unordered_map<string, string>> mappeContenuti = JsonHandler::estraiArrayDiMappe(QString::fromStdString(json[i]));
+        vector<unordered_map<string, string>> mappeContenuti = 
+                JsonHandler::estraiArrayDiMappe(QString::fromStdString(json[i]));
+
         for(auto mappa : mappeContenuti) {
             CreationVisitor contenuto(mappa);
             creaContenuto(i, &contenuto);
@@ -23,8 +26,6 @@ memoria{} {
 
 void ContentManager::uploadContenuti() {
     for(std::size_t i = 0; i < memoria.size(); ++i) {
-        qDebug() << "Salvataggio nel Json iniziato" << i;
-        qDebug() << QString::fromStdString(json[i]) << " | " << memoria[i].size();
         JsonHandler::salvaArrayDiMappe(QString::fromStdString(json[i]), memoria[i]);
     }
 }
@@ -39,21 +40,26 @@ void ContentManager::salvaContenuto(const int& index, Contenuto* contenuto) {
     memoria[index].push_back(contenuto);
 }
 
-vector<Contenuto*> ContentManager::cercaContenuto(const int& index, const unordered_map<string, string>& map) const {
+vector<Contenuto*> ContentManager::cercaContenuto(const int& index,
+        const unordered_map<string, string>& map) const {
     vector<Contenuto*> risultati;
     
     const string& title = map.find("Titolo")->second;
     for(Contenuto* element : memoria[index]) {
         CheckVisitor check(map);
-        if(element->getNome().size() >= title.size() && std::equal(title.begin(), title.end(), element->getNome().begin(), [](char a, char b) { return std::tolower(a) == std::tolower(b);})) {
-            element->accept(&check);
-            if(check.isSimilar()) risultati.push_back(element);
+        if(element->getNome().size() >= title.size() && 
+           std::equal(title.begin(), title.end(), element->getNome().begin(), 
+           [](char a, char b) { return std::tolower(a) == std::tolower(b);})) {
+                element->accept(&check);
+                if(check.isSimilar()) risultati.push_back(element);
         }
     }
     return risultati;
 }
 
-bool ContentManager::controllaDuplicato(const int& index, const unordered_map<string, string>& map) const {
+bool ContentManager::controllaDuplicato(const int& index, 
+        const unordered_map<string, string>& map) const {
+    
     CheckVisitor check(map);
     
     const string& title = map.find("Titolo")->second;
@@ -86,7 +92,8 @@ vector<Contenuto*> ContentManager::cercaPerTitolo(const string& title) const {
     return risultati;
 }
 
-void ContentManager::eliminaContenuto(const int& index, const unordered_map<string, string>& attributi) {
+void ContentManager::eliminaContenuto(const int& index, 
+        const unordered_map<string, string>& attributi) {
     for(auto it = memoria[index].begin(); it != memoria[index].end(); ++it) {
         CheckVisitor visitor(attributi);
         (*it)->accept(&visitor);
@@ -99,7 +106,10 @@ void ContentManager::eliminaContenuto(const int& index, const unordered_map<stri
     }
 }
 
-void ContentManager::modificaContenuto(const int& index, const unordered_map<string, string>& original, const unordered_map<string, string>& modifiche) {
+void ContentManager::modificaContenuto(const int& index,
+        const unordered_map<string, string>& original, 
+        const unordered_map<string, string>& modifiche) {
+
     for(auto it = memoria[index].begin(); it != memoria[index].end(); ++it) {
         CheckVisitor visitor(original);
 

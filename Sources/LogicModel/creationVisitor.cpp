@@ -1,7 +1,8 @@
 #include "../../Headers/LogicModel/creationVisitor.h"
 #include <QDebug>
 
-CreationVisitor::CreationVisitor(const unordered_map<string, string>& prmts) : parametri(prmts) {}
+CreationVisitor::CreationVisitor(const unordered_map<string, string>& prmts) : 
+    parametri(prmts) {}
 
 void CreationVisitor::visit(Libro& lib) {
     auto it = parametri.find("Titolo");

@@ -10,8 +10,10 @@ const unordered_map<const Film::Genere, const string> Film::MappaGeneri = {
     { Film::Genere::Romantico, "Romantico" }
 };
 
-Film::Film(string n, unsigned int a, Lingua l, Risoluzione res, unsigned int d, string rgs, string cmp, string prd, Genere g) :
-            Digitale(n, a, l, res, d), regista(rgs), composer(cmp), producer(prd), genere(g) {}
+Film::Film(string n, unsigned int a, Lingua l,
+           Risoluzione res, unsigned int d, 
+           string rgs, string cmp, string prd, Genere g) :
+    Digitale(n, a, l, res, d), regista(rgs), composer(cmp), producer(prd), genere(g) {}
 
 string Film::getRegista() const { return regista; }
 
