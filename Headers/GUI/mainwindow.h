@@ -5,7 +5,10 @@
 #include <QToolBar>
 #include <QAction>
 #include <QActionGroup>
+#include <QShortcut>
 
+
+#include "errorClosing.h"
 #include "creation.h"
 #include "research.h"
 #include "errorChanging.h"
@@ -26,6 +29,8 @@ public:
 private slots :
     void showSearching();
     void showCreation();
+    void closeApplication();
+    
 };
 
 #endif //MAINWINDOW_H

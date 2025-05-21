@@ -57,15 +57,15 @@ void Creation::startCreation() {
            CreationVisitor creator(parameters);
            //AGGIUNGERE NON POSSIBILITÀ DI CREARE DUPLICATI
            if(manager->cercaContenuto(filtri->currentIndex(), parameters).size() != 0) {
-                    //definire una classe sia per la creazione avvenuta che per
-                    //la copia trovata
-                    //ErrorCopy error("Copia dupplicata", this);
-                    //error.exec();
+                    ErrorDuplicate error(this, "Creazione", titolo->text().toStdString());
+                    error.exec();
            }
            else {
                manager->creaContenuto(filtri->currentIndex(), &creator);
                qobject_cast<Filters*>(filtri->currentWidget())->reset();
                titolo->clear();
+               MessageSuccess success(this, "Creazione", titolo->text().toStdString());
+               success.exec();
            }
        }
    }
@@ -75,4 +75,6 @@ void Creation::startCreation() {
    }
 }
 
-Creation::~Creation() = default;
+Creation::~Creation() {
+    manager = nullptr;
+}

@@ -37,8 +37,6 @@ unordered_map<string, string> BookFilters::raccogliDati() const {
     (publisher->text().toStdString()).empty() ? parametri.insert({"Publisher", "Indefinito"}) : parametri.insert({"Publisher", publisher->text().toStdString()});
     (genre->currentText().toStdString()).empty() ? parametri.insert({"Genere", "Indefinito"}) : parametri.insert({"Genere", genre->currentText().toStdString()});
 
-    parametri.insert({"Anteprima", pathImmagine.toStdString()});
-
     return parametri;
 }
 
@@ -135,7 +133,7 @@ void BookFilters::setAttributes(const unordered_map<string, string>& attributes)
 
 
 void BookFilters::accept(GuiVisitor* visitor) const {
-    visitor->visit(*this);
+    visitor->visit(this);
 }
 
 BookFilters::~BookFilters() = default;

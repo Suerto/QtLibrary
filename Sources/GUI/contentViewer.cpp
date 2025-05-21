@@ -105,7 +105,8 @@ void ContentViewer::modifica() {
             IndexVisitor visitor;
             dettagli->accept(&visitor);
             if(verifier->isThereADuplicate(visitor.getIndex(), modifiche)) {
-                qDebug() << "Trovato un duplicato, modifica non possibile";
+                ErrorDuplicate error(this, "Modifica", title->text().toStdString());
+                error.exec();
                 dettagli->setModifiable(false);
                 abilitaPulsantiReadOnly(true);
                 restoreFilter(original);
@@ -117,6 +118,8 @@ void ContentViewer::modifica() {
             abilitaPulsantiReadOnly(true);
             restoreFilter(modifiche);
             picture->setPixmap(QPixmap(QString::fromStdString(dettagli->raccogliDati().find("Anteprima")->second)));
+            MessageSuccess success(this, "Modifica", title->text().toStdString());
+            success.exec();
             }
         }
             });

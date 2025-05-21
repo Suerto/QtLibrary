@@ -167,7 +167,7 @@ void AnimeFilters::setAttributes(const unordered_map<string, string>& attributes
 }
 
 void AnimeFilters::accept(GuiVisitor* visitor) const {
-    visitor->visit(*this);
+    visitor->visit(this);
 }
 
 AnimeFilters::~AnimeFilters() = default;

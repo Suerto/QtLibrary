@@ -100,6 +100,9 @@ MainWindow::MainWindow(QWidget* parent, ContentManager* mngr) : QMainWindow(pare
         }
         )"
     );
+
+        QShortcut* escShortcut = new QShortcut(QKeySequence(Qt::Key_Escape), this);
+        connect(escShortcut, &QShortcut::activated, this, &MainWindow::closeApplication);
 }
 
 void MainWindow::showSearching() {
@@ -136,4 +139,16 @@ void MainWindow::showCreation() {
     }
 }
 
-MainWindow::~MainWindow() {}
+void MainWindow::closeApplication() {
+    ErrorClosing error;
+    connect(&error, &ErrorClosing::azione, this, [this](const QString& choice) {
+            if(choice == "Conferma") {
+                close();
+            }
+        });
+    error.exec();
+}
+
+MainWindow::~MainWindow() {
+    manager = nullptr;
+}
