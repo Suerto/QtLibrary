@@ -3,7 +3,7 @@
 
 #include <QApplication>
 
-#include "mainwindow.h"
+#include "mainWindow.h"
 
 class App : public QApplication {
 private:

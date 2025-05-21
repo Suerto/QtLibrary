@@ -1,4 +1,4 @@
-#include "../../Headers/GUI/mainwindow.h"
+#include "../../Headers/GUI/mainWindow.h"
 
 MainWindow::MainWindow(QWidget* parent, ContentManager* mngr) : QMainWindow(parent), manager(mngr), toolBar(new QToolBar(this)), windows(new QStackedWidget(this)), searching(new QAction("Sezione Ricerca", this)), creation(new QAction("Sezione Creazione", this)) {
     setMinimumSize(1200, 800);
