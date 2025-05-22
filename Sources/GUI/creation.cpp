@@ -21,7 +21,7 @@ void Creation::mostraFiltro(int id) {
                 if(choice == "Conferma") {
                     qobject_cast<Filters*>(filtri->currentWidget())->reset();
                     filtri->setCurrentIndex(id);
-                    qobject_cast<Filters*>(filtri->currentWidget())->setImageButtonVisible();
+                    qobject_cast<Filters*>(filtri->currentWidget())->setImageButtonVisible(true);
                 }
                 else {
                     tipologia->button(filtri->currentIndex())->click();
@@ -32,7 +32,7 @@ void Creation::mostraFiltro(int id) {
     else {
         filtri->setCurrentIndex(id);
         filtri->setVisible(true);
-        qobject_cast<Filters*>(filtri->currentWidget())->setImageButtonVisible();
+        qobject_cast<Filters*>(filtri->currentWidget())->setImageButtonVisible(true);
     }
 }
 

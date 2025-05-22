@@ -33,7 +33,7 @@ public:
     void setLanguage(const QString& lng);
     void setYear(const unsigned int& yr);
     void setPathImage(const QString& path);
-    void setImageButtonVisible();
+    void setImageButtonVisible(const bool& vsbl);
 
     virtual void reset();
     virtual void setModifiable(const bool& mdf);
