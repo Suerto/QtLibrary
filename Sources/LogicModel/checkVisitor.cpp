@@ -9,7 +9,6 @@ void CheckVisitor::visit(Libro& lib) {
     if(anno != 0) {
         if(anno != lib.getAnno()) {
             similar = false;
-            qDebug() << "uscito per anno differente";
             return;
         }
     }
@@ -18,7 +17,6 @@ void CheckVisitor::visit(Libro& lib) {
     if(lingua != "Indefinita") {
         if(lingua != lib.getLingua()) {
             similar = false; 
-            qDebug() << "uscito per lingua differente";
             return;
         }
     }
@@ -27,7 +25,6 @@ void CheckVisitor::visit(Libro& lib) {
     if(copertina != "Indefinita") {
         if(copertina != lib.getCopertina()) {
             similar = false;
-            qDebug() << "uscito per copertina differente";
             return;
         }
     }
@@ -36,7 +33,6 @@ void CheckVisitor::visit(Libro& lib) {
     if(pagine != 0) {
         if(pagine != lib.getPagine()) {
             similar = false;
-            qDebug() << "uscito per pagine differente";
             return;
         }
     }
@@ -45,7 +41,6 @@ void CheckVisitor::visit(Libro& lib) {
     if(autore != "Indefinito") {
         if(autore != lib.getAutore()) {
             similar = false;
-            qDebug() << "uscito per autore differente";
             return;
         }
     }
@@ -54,7 +49,6 @@ void CheckVisitor::visit(Libro& lib) {
     if(editore != "Indefinito") {
         if(editore != lib.getEditore()) {
             similar = false;
-            qDebug() << "uscito per editore differente";
             return;
         }
     }
@@ -63,7 +57,6 @@ void CheckVisitor::visit(Libro& lib) {
     if(publisher != "Indefinito") {
         if(publisher != lib.getPublisher()) {
             similar = false;
-            qDebug() << "uscito per publisher differente";
             return;
         }
     }
@@ -72,11 +65,9 @@ void CheckVisitor::visit(Libro& lib) {
     if(genere != "Indefinito") {
         if(genere != lib.getGenere()) {
             similar = false;
-            qDebug() << "uscito per genere differente";
             return;
         }
     }
-    qDebug() << "Tutti gli attributi sono uguali/indefiniti";
 }
 
 void CheckVisitor::visit(Manga& mng) {

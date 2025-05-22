@@ -1,5 +1,4 @@
 #include "../../Headers/GUI/app.h"
-#include "../../Headers/GUI/mainwindow.h"
 
 App::App(int& argc, char** argv, ContentManager* mngr) : QApplication(argc, argv), main(new MainWindow(nullptr, mngr)) {
     JsonHandler::saveEnumToJson(Contenuto::getMappaLingue(), "Data/Dati.json" , "Lingue");

@@ -30,7 +30,6 @@ Filters::Filters(QWidget* parent) : QWidget(parent), pathImmagine("Data/Immagini
 
     connect(coverImage, &QPushButton::clicked, this, [this]() {
                 pathImmagine = QFileDialog::getOpenFileName(this, "Seleziona immagine", "Data/Immagini", "Immagini (*.png *.jpg *.jpeg *.bmp");
-                qDebug() << pathImmagine;
             });
 }
 

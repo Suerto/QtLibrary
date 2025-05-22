@@ -24,7 +24,7 @@ public:
     void startSearch();
     void mostraFiltro(int id) override;
 signals:
-        void risultatiOttenuti(vector<Contenuto*> res);
+    void risultatiOttenuti(vector<Contenuto*> res);
 };
 
 #endif //SEARCH_H

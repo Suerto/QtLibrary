@@ -44,12 +44,8 @@ void Search::startSearch() {
             res = manager->cercaPerTitolo(title);
         }
         else {
-            qDebug() << "ingresso nell'else per la ricerca per parametri";
             unordered_map<string, string> parametri = qobject_cast<Filters*>(filtri->currentWidget())->raccogliDati();
             parametri.insert({"Titolo", title});
-
-            qDebug() << "parametri raccolti :";
-            for(const auto&[T, V] : parametri) qDebug() << QString::fromStdString(T) << " : " << QString::fromStdString(V);
             res =  manager->cercaContenuto(filtri->currentIndex(), parametri);
         }
         

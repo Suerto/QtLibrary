@@ -1,5 +1,4 @@
 #include "../../Headers/LogicModel/anime.h"
-#include <string>
 
 const unordered_map<const Anime::Genere, const string> Anime::MappaGeneri = {
     { Anime::Genere::Isekai, "Isekai" },
