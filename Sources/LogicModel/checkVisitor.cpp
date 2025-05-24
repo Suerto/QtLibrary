@@ -294,4 +294,6 @@ void CheckVisitor::visit(Anime& anm) {
 
 bool CheckVisitor::isSimilar() const { return similar; }
 
+void CheckVisitor::setDefault() { similar = true; }
+
 unordered_map<string, string> CheckVisitor::getMap() const { return parametri; }

@@ -1,2 +1,26 @@
 [
+    {
+        "Anno": "1921",
+        "Anteprima": "/home/suar/Desktop/Alberto/PaO/QtLibrary/Data/Immagini/test.jpg",
+        "Autore": "Io",
+        "Copertina": "Rigida",
+        "Editore": "Io",
+        "Genere": "Avventura",
+        "Lingua": "Francese",
+        "Pagine": "290",
+        "Publisher": "Sos",
+        "Titolo": "Sass"
+    },
+    {
+        "Anno": "1921",
+        "Anteprima": "Data/Immagini/default.jpg",
+        "Autore": "Io",
+        "Copertina": "Rigida",
+        "Editore": "Io",
+        "Genere": "Avventura",
+        "Lingua": "Francese",
+        "Pagine": "290",
+        "Publisher": "io",
+        "Titolo": "Sass"
+    }
 ]

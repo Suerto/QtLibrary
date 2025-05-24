@@ -4,13 +4,15 @@
 FilterVisitor::FilterVisitor(Filters* ptr) : contenutoWidget(ptr) {}
 
 void FilterVisitor::visit(Libro& lib) {
+    qDebug() << "Ingresso nella visit del libro";
     BookFilters* libro = new BookFilters;
     
     type = "Libro";
 
     libro->setAttributes(lib.fromObjectToMap());
-
+    libro->setPathImage(QString::fromStdString(lib.getAnteprima()));
     contenutoWidget = libro;
+    qDebug() << "Libro creato";
 }
 
 void FilterVisitor::visit(Manga& mng) {
@@ -20,6 +22,7 @@ void FilterVisitor::visit(Manga& mng) {
     
     manga->setAttributes(mng.fromObjectToMap());
 
+    manga->setPathImage(QString::fromStdString(mng.getAnteprima()));
     contenutoWidget = manga;
 }
 
@@ -30,6 +33,7 @@ void FilterVisitor::visit(Anime& anm) {
     
     anime->setAttributes(anm.fromObjectToMap());
     
+    anime->setPathImage(QString::fromStdString(anm.getAnteprima()));
     contenutoWidget = anime;
 }
 
@@ -39,6 +43,7 @@ void FilterVisitor::visit(Film& flm) {
 
     type = "Film";
     
+    film->setPathImage(QString::fromStdString(flm.getAnteprima()));
     film->setAttributes(flm.fromObjectToMap());
 
     contenutoWidget = film;

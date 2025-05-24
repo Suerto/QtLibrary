@@ -31,12 +31,15 @@ ViewContents::ViewContents(DuplicateVerifier* vrfr, std::vector<Contenuto*> resu
 
     for (Contenuto* content : result) {
         FilterVisitor visitor;
+        qDebug() << static_cast<void*>(&visitor);
         content->accept(&visitor);
+        qDebug() << static_cast<void*>(verifier);
         ContentViewer* filtro = new ContentViewer(
             verifier,
             QString::fromStdString(content->getNome()),
             QString::fromStdString(visitor.getType()),
-            visitor.getFilters());
+            visitor.getFilters(),
+            this);
 
         filtro->setFixedSize(widgetWidth, 350);
 

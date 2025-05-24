@@ -1,10 +1,11 @@
 #include "../../Headers/GUI/contentViewer.h"
 #include "qglobal.h"
+#include "qnamespace.h"
 
 ContentViewer::ContentViewer(DuplicateVerifier* vrfr, const QString& ttl, const QString& tp, Filters* flts, QWidget* parent) : QWidget(parent), verifier(vrfr), picture(new QLabel(this)), title(new QLineEdit(this)), type(new QLineEdit(this)), dettagli(flts), modify(new QPushButton("Modifica", this)), remove(new QPushButton("Elimina", this)), save(new QPushButton("Salva", this)), cancel(new QPushButton("Annulla", this)), mainLayout(new QHBoxLayout()), contentLayout(new QVBoxLayout()), buttonsLayout(new QHBoxLayout()){
     picture->setFixedSize(240, 330);  // Larghezza fissa, altezza come tutto il widget
     picture->setScaledContents(true);
-    picture->setPixmap(QPixmap(QString::fromStdString(dettagli->raccogliDati().find("Anteprima")->second)));
+    picture->setPixmap(QPixmap(dettagli->getPathImage()));
 
     title->setText(ttl);
     title->setAlignment(Qt::AlignCenter);
@@ -64,65 +65,114 @@ void ContentViewer::abilitaPulsantiReadOnly(const bool& rom) {
 }
 
 void ContentViewer::modifica() {
+    //Viene impedita la modifica a contenuti multipli. Solo quello cliccato viene 
+    //possibilmente modificato
     emit modificaAvviata(this);
-
-    std::unordered_map<string, string> original = dettagli->raccogliDati();
     
+    //Si raccolgono gli attributi, compresa la immagine, ma non viene ancora inserita
+    std::unordered_map<string, string> original = dettagli->raccogliDati();
+    const string originalImage = dettagli->getPathImage().toStdString();
+    qDebug() << "Immagine vecchia : " << QString::fromStdString(originalImage);
     original.insert({"Titolo", title->text().toStdString()});
     dettagli->setModifiable(true);
 
     abilitaPulsantiReadOnly(false);
-    connect(cancel, &QPushButton::clicked, this, [original, this]() {
+
+    //Se la modifica viene annullata, vengono reimpostati i valori iniziali 
+    //(questo serve perché si potrebbero modificare i valori e poi cliccare Annulla)
+    connect(cancel, &QPushButton::clicked, this, [&]() {
         dettagli->setModifiable(false);
 
         emit modificaAnnullata();
         dettagli->setModifiable(false);
         abilitaPulsantiReadOnly(true);
+        original.insert({"Anteprima", originalImage});
         restoreFilter(original);
     });
-
-    connect(save, &QPushButton::clicked, this, [original, this]() {
+    
+    //Viene cliccato il pulsante di salvataggio
+    connect(save, &QPushButton::clicked, this, [original, originalImage, this]() {
+        //Vengono raccolti gli attributi modificati, tra cui la immagine, ma non viene 
+        //ancora inserita
         unordered_map<string, string> modifiche = dettagli->raccogliDati();
+        string modifiedImage = dettagli->getPathImage().toStdString();
         modifiche.insert({"Titolo", title->text().toStdString()});
-        //check che non ci siano attributi vuoti
+        
+        qDebug() << "Seconda stampa di immagine vecchia: " << QString::fromStdString(originalImage);
+        qDebug() << "Immagine nuova:" << QString::fromStdString(modifiedImage);
+        //si controllano che tutti gli attributi siano stati definiti
         if(!checkMap(modifiche)) {
-                ErrorMissing error(this, "Modifica" , title->text().toStdString());
-                error.exec();
+                ErrorMissing* error = new ErrorMissing(this, "Modifica" , title->text().toStdString());
+                error->open();
                 emit modificaAnnullata();
                 dettagli->setModifiable(false);
                 abilitaPulsantiReadOnly(true);
                 restoreFilter(original);
+                dettagli->setPathImage(QString::fromStdString(originalImage));
         }
+        
+        //Si controlla se l'utente vuole cambiare SOLO l'immagine
+        else if(original == modifiche) {
+            qDebug() << QString::fromStdString(originalImage) << " | " << QString::fromStdString(modifiedImage);
+            if(originalImage != modifiedImage) {
+                qDebug() << "Si vuole modificare l'immagine";
+                modifiche.insert({"Anteprima", modifiedImage});
+                IndexVisitor visitor;
+                dettagli->accept(&visitor);
+                MessageSuccess* success = new MessageSuccess(this, "Modifica", title->text().toStdString());
+                success->setAttribute(Qt::WA_DeleteOnClose);
+                success->open();
+                qDebug() << "Modifica confermata";
+                emit modificaConfermata(visitor.getIndex(), original, modifiche);
+                dettagli->setModifiable(false);
+                abilitaPulsantiReadOnly(true);
+                restoreFilter(modifiche);
+                picture->setPixmap(QPixmap(QString::fromStdString(modifiedImage)));
 
-        else if(original == modifiche) { 
+            }
+            
+            //Se sono tutti uguali, non viene modificato nulla
+            else {
                 emit modificaAnnullata();
                 dettagli->setModifiable(false);
                 abilitaPulsantiReadOnly(true);
+                qDebug() << "Nessuna modifica effettuata per mancanza di differenti attributi";
                 restoreFilter(original);
+                dettagli->setPathImage(QString::fromStdString(originalImage));
             }
-
+        }
+        
+        //Gli attributi sono differenti. Bisogna controllare che non vi siano duplicati
         else {
             IndexVisitor visitor;
             dettagli->accept(&visitor);
+            qDebug() << visitor.getIndex();
             if(verifier->isThereADuplicate(visitor.getIndex(), modifiche)) {
-                ErrorDuplicate error(this, "Modifica", title->text().toStdString());
-                error.exec();
+                ErrorDuplicate* error = new ErrorDuplicate(this, "Modifica", title->text().toStdString());
+                error->setAttribute(Qt::WA_DeleteOnClose);
+                error->open();
+
+                emit modificaAnnullata();
                 dettagli->setModifiable(false);
                 abilitaPulsantiReadOnly(true);
                 restoreFilter(original);
+                qDebug() << "Duplicato";
             }    
             
             else {
-            emit modificaConfermata(visitor.getIndex(), original, modifiche);
-            dettagli->setModifiable(false);
-            abilitaPulsantiReadOnly(true);
-            restoreFilter(modifiche);
-            picture->setPixmap(QPixmap(QString::fromStdString(dettagli->raccogliDati().find("Anteprima")->second)));
-            MessageSuccess success(this, "Modifica", title->text().toStdString());
-            success.exec();
+                MessageSuccess* success = new MessageSuccess(this, "Modifica", title->text().toStdString());
+                success->setAttribute(Qt::WA_DeleteOnClose);
+                success->open();
+                qDebug() << "Modifica confermata";
+                emit modificaConfermata(visitor.getIndex(), original, modifiche);
+                dettagli->setModifiable(false);
+                abilitaPulsantiReadOnly(true);
+                restoreFilter(modifiche);
+                picture->setPixmap(QPixmap(QString::fromStdString(modifiedImage)));
             }
+                
         }
-            });
+    });
 }
 
 void ContentViewer::pulsantiModificaAttivi(const bool& rom) {

@@ -61,11 +61,12 @@ void Creation::startCreation() {
                     error.exec();
            }
            else {
+               qDebug() << static_cast<void*>(manager); 
                manager->creaContenuto(filtri->currentIndex(), &creator);
-               qobject_cast<Filters*>(filtri->currentWidget())->reset();
-               titolo->clear();
                MessageSuccess success(this, "Creazione", titolo->text().toStdString());
                success.exec();
+               qobject_cast<Filters*>(filtri->currentWidget())->reset();
+               titolo->clear();
            }
        }
    }

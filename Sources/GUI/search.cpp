@@ -41,11 +41,13 @@ void Search::startSearch() {
         const string& title = titolo->text().toStdString();
         vector<Contenuto*> res;
         if(!advancedResearchButton->isChecked()) {
+            qDebug() << "Avvio ricerca solo con titolo";
             res = manager->cercaPerTitolo(title);
         }
         else {
             unordered_map<string, string> parametri = qobject_cast<Filters*>(filtri->currentWidget())->raccogliDati();
             parametri.insert({"Titolo", title});
+            qDebug() << "Avvio ricerca con filtri";
             res =  manager->cercaContenuto(filtri->currentIndex(), parametri);
         }
         

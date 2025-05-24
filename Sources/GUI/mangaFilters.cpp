@@ -31,7 +31,6 @@ unordered_map<string, string> MangaFilters::raccogliDati() const {
     parametri.insert({"Anno", std::to_string(year->value())});
     (language->currentText().toStdString()).empty() ? parametri.insert({"Lingua",
      "Indefinita"}) : parametri.insert({"Lingua", language->currentText().toStdString()});
-    parametri.insert({"Anteprima", pathImmagine.toStdString()});
     
     //Fisico
     (cover->currentText().toStdString()).empty() ? parametri.insert({"Copertina", "Indefinita"}) : parametri.insert({"Copertina", cover->currentText().toStdString()});

@@ -25,7 +25,6 @@ unordered_map<string, string> FilmFilters::raccogliDati() const {
     //Contenuto
     parametri.insert({"Anno", std::to_string(year->value())});
     (language->currentText().toStdString()).empty() ? parametri.insert({"Lingua", "Indefinita"}) : parametri.insert({"Lingua", language->currentText().toStdString()});
-    parametri.insert({"Anteprima", pathImmagine.toStdString()});
     
     //Digitale
     (resolution->currentText().toStdString()).empty() ? parametri.insert({"Risoluzione", "Indefinita"}) : parametri.insert({"Risoluzione", resolution->currentText().toStdString()});

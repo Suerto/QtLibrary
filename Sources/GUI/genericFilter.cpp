@@ -2,7 +2,8 @@
 #include "qglobal.h"
 #include <string>
 
-Filters::Filters(QWidget* parent) : QWidget(parent), pathImmagine("Data/Immagini/default.jpg"), language(new QComboBox(this)), year(new QSpinBox(this)), coverImage(new QPushButton("Cartella Immagini", this)), filtersLayout(new QFormLayout(this)) {
+Filters::Filters(QWidget* parent) : QWidget(parent), pathImmagine(), language(new QComboBox(this)), year(new QSpinBox(this)), coverImage(new QPushButton("Cartella Immagini", this)), filtersLayout(new QFormLayout(this)) {
+    pathImmagine = "Data/Immagini/default.jpg";
     filtersLayout->addRow("", coverImage);
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Lingue", language);
     filtersLayout->addRow("Lingua : ", language);
@@ -29,6 +30,7 @@ Filters::Filters(QWidget* parent) : QWidget(parent), pathImmagine("Data/Immagini
 
     connect(coverImage, &QPushButton::clicked, this, [this]() {
                 pathImmagine = QFileDialog::getOpenFileName(this, "Seleziona immagine", "Data/Immagini", "Immagini (*.png *.jpg *.jpeg *.bmp");
+                qDebug() << "Cambiato percorso Immagine : " << pathImmagine;
             });
 }
 
@@ -68,10 +70,11 @@ void Filters::setModifiable(const bool& mdf) {
         coverImage->setVisible(mdf);
 }
 
+QString Filters::getPathImage() const { return pathImmagine; }
+
 void Filters::setAttributes(const std::unordered_map<string, string>& attributes) {
     setLanguage(QString::fromStdString(attributes.find("Lingua")->second));
     setYear(std::stoi(attributes.find("Anno")->second));
-    setPathImage(QString::fromStdString(attributes.find("Anteprima")->second));
 }
 
 Filters::~Filters() = default;

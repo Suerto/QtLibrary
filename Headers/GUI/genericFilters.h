@@ -34,6 +34,7 @@ public:
     void setYear(const unsigned int& yr);
     void setPathImage(const QString& path);
     void setImageButtonVisible(const bool& vsbl);
+    QString getPathImage() const;
 
     virtual void reset();
     virtual void setModifiable(const bool& mdf);

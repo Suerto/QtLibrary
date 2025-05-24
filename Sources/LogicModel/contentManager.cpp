@@ -1,6 +1,7 @@
 #include "../../Headers/LogicModel/contentManager.h"
 
 #include "../JSON/JsonHandler.hpp"
+#include "qglobal.h"
 
 std::unordered_map<int, std::function<Contenuto*()>> ContentManager::creatore = {
     {0, [](){ return new Libro(); } },
@@ -43,10 +44,14 @@ void ContentManager::salvaContenuto(const int& index, Contenuto* contenuto) {
 vector<Contenuto*> ContentManager::cercaContenuto(const int& index,
         const unordered_map<string, string>& map) const {
     vector<Contenuto*> risultati;
-    
+    qDebug() << "Ingresso in cercaContenuto";
     const string& title = map.find("Titolo")->second;
+    for(const auto&[T, V] : map) {
+        qDebug() << QString::fromStdString(T) << " : " << QString::fromStdString(V);
+    }
     for(Contenuto* element : memoria[index]) {
-        CheckVisitor check(map);
+        CheckVisitor check(map); 
+        //check.setDefault();
         if(element->getNome().size() >= title.size() && 
            std::equal(title.begin(), title.end(), element->getNome().begin(), 
            [](char a, char b) { return std::tolower(a) == std::tolower(b);})) {
@@ -54,23 +59,28 @@ vector<Contenuto*> ContentManager::cercaContenuto(const int& index,
                 if(check.isSimilar()) risultati.push_back(element);
         }
     }
+    qDebug() << risultati.size();
     return risultati;
 }
 
 bool ContentManager::controllaDuplicato(const int& index, 
         const unordered_map<string, string>& map) const {
-    
     CheckVisitor check(map);
-    
     const string& title = map.find("Titolo")->second;
-    qDebug() << "Titolo " << QString::fromStdString(title);
-    for(Contenuto* element : memoria[index]) {
-        if(element->getNome() == title) {
-            qDebug() << "Trovato un contenuto con lo stesso titolo";
+    
+    vector<Contenuto*> duplicati;
+    for(Contenuto* duplicate : memoria[index]) {
+        if(duplicate->getNome() == title) duplicati.push_back(duplicate); 
+    }
+    
+    //se c'è solo un elemento, è quello che si vuole modificare
+    if(duplicati.size() != 1) {
+        for(Contenuto* element : duplicati) {
             element->accept(&check);
-            if(check.isSimilar()) return true;
+            if(check.isSimilar()) return true; 
         }
     }
+    
     return false;
 }
 

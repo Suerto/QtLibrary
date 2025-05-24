@@ -21,7 +21,7 @@ public:
     virtual void visit(Anime& anm) override;
 
     bool isSimilar() const;
-
+    void setDefault();
     unordered_map<string, string> getMap() const;
 };
 
