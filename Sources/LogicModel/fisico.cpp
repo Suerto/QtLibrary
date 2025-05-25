@@ -7,8 +7,7 @@ const unordered_map<const Fisico::Copertina, const string> Fisico::MappaCopertin
     { Fisico::Copertina::Ruvida, "Ruvida" }
 };
 
-Fisico::Fisico(string n, unsigned int a, Lingua l, 
-               Copertina ca, unsigned int p) :
+Fisico::Fisico(string n, unsigned int a, Lingua l, Copertina ca, unsigned int p) :
                 Contenuto(n, a, l), copertina(ca), pagine(p) {}
 
 string Fisico::getCopertina() const { 
@@ -43,3 +42,5 @@ unordered_map<string, string> Fisico::fromObjectToMap() const {
 
 unordered_map<const Fisico::Copertina, const string> Fisico::getMappaCopertine()
 { return MappaCopertine; }
+
+Fisico::~Fisico() = default;

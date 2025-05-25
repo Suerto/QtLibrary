@@ -59,4 +59,6 @@ unordered_map<string, string> Film::fromObjectToMap() const {
     return attributi;
 }
 
-const unordered_map<const Film::Genere, const string> Film::getMappaGeneri() { return MappaGeneri; }
+const unordered_map<const Film::Genere, const string>& Film::getMappaGeneri() { return MappaGeneri; }
+
+Film::~Film() = default;

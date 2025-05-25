@@ -4,7 +4,6 @@
 #include "fisico.h"
 #include "periodico.h"
 
-
 class Manga : public Fisico, public Periodico {
 public:
    enum Genere { Indefinito, Seinen, Shonen, Mecha, Shojo, Action };  
@@ -34,6 +33,8 @@ public:
     virtual void accept(Visitors* visitor) override;
 
     virtual unordered_map<string, string> fromObjectToMap() const override;
-    static const unordered_map<const Genere, const string> getMappaGeneri();
+    static const unordered_map<const Genere, const string>& getMappaGeneri();
+
+    virtual ~Manga() override;
 };
 #endif

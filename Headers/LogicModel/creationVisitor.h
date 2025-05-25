@@ -21,6 +21,8 @@ public:
     virtual void visit(Anime& anm) override;
 
     unordered_map<string, string> getMap() const;
+
+    virtual ~CreationVisitor() override;
 };
 
 #endif //CREATION_VISITOR_H

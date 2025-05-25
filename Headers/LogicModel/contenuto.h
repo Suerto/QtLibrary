@@ -27,7 +27,8 @@ private:
     Lingua lingua;
     string anteprima;
 public:   
-    Contenuto(string n = "", unsigned int a = 1970, Lingua l = Lingua::Indefinita, string ant = "");
+    Contenuto(string n = "", unsigned int a = 0,
+              Lingua l = Lingua::Indefinita, string ant = "");
 
     string getNome() const;
     unsigned int getAnno() const;

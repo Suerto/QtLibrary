@@ -20,7 +20,9 @@ public:
 
     void setCadenza(const string& cdn);
 
-    static const unordered_map<const Cadenza, const string> getMappaCadenze();
+    static const unordered_map<const Cadenza, const string>& getMappaCadenze();
+
+    virtual ~Periodico();
 };
 
 #endif

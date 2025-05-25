@@ -1,13 +1,13 @@
 #ifndef VISITORS_H
 #define VISITORS_H
 
+#include <unordered_map>
+#include <string>
+
 class Libro;
 class Manga;
 class Anime;
 class Film;
-
-#include <unordered_map>
-#include <string>
 
 using std::string;
 using std::unordered_map;
@@ -19,7 +19,7 @@ public:
     virtual void visit(Manga& mng) = 0;
     virtual void visit(Anime& anm) = 0;
 
-    //virtual std::unordered_map<string, string> getMap() const = 0;
+    virtual ~Visitors() = default;
 };
 
 #endif

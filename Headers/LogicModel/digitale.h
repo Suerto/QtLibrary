@@ -21,7 +21,9 @@ public:
     void setDurata(const unsigned int& dur);
 
     virtual unordered_map<string, string> fromObjectToMap() const override;
-    static const unordered_map<const Risoluzione, const string> getMappaRisoluzioni();
+    static const unordered_map<const Risoluzione, const string>& getMappaRisoluzioni();
+
+    virtual ~Digitale() override;
 };
 
 #endif

@@ -65,5 +65,7 @@ unordered_map<string, string> Manga::fromObjectToMap() const {
     return attributi;
 }
 
-const unordered_map<const Manga::Genere, const string> Manga::getMappaGeneri()
+const unordered_map<const Manga::Genere, const string>& Manga::getMappaGeneri()
 { return MappaGeneri; }
+
+Manga::~Manga() = default;

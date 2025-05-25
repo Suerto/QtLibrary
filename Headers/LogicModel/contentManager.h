@@ -11,6 +11,7 @@
 #include "libro.h"
 #include "manga.h"
 #include "creationVisitor.h"
+#include "searchVisitor.h"
 #include "checkVisitor.h"
 
 using std::vector;

@@ -5,7 +5,11 @@
 
 class Fisico : public Contenuto {
 public:
-    enum Copertina { Indefinita, Brossura, Rigida, Ruvida, Plastificata };
+    enum Copertina { Indefinita,
+                     Brossura, 
+                     Rigida, 
+                     Ruvida, 
+                     Plastificata };
 protected:
     static const unordered_map<const Copertina, const string> MappaCopertine;
 private:
@@ -23,6 +27,8 @@ public:
 
     virtual unordered_map<string, string> fromObjectToMap() const override;
     static unordered_map<const Copertina, const string> getMappaCopertine();
+
+    virtual ~Fisico() override;
 };
 
 #endif

@@ -26,5 +26,7 @@ void Periodico::setCadenza(const string& cdn) {
     else cadenza = Periodico::Cadenza::Indefinita;
 }
 
-const unordered_map<const Periodico::Cadenza, const string> Periodico::getMappaCadenze() 
+const unordered_map<const Periodico::Cadenza, const string>& Periodico::getMappaCadenze() 
 { return MappaCadenze; }
+
+Periodico::~Periodico() = default;

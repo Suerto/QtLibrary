@@ -68,6 +68,8 @@ void CheckVisitor::visit(Libro& lib) {
             return;
         }
     }
+
+    qDebug() << "Tutti gli attributi sono uguali";
 }
 
 void CheckVisitor::visit(Manga& mng) {
@@ -297,3 +299,5 @@ bool CheckVisitor::isSimilar() const { return similar; }
 void CheckVisitor::setDefault() { similar = true; }
 
 unordered_map<string, string> CheckVisitor::getMap() const { return parametri; }
+
+CheckVisitor::~CheckVisitor() = default;

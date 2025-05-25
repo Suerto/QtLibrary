@@ -60,4 +60,6 @@ unordered_map<string, string> Libro::fromObjectToMap() const {
     return attributi;
 }
 
-const unordered_map<const Libro::Genere, const string> Libro::getMappaGeneri() { return MappaGeneri; }
+const unordered_map<const Libro::Genere, const string>& Libro::getMappaGeneri() { return MappaGeneri; }
+
+Libro::~Libro() = default;

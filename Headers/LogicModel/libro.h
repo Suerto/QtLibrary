@@ -30,7 +30,9 @@ public:
     virtual void accept(Visitors* visitor) override;
 
     virtual unordered_map<string, string> fromObjectToMap() const override;
-    static const unordered_map<const Genere, const string> getMappaGeneri();
+    static const unordered_map<const Genere, const string>& getMappaGeneri();
+
+    virtual ~Libro() override;
 };
 
 #endif 

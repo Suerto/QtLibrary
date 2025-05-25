@@ -75,3 +75,5 @@ unordered_map<string, string> Anime::fromObjectToMap() const {
     
     return attributi;
 }
+
+Anime::~Anime() = default;

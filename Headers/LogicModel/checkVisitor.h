@@ -23,8 +23,8 @@ public:
     bool isSimilar() const;
     void setDefault();
     unordered_map<string, string> getMap() const;
-};
 
-//Spiegazione del perché ho usato mutable bool similar
+    virtual ~CheckVisitor() override;
+};
 
 #endif //CHECK_VISITOR_H

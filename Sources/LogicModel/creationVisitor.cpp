@@ -172,3 +172,5 @@ void CreationVisitor::visit(Anime& anm) {
 }
 
 unordered_map<string, string> CreationVisitor::getMap() const { return parametri; }
+
+CreationVisitor::~CreationVisitor() = default;

@@ -15,7 +15,7 @@ private:
     Genere genere;
     static const unordered_map<const Genere, const string> MappaGeneri;
 public:
-    Anime(string n = "", unsigned int a = 1970, Lingua l = Lingua::Indefinita, 
+    Anime(string n = "", unsigned int a = 0, Lingua l = Lingua::Indefinita, 
           Risoluzione res = Risoluzione::Indefinita, unsigned int d = 0, 
           Cadenza ca = Cadenza::Indefinita, 
           unsigned int ep = 0, unsigned int s = 0, bool sub = false, string prd = "", 
@@ -36,6 +36,8 @@ public:
     virtual unordered_map<string, string> fromObjectToMap() const override;
     virtual void accept(Visitors* visitor) override;
 
-    static const unordered_map<const Genere, const string> getMappaGeneri();
+    static const unordered_map<const Genere, const string>& getMappaGeneri();
+
+    virtual ~Anime() override;
 };
 #endif

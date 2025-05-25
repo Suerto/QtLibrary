@@ -40,5 +40,7 @@ unordered_map<string, string> Digitale::fromObjectToMap() const {
     return attributi;
 }
 
-const unordered_map<const Digitale::Risoluzione, const string> 
+const unordered_map<const Digitale::Risoluzione, const string>& 
 Digitale::getMappaRisoluzioni() { return MappaRisoluzioni; }
+
+Digitale::~Digitale() = default;
