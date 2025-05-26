@@ -2,8 +2,7 @@
 #define CREATION_H
 
 #include "mainWidgets.h"
-#include "errorDuplicate.h"
-#include "messageSuccess.h"
+#include "error.h"
 
 class Creation : public MainWidget {
     Q_OBJECT 

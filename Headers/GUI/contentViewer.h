@@ -10,9 +10,7 @@
 
 #include "duplicateVerifier.h"
 #include "genericFilters.h"
-#include "errorMissing.h"
-#include "errorDuplicate.h"
-#include "messageSuccess.h"
+#include "error.h"
 #include "indexVisitor.h"
 
 class ContentViewer : public QWidget {

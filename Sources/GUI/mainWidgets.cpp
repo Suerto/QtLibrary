@@ -1,7 +1,7 @@
 #include "../../Headers/GUI/mainWidgets.h"
 #include "qwidget.h"
 
-MainWidget::MainWidget(QWidget* parent, ContentManager* mngr) : QWidget(parent), manager(mngr), mainLayout(new QVBoxLayout(this)), topLayout(new QVBoxLayout()), titleLayout(new QHBoxLayout()), titolo(new QLineEdit(this)), reset(new QPushButton("Ripristina Filtri", this)), filtersButtonsLayout(new QHBoxLayout()), pulsantiera(new QWidget(this)), tipologia(new QButtonGroup(pulsantiera)), filtri(new QStackedWidget(this)) {
+MainWidget::MainWidget(QWidget* parent, ContentManager* mngr) : QWidget(parent), manager(mngr), mainLayout(new QVBoxLayout(this)), topLayout(new QVBoxLayout()), titleLayout(new QHBoxLayout()), titolo(new QLineEdit(this)), reset(new QPushButton("Ripristina Filtri", this)), filtersButtonsLayout(new QHBoxLayout()), pulsantiera(new QWidget(this)), tipologia(new QButtonGroup(this)), filtri(new QStackedWidget(this)) {
     titolo->setPlaceholderText("Inserire titolo del Contenuto : ");
     titolo->setFixedSize(300, 50);
     titolo->setStyleSheet("QLineEdit::placeholder { color : white; }");
@@ -92,5 +92,7 @@ void MainWidget::ripristinaFiltri() {
 }
 
 MainWidget::~MainWidget() {
+    delete topLayout;
+    delete filtersButtonsLayout;
     manager = nullptr;
 }

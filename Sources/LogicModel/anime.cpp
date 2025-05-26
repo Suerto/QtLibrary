@@ -58,7 +58,7 @@ void Anime::accept(Visitors* visitor) {
     visitor->visit(*this);
 }
 
-const unordered_map<const Anime::Genere, const string> Anime::getMappaGeneri() 
+const unordered_map<const Anime::Genere, const string>& Anime::getMappaGeneri() 
 { return MappaGeneri; }
 
 unordered_map<string, string> Anime::fromObjectToMap() const {

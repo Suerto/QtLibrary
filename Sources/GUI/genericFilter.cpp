@@ -5,6 +5,7 @@
 Filters::Filters(QWidget* parent) : QWidget(parent), pathImmagine(), language(new QComboBox(this)), year(new QSpinBox(this)), coverImage(new QPushButton("Cartella Immagini", this)), filtersLayout(new QFormLayout(this)) {
     pathImmagine = "Data/Immagini/default.jpg";
     filtersLayout->addRow("", coverImage);
+    coverImage->setVisible(false);
     JsonHandler::loadEnumFromJson("Data/Dati.json", "Lingue", language);
     filtersLayout->addRow("Lingua : ", language);
     

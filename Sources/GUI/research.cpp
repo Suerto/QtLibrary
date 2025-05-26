@@ -18,7 +18,6 @@ void Research::showResults(vector<Contenuto*> res) {
         verifier = nullptr;
     }
     
-    qDebug() << "Accesso in showresults";
     verifier = new DuplicateVerifier(manager);
     results = new ViewContents(verifier, res, this);
     results->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);

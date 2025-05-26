@@ -11,9 +11,7 @@
 #include "animeFilters.h"
 #include "mangaFilters.h"
 #include "filmFilters.h"
-#include "errorMissing.h"
-#include "errorChanging.h"
-#include "errorNoTitle.h"
+#include "error.h"
 
 #include "../LogicModel/contentManager.h"
 

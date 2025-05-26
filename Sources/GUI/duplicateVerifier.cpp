@@ -6,5 +6,6 @@ DuplicateVerifier::DuplicateVerifier(ContentManager* mngr) : manager(mngr) {
 }
 
 bool DuplicateVerifier::isThereADuplicate(const int& index, const unordered_map<string, string>& map) const {
+    qDebug() << "Ingresso in controllo duplicato fatto";
     return manager->controllaDuplicato(index, map);
 }

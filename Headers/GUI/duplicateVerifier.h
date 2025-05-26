@@ -19,5 +19,3 @@ public:
 };
 
 #endif //DUPLICATE_VERIFIER_H
-       //
-//Valutare la possibilità di far partire il DuplicateVerifier direttamente dal main e poi a scalata portarlo fino a ContentViewer

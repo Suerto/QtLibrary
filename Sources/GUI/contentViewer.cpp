@@ -80,14 +80,14 @@ void ContentViewer::modifica() {
 
     //Se la modifica viene annullata, vengono reimpostati i valori iniziali 
     //(questo serve perché si potrebbero modificare i valori e poi cliccare Annulla)
-    connect(cancel, &QPushButton::clicked, this, [&]() {
+    connect(cancel, &QPushButton::clicked, this, [original, originalImage, this]() {
         dettagli->setModifiable(false);
 
         emit modificaAnnullata();
         dettagli->setModifiable(false);
         abilitaPulsantiReadOnly(true);
-        original.insert({"Anteprima", originalImage});
         restoreFilter(original);
+        dettagli->setPathImage(QString::fromStdString(originalImage));
     });
     
     //Viene cliccato il pulsante di salvataggio
@@ -97,9 +97,7 @@ void ContentViewer::modifica() {
         unordered_map<string, string> modifiche = dettagli->raccogliDati();
         string modifiedImage = dettagli->getPathImage().toStdString();
         modifiche.insert({"Titolo", title->text().toStdString()});
-        
-        qDebug() << "Seconda stampa di immagine vecchia: " << QString::fromStdString(originalImage);
-        qDebug() << "Immagine nuova:" << QString::fromStdString(modifiedImage);
+
         //si controllano che tutti gli attributi siano stati definiti
         if(!checkMap(modifiche)) {
                 ErrorMissing* error = new ErrorMissing(this, "Modifica" , title->text().toStdString());
@@ -113,20 +111,19 @@ void ContentViewer::modifica() {
         
         //Si controlla se l'utente vuole cambiare SOLO l'immagine
         else if(original == modifiche) {
-            qDebug() << QString::fromStdString(originalImage) << " | " << QString::fromStdString(modifiedImage);
             if(originalImage != modifiedImage) {
-                qDebug() << "Si vuole modificare l'immagine";
-                modifiche.insert({"Anteprima", modifiedImage});
                 IndexVisitor visitor;
                 dettagli->accept(&visitor);
                 MessageSuccess* success = new MessageSuccess(this, "Modifica", title->text().toStdString());
                 success->setAttribute(Qt::WA_DeleteOnClose);
                 success->open();
                 qDebug() << "Modifica confermata";
+                modifiche.insert({"Anteprima", modifiedImage});
                 emit modificaConfermata(visitor.getIndex(), original, modifiche);
                 dettagli->setModifiable(false);
                 abilitaPulsantiReadOnly(true);
                 restoreFilter(modifiche);
+                dettagli->setPathImage(QString::fromStdString(modifiedImage));
                 picture->setPixmap(QPixmap(QString::fromStdString(modifiedImage)));
 
             }
@@ -147,6 +144,16 @@ void ContentViewer::modifica() {
             IndexVisitor visitor;
             dettagli->accept(&visitor);
             qDebug() << visitor.getIndex();
+            qDebug() << "Mappa dell'originale";
+            for(const auto&[T, V] : original) {
+                qDebug() << QString::fromStdString(T) << " " << QString::fromStdString(V);
+            }
+
+            qDebug() << "Mappa delle modifiche";
+            for(const auto&[T, V] : modifiche) {
+                qDebug() << QString::fromStdString(T) << " " << QString::fromStdString(V);
+            }
+            qDebug() << static_cast<void*>(verifier);
             if(verifier->isThereADuplicate(visitor.getIndex(), modifiche)) {
                 ErrorDuplicate* error = new ErrorDuplicate(this, "Modifica", title->text().toStdString());
                 error->setAttribute(Qt::WA_DeleteOnClose);
@@ -163,8 +170,10 @@ void ContentViewer::modifica() {
                 MessageSuccess* success = new MessageSuccess(this, "Modifica", title->text().toStdString());
                 success->setAttribute(Qt::WA_DeleteOnClose);
                 success->open();
-                qDebug() << "Modifica confermata";
+                qDebug() << "Modifica avviata";
+                modifiche.insert({"Anteprima", modifiedImage});
                 emit modificaConfermata(visitor.getIndex(), original, modifiche);
+                qDebug() << "Modifica avvenuta";
                 dettagli->setModifiable(false);
                 abilitaPulsantiReadOnly(true);
                 restoreFilter(modifiche);

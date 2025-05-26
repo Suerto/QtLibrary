@@ -7,11 +7,9 @@
 #include <QActionGroup>
 #include <QShortcut>
 
-
-#include "errorClosing.h"
+#include "error.h"
 #include "creation.h"
 #include "research.h"
-#include "errorChanging.h"
 
 class MainWindow : public QMainWindow { 
     Q_OBJECT    
