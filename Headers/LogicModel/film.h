@@ -12,6 +12,7 @@ public:
                   Guerra, 
                   Autobiografico, 
                   Romantico, 
+                  Fantasy,
                   Indefinito };
 private:
     static const unordered_map<const Genere, const string> MappaGeneri;

@@ -7,7 +7,8 @@ const unordered_map<const Film::Genere, const string> Film::MappaGeneri = {
     { Film::Genere::Autobiografico, "Autobiografico" },
     { Film::Genere::Comedy, "Commedia" },
     { Film::Genere::Guerra, "Guerra" },
-    { Film::Genere::Romantico, "Romantico" }
+    { Film::Genere::Romantico, "Romantico" },
+    { Film::Genere::Fantasy, "Fantasy" }
 };
 
 Film::Film(string n, unsigned int a, Lingua l,

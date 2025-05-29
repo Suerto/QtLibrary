@@ -5,16 +5,16 @@ AnimeFilters::AnimeFilters(QWidget* parent) :Filters(parent), resolution(new QCo
 
    filtersLayout->addRow("Sottotitolato :", subtitled);
     
-   episodes->setMaximum(1000);
+   episodes->setMaximum(3000);
    filtersLayout->addRow("Episodi :", episodes);
     
-   duration->setMaximum(120);
+   duration->setMaximum(250);
    filtersLayout->addRow("Durata (per episodio): ", duration);
     
    JsonHandler::loadEnumFromJson("Data/Dati.json", "Cadenze", cadence);
    filtersLayout->addRow("Cadenza :", cadence);
     
-   seasons->setMaximum(10);
+   seasons->setMaximum(30);
    filtersLayout->addRow("Stagioni :", seasons);
 
    JsonHandler::loadEnumFromJson("Data/Dati.json", "Risoluzioni", resolution);

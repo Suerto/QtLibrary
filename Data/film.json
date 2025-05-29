@@ -1,2 +1,86 @@
 [
+    {
+        "Anno": "2001",
+        "Anteprima": "Data/Immagini/default.jpg",
+        "Compositore": "John WIlliams",
+        "Durata": "152",
+        "Genere": "Fantasy",
+        "Lingua": "Italiano",
+        "Producer": "David Heyman",
+        "Regista": "Steven Spielberg",
+        "Risoluzione": "Full HD",
+        "Titolo": "Harry Potter e la Pietra Filosofale"
+    },
+    {
+        "Anno": "2007",
+        "Anteprima": "/home/suar/Desktop/Alberto/PaO/QtLibrary/Data/Immagini/transformes1.jpg",
+        "Compositore": "Steve Jablonsky",
+        "Durata": "143",
+        "Genere": "Azione",
+        "Lingua": "Inglese",
+        "Producer": "Tom DeSanto",
+        "Regista": "Micheal Bay",
+        "Risoluzione": "Ultra HD",
+        "Titolo": "Transformers"
+    },
+    {
+        "Anno": "2009",
+        "Anteprima": "/home/suar/Desktop/Alberto/PaO/QtLibrary/Data/Immagini/transformers2.jpg",
+        "Compositore": "Steve Jablonsky",
+        "Durata": "150",
+        "Genere": "Azione",
+        "Lingua": "Inglese",
+        "Producer": "Tom DeSanto",
+        "Regista": "Micheal Bay",
+        "Risoluzione": "Full HD",
+        "Titolo": "Transformers 2"
+    },
+    {
+        "Anno": "2012",
+        "Anteprima": "/home/suar/Desktop/Alberto/PaO/QtLibrary/Data/Immagini/berserk1film.jpg",
+        "Compositore": "Shiro ",
+        "Durata": "77",
+        "Genere": "Azione",
+        "Lingua": "Inglese",
+        "Producer": "Mitsuru Ooshima",
+        "Regista": "Toshiyuki Kubooka",
+        "Risoluzione": "Full HD",
+        "Titolo": "Berserk - The Egg of The King"
+    },
+    {
+        "Anno": "2012",
+        "Anteprima": "/home/suar/Desktop/Alberto/PaO/QtLibrary/Data/Immagini/berserk2film.jpg",
+        "Compositore": "Shiro Sagisu",
+        "Durata": "98",
+        "Genere": "Azione",
+        "Lingua": "Inglese",
+        "Producer": "Mitsuru Ooshima",
+        "Regista": "Toshiyuki Kubooka",
+        "Risoluzione": "Full HD",
+        "Titolo": "Berserk - The Battle for Doldrey"
+    },
+    {
+        "Anno": "2013",
+        "Anteprima": "/home/suar/Desktop/Alberto/PaO/QtLibrary/Data/Immagini/berserk3film.jpg",
+        "Compositore": "Shiro Sagisu",
+        "Durata": "113",
+        "Genere": "Azione",
+        "Lingua": "Inglese",
+        "Producer": "Mitsuru Ooshima",
+        "Regista": "Toshiyuki Kubooka",
+        "Risoluzione": "Full HD",
+        "Titolo": "Berserk - The Advent"
+    },
+    {
+        "Anno": "1995",
+        "Anteprima": "/home/suar/Desktop/Alberto/PaO/QtLibrary/Data/Immagini/seven_film.jpeg",
+        "Compositore": "Howard Shore",
+        "Durata": "127",
+        "Genere": "Thriller",
+        "Lingua": "Inglese",
+        "Producer": "Arnold Kopelson",
+        "Regista": "David Fincher",
+        "Risoluzione": "4K",
+        "Titolo": "Se7en"
+    }
 ]

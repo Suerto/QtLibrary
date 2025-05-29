@@ -1,26 +1,2 @@
 [
-    {
-        "Anno": "1999",
-        "Anteprima": "Data/Immagini/default.jpg",
-        "Autore": "Asa",
-        "Copertina": "Ruvida",
-        "Editore": "Asa",
-        "Genere": "Fantasy",
-        "Lingua": "Tedesco",
-        "Pagine": "100",
-        "Publisher": "Asa",
-        "Titolo": "sos"
-    },
-    {
-        "Anno": "1092",
-        "Anteprima": "Data/Immagini/default.jpg",
-        "Autore": "Io",
-        "Copertina": "Brossura",
-        "Editore": "Io",
-        "Genere": "Storico",
-        "Lingua": "Tedesco",
-        "Pagine": "1092",
-        "Publisher": "asas",
-        "Titolo": "sas"
-    }
 ]

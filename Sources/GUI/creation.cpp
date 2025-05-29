@@ -52,7 +52,7 @@ void Creation::mostraFiltro(int id) {
 
 bool Creation::checkMap(const unordered_map<string, string>& map) const {
     for(const auto&[T, V] : map) {
-        if(V == "Indefinito" || V == "Indefinita" || V == "0") return false;
+        if(V == "Indefinito" || V == "Indefinita" || (V == "0" && T != "Sottotitolato")) return false;
     }
     return true;
 }

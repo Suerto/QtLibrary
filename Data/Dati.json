@@ -55,6 +55,10 @@
     ],
     "Generi Film": [
         {
+            "enum": 7,
+            "nome": "Fantasy"
+        },
+        {
             "enum": 6,
             "nome": "Romantico"
         },
