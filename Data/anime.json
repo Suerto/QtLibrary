@@ -1,7 +1,7 @@
 [
     {
         "Anno": "1997",
-        "Anteprima": "/home/suar/Desktop/Alberto/PaO/QtLibrary/Data/Immagini/berserk_anime.jpg",
+        "Anteprima": "Data/Immagini/berserk_anime.jpg",
         "Cadenza": "Mensile",
         "Durata": "25",
         "Episodi": "25",
@@ -15,7 +15,7 @@
     },
     {
         "Anno": "2004",
-        "Anteprima": "/home/suar/Desktop/Alberto/PaO/QtLibrary/Data/Immagini/monster.jpeg",
+        "Anteprima": "Data/Immagini/monster.jpeg",
         "Cadenza": "Settimanale",
         "Durata": "24",
         "Episodi": "74",
@@ -29,7 +29,7 @@
     },
     {
         "Anno": "1999",
-        "Anteprima": "/home/suar/Desktop/Alberto/PaO/QtLibrary/Data/Immagini/onepiece_anime.jpeg",
+        "Anteprima": "Data/Immagini/onepiece_anime.jpeg",
         "Cadenza": "Mensile",
         "Durata": "22",
         "Episodi": "1130",

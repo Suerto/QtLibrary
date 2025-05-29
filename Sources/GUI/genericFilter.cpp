@@ -30,9 +30,19 @@ Filters::Filters(QWidget* parent) : QWidget(parent), pathImmagine(), language(ne
     )");
 
     connect(coverImage, &QPushButton::clicked, this, [this]() {
-                pathImmagine = QFileDialog::getOpenFileName(this, "Seleziona immagine", "Data/Immagini", "Immagini (*.png *.jpg *.jpeg *.bmp");
-                qDebug() << "Cambiato percorso Immagine : " << pathImmagine;
-            });
+        QString absolutePath = QFileDialog::getOpenFileName(this, "Seleziona immagine", "Data/Immagini", "Immagini (*.png *.jpg *.jpeg *.bmp)");
+    
+        if (!absolutePath.isEmpty()) {
+            QDir baseDir(QCoreApplication::applicationDirPath()); // QtLibrary/
+            QString relativePath = baseDir.relativeFilePath(absolutePath);
+        
+            qDebug() << "Percorso assoluto: " << absolutePath;
+            qDebug() << "Percorso relativo: " << relativePath;
+        
+            pathImmagine = relativePath;
+        }
+    });
+    
 }
 
 void Filters::reset() { 

@@ -13,7 +13,7 @@
     },
     {
         "Anno": "2007",
-        "Anteprima": "/home/suar/Desktop/Alberto/PaO/QtLibrary/Data/Immagini/transformes1.jpg",
+        "Anteprima": "Data/Immagini/transformes1.jpg",
         "Compositore": "Steve Jablonsky",
         "Durata": "143",
         "Genere": "Azione",
@@ -25,7 +25,7 @@
     },
     {
         "Anno": "2009",
-        "Anteprima": "/home/suar/Desktop/Alberto/PaO/QtLibrary/Data/Immagini/transformers2.jpg",
+        "Anteprima": "Data/Immagini/transformers2.jpg",
         "Compositore": "Steve Jablonsky",
         "Durata": "150",
         "Genere": "Azione",
@@ -37,7 +37,7 @@
     },
     {
         "Anno": "2012",
-        "Anteprima": "/home/suar/Desktop/Alberto/PaO/QtLibrary/Data/Immagini/berserk1film.jpg",
+        "Anteprima": "Data/Immagini/berserk1film.jpg",
         "Compositore": "Shiro ",
         "Durata": "77",
         "Genere": "Azione",
@@ -49,7 +49,7 @@
     },
     {
         "Anno": "2012",
-        "Anteprima": "/home/suar/Desktop/Alberto/PaO/QtLibrary/Data/Immagini/berserk2film.jpg",
+        "Anteprima": "Data/Immagini/berserk2film.jpg",
         "Compositore": "Shiro Sagisu",
         "Durata": "98",
         "Genere": "Azione",
@@ -61,7 +61,7 @@
     },
     {
         "Anno": "2013",
-        "Anteprima": "/home/suar/Desktop/Alberto/PaO/QtLibrary/Data/Immagini/berserk3film.jpg",
+        "Anteprima": "Data/Immagini/berserk3film.jpg",
         "Compositore": "Shiro Sagisu",
         "Durata": "113",
         "Genere": "Azione",
@@ -73,7 +73,7 @@
     },
     {
         "Anno": "1995",
-        "Anteprima": "/home/suar/Desktop/Alberto/PaO/QtLibrary/Data/Immagini/seven_film.jpeg",
+        "Anteprima": "Data/Immagini/seven_film.jpeg",
         "Compositore": "Howard Shore",
         "Durata": "127",
         "Genere": "Thriller",
