@@ -1,13 +1,41 @@
 #include "../../Headers/GUI/mainWidgets.h"
 #include "qwidget.h"
 
-MainWidget::MainWidget(QWidget* parent, ContentManager* mngr) : QWidget(parent), manager(mngr), mainLayout(new QVBoxLayout(this)), topLayout(new QVBoxLayout()), titleLayout(new QHBoxLayout()), titolo(new QLineEdit(this)), reset(new QPushButton("Ripristina Filtri", this)), filtersButtonsLayout(new QHBoxLayout()), pulsantiera(new QWidget(this)), tipologia(new QButtonGroup(this)), filtri(new QStackedWidget(this)) {
+MainWidget::MainWidget(QWidget* parent, ContentManager* mngr) : QWidget(parent), manager(mngr), mainLayout(new QVBoxLayout(this)), topLayout(new QVBoxLayout()), titleLayout(new QHBoxLayout()), titolo(new QLineEdit(this)), reset(new QPushButton(this)), filtersButtonsLayout(new QHBoxLayout()), pulsantiera(new QWidget(this)), tipologia(new QButtonGroup(this)), filtri(new QStackedWidget(this)) {
     titolo->setPlaceholderText("Inserire titolo del Contenuto : ");
     titolo->setFixedSize(300, 50);
-    titolo->setStyleSheet("QLineEdit::placeholder { color : white; }");
+    titolo->setStyleSheet(R"(
+        QLineEdit::placeholder { 
+            color : white; 
+        }
+
+        QLineEdit {
+            border-radius : 8px;
+        }
+    )");
     titleLayout->addWidget(titolo);
     
     reset->setFixedSize(50, 50);
+    reset->setIcon(QIcon("Data/Icone/return.jpeg"));
+    reset->setIconSize(QSize(30, 30));
+    reset->setToolTip("Clicca qui per ripristinare i filtri");
+    reset->setStyleSheet(R"(
+        QPushButton {
+            border: 1px solid gray;
+            padding: 5px;
+            background-color: white;
+            border-radius: 8px;
+        }
+    
+        QPushButton:hover {
+            background-color: #f0f0f0;
+        }
+    
+        QPushButton:pressed {
+            background-color: #d0d0d0;
+        }
+    )");
+    
     titleLayout->addWidget(reset);
 
     topLayout->addLayout(titleLayout);
@@ -92,7 +120,5 @@ void MainWidget::ripristinaFiltri() {
 }
 
 MainWidget::~MainWidget() {
-    delete topLayout;
-    delete filtersButtonsLayout;
     manager = nullptr;
 }

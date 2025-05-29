@@ -1,26 +1,26 @@
 [
     {
-        "Anno": "1921",
-        "Anteprima": "/home/suar/Desktop/Alberto/PaO/QtLibrary/Data/Immagini/test.jpg",
-        "Autore": "Io",
-        "Copertina": "Rigida",
-        "Editore": "Io",
-        "Genere": "Avventura",
-        "Lingua": "Francese",
-        "Pagine": "290",
-        "Publisher": "Sos",
-        "Titolo": "Sass"
+        "Anno": "1999",
+        "Anteprima": "Data/Immagini/default.jpg",
+        "Autore": "Asa",
+        "Copertina": "Ruvida",
+        "Editore": "Asa",
+        "Genere": "Fantasy",
+        "Lingua": "Tedesco",
+        "Pagine": "100",
+        "Publisher": "Asa",
+        "Titolo": "sos"
     },
     {
-        "Anno": "1921",
+        "Anno": "1092",
         "Anteprima": "Data/Immagini/default.jpg",
         "Autore": "Io",
-        "Copertina": "Rigida",
+        "Copertina": "Brossura",
         "Editore": "Io",
-        "Genere": "Avventura",
-        "Lingua": "Francese",
-        "Pagine": "290",
-        "Publisher": "io",
-        "Titolo": "Sass"
+        "Genere": "Storico",
+        "Lingua": "Tedesco",
+        "Pagine": "1092",
+        "Publisher": "asas",
+        "Titolo": "sas"
     }
 ]

@@ -22,5 +22,4 @@ App::App(int& argc, char** argv, ContentManager* mngr) : QApplication(argc, argv
 App::~App() { 
     delete main;
     main = nullptr;
-    manager = nullptr;
 }

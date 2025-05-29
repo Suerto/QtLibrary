@@ -1,8 +1,8 @@
 #include "../../Headers/GUI/mainWindow.h"
 
-MainWindow::MainWindow(QWidget* parent, ContentManager* mngr) : QMainWindow(parent), manager(mngr), toolBar(new QToolBar(this)), windows(new QStackedWidget(this)), searching(new QAction("Sezione Ricerca", this)), creation(new QAction("Sezione Creazione", this)) {
+MainWindow::MainWindow(QWidget* parent, ContentManager* mngr) : QMainWindow(parent), toolBar(new QToolBar(this)), windows(new QStackedWidget(this)), searching(new QAction("Sezione Ricerca", this)), creation(new QAction("Sezione Creazione", this)), creationSection(new Creation(this, mngr)), researchSection(new Research(this, mngr)) {
     setMinimumSize(1200, 800);
-    toolBar = addToolBar("Strumenti");
+    addToolBar(toolBar);
     toolBar->setMovable(false);
     
     toolBar->addAction(searching);
@@ -42,11 +42,8 @@ MainWindow::MainWindow(QWidget* parent, ContentManager* mngr) : QMainWindow(pare
         }
     });
 
-    Research* ricerca = new Research(this, mngr);
-    Creation* creazione = new Creation(this, mngr);
-
-    windows->insertWidget(0, ricerca);
-    windows->insertWidget(1, creazione);
+    windows->insertWidget(0, researchSection);
+    windows->insertWidget(1, creationSection);
     windows->setVisible(false);
     windows->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
      
@@ -113,7 +110,7 @@ void MainWindow::showSearching() {
         ErrorChanging change;
         connect(&change, &ErrorChanging::azione, this, [this](const QString& choice) {
             if(choice == "Conferma") {
-               qobject_cast<Creation*>(windows->currentWidget())->ripristinaFiltri();
+               creationSection->ripristinaFiltri();
                windows->setCurrentIndex(0);
                searching->setChecked(true);
                creation->setChecked(false);
@@ -124,7 +121,6 @@ void MainWindow::showSearching() {
             }
         });
         change.exec();
-
     }
 }
 
@@ -147,8 +143,4 @@ void MainWindow::closeApplication() {
             }
         });
     error.exec();
-}
-
-MainWindow::~MainWindow() {
-    manager = nullptr;
 }

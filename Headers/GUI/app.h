@@ -7,7 +7,6 @@
 
 class App : public QApplication {
 private:
-    ContentManager* manager;
     MainWindow* main;
 public: 
     App(int& argc, char** argv, ContentManager* mngr);

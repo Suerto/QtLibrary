@@ -3,7 +3,9 @@
 Creation::Creation(QWidget* parent, ContentManager* mngr) :
                    MainWidget(parent), manager(mngr), crea(new QPushButton(this)) {
     crea->setFixedSize(50, 50);
-    crea->setIcon(QIcon("➕"));
+    crea->setIcon(QIcon("Data/Icone/creazione.png"));
+    crea->setIconSize(QSize(25, 25));
+    titolo->text().isEmpty() ? crea->setToolTip("Inserire un titolo valido per la creazione") : crea->setToolTip("Clicca qui per avviare la creazione");
     titleLayout->addWidget(crea);
     pulsantiera->setVisible(true);
     
@@ -11,6 +13,19 @@ Creation::Creation(QWidget* parent, ContentManager* mngr) :
     connect(crea, &QPushButton::clicked, this, &Creation::startCreation);
 
     setLayout(mainLayout);
+    
+    crea->setStyleSheet(R"(
+    QPushButton {
+        border: 1px solid gray;
+        padding: 5px;
+        background-color: white;
+        border-radius: 6px;
+    }
+
+    QPushButton:hover {
+        background-color: #e6f0ff;
+    }
+)");
 }
 
 void Creation::mostraFiltro(int id) {

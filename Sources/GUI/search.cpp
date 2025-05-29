@@ -2,6 +2,7 @@
 
 Search::Search(QWidget* parent, ContentManager* mngr) : MainWidget(parent, mngr), advancedResearchButton(new QCheckBox("Ricerca Avanzata", this)), ricerca(new QPushButton("Avvia Ricerca", this)) {   
     ricerca->setFixedSize(50, 50);
+    
     titleLayout->addWidget(ricerca);
     topLayout->addWidget(advancedResearchButton);
     
