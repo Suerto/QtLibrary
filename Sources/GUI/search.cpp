@@ -1,14 +1,28 @@
 #include "../../Headers/GUI/search.h"
 
-Search::Search(QWidget* parent, ContentManager* mngr) : MainWidget(parent, mngr), advancedResearchButton(new QCheckBox("Ricerca Avanzata", this)), ricerca(new QPushButton("Avvia Ricerca", this)) {   
+Search::Search(QWidget* parent, ContentManager* mngr) : MainWidget(parent, mngr), advancedResearchButton(new QCheckBox("Ricerca Avanzata", this)), ricerca(new QPushButton(this)) {   
     ricerca->setFixedSize(50, 50);
-    
+    ricerca->setIcon(QIcon("Data/Icone/lente.png"));
+    ricerca->setIconSize(QSize(25, 25));
     titleLayout->addWidget(ricerca);
     topLayout->addWidget(advancedResearchButton);
     
     connect(advancedResearchButton, &QCheckBox::toggled, this, &Search::advancedResearch);
 
     connect(ricerca, &QPushButton::clicked, this, &Search::startSearch);
+
+    ricerca->setStyleSheet(R"(
+    QPushButton {
+        border: 1px solid gray;
+        padding: 5px;
+        background-color: white;
+        border-radius: 6px;
+    }
+
+    QPushButton:hover {
+        background-color: #e6f0ff;
+    }
+)");
 }
 
 void Search::advancedResearch(bool checked) {
