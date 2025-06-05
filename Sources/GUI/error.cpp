@@ -183,3 +183,25 @@ MessageSuccess::MessageSuccess(QWidget* parent, const string& mode, const string
 }
 
 void MessageSuccess::chiudiErrore() { close(); }
+
+
+ErrorNoFile::ErrorNoFile(QWidget* parent) : ErrorStructure(parent), confirm(new QPushButton("Capito", this)) {
+    text->setText("Uno o più file JSON non sono stati esplicitamente dichiarati. Avvio non eseguito");
+    errorLayout->addWidget(confirm);
+    
+    connect(confirm, &QPushButton::clicked, this, &ErrorNoFile::chiudiErrore);
+    setStyleSheet(R"(
+        QLabel {
+            color : white;
+            font-family : Fira Code;
+            font-size : 15px;
+        }
+
+        QDialog {
+            background-color: #848687;
+            border: 2px solid #0078D7;
+        }
+        )");
+}
+
+void ErrorNoFile::chiudiErrore() { close(); }

@@ -97,4 +97,15 @@ public:
 public slots:
     void chiudiErrore();
 };
+
+class ErrorNoFile : public ErrorStructure {
+    Q_OBJECT
+private:
+    QPushButton* confirm;
+public:
+    ErrorNoFile(QWidget* parent = nullptr);
+public slots:
+    void chiudiErrore();
+};
+
 #endif //ERRORS_H

@@ -4,10 +4,12 @@
 #include <QApplication>
 
 #include "mainWindow.h"
+#include "../JSON/jsonSelector.h"
 
 class App : public QApplication {
 private:
     MainWindow* main;
+    ContentManager* manager;
 public: 
     App(int& argc, char** argv, ContentManager* mngr);
     ~App();
