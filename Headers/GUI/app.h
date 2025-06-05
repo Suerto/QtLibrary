@@ -10,6 +10,9 @@ class App : public QApplication {
 private:
     MainWindow* main;
     ContentManager* manager;
+    JsonSelector* json;
+
+    bool started;
 public: 
     App(int& argc, char** argv, ContentManager* mngr);
     ~App();
