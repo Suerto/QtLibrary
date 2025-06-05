@@ -45,6 +45,10 @@ public:
 
     void uploadContenuti();
 
+    void downloadContenuti();
+
+    void setJsonFiles(const array<string, 4>& js);
+
     bool controllaDuplicato(const int& index, const unordered_map<string, string>& map) const;
 };
 

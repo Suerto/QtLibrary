@@ -11,12 +11,15 @@ std::unordered_map<int, std::function<Contenuto*()>> ContentManager::creatore = 
 };
 
 ContentManager::ContentManager() : 
-    json({"Data/libro.json", "Data/manga.json", "Data/film.json", "Data/anime.json"}),
-    memoria{} {
+    json{},
+    memoria{} {}
 
+void ContentManager::setJsonFiles(const array<string, 4>& js) { json = js; }
+
+void ContentManager::downloadContenuti() {
     for(std::size_t i = 0; i < memoria.size(); ++i) {
         vector<unordered_map<string, string>> mappeContenuti = 
-                JsonHandler::estraiArrayDiMappe(QString::fromStdString(json[i]));
+            JsonHandler::estraiArrayDiMappe(QString::fromStdString(json[i]));
 
         for(auto mappa : mappeContenuti) {
             CreationVisitor contenuto(mappa);
